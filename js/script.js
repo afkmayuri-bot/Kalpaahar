@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     mobileNav.classList.remove('open');
     mobileNavOverlay.classList.remove('open');
     if (navToggle) navToggle.classList.remove('active');
+    document.body.style.overflow = '';
   }
 
   // keyboard accessibility: Enter/Space toggles the label like a button
