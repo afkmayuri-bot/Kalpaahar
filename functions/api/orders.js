@@ -22,7 +22,7 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    if (!env.RAZORPAY_KEY_ID || !env.RAZORPAY_SECRET) {
+  if (!env.RAZORPAY_KEY_ID || !env.RAZORPAY_KEY_SECRET) {
       return Response.json(
         { error: "Razorpay keys not configured" },
         { status: 500 }
