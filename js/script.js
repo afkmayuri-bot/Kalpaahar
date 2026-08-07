@@ -884,8 +884,7 @@ var CHECKOUT_ENDPOINT = "https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com
     setPayButtonDisabled(true);
     showPayStatus('Setting up secure payment...');
 
-   fetch(CHECKOUT_API_BASE + '/create-order', {
-  method: 'POST',
+fetch(CHECKOUT_API_BASE + '/api/orders', {method: 'POST',
   headers: { 
     'Content-Type': 'application/json' 
   },
