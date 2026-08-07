@@ -22,31 +22,54 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
+    if (!env.RAZORPAY_KEY_ID || !env.RAZORPAY_SECRET) {
+      return Response.json(
+        { error: "Razorpay keys not configured" },
+        { status: 500 }
+      );
+    }
+
     const amount = ebook.price * 100;
 
-   const auth = btoa(
-  env.RAZORPAY_KEY_ID + ":" + env.RAZORPAY_KEY_SECRET
-);
+    const auth = btoa(
+      `${env.RAZORPAY_KEY_ID}:${env.RAZORPAY_SECRET}`
+    );
 
-    const response = await fetch(
+    const razorpayResponse = await fetch(
       "https://api.razorpay.com/v1/orders",
       {
         method: "POST",
         headers: {
-          "Authorization": "Basic " + auth,
+          "Authorization": `Basic ${auth}`,
           "Content-Type": "application/json"
         },
-      body: JSON.stringify({
-  amount: amount,
-  currency: "INR",
-  receipt: "ebook_" + Date.now()
-})
+        body: JSON.stringify({
+          amount: amount,
+          currency: "INR",
+          receipt: `ebook_${Date.now()}`,
+          notes: {
+            ebook: ebook.title,
+            customerName: customer?.name || "",
+            customerEmail: customer?.email || ""
+          }
+        })
       }
     );
 
-    const order = await response.json();
+    const order = await razorpayResponse.json();
+
+    if (!razorpayResponse.ok) {
+      return Response.json(
+        {
+          error: "Razorpay order creation failed",
+          details: order
+        },
+        { status: 400 }
+      );
+    }
 
     return Response.json({
+      success: true,
       keyId: env.RAZORPAY_KEY_ID,
       orderId: order.id,
       amount: order.amount,
@@ -55,9 +78,15 @@ export async function onRequestPost({ request, env }) {
     });
 
   } catch (error) {
+
     return Response.json(
-      { error: error.message },
-      { status: 500 }
+      {
+        error: error.message
+      },
+      {
+        status: 500
+      }
     );
+
   }
 }
