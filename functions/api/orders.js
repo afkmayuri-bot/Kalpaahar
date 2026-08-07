@@ -37,7 +37,7 @@ export async function onRequestPost({ request, env }) {
           "Content-Type": "application/json"
         },
       body: JSON.stringify({
-  amount: amount * 100,
+  amount: amount,
   currency: "INR",
   receipt: "ebook_" + Date.now()
 })
