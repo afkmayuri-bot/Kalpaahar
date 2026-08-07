@@ -885,20 +885,27 @@ var CHECKOUT_ENDPOINT = "https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com
     showPayStatus('Setting up secure payment...');
 
    fetch(CHECKOUT_API_BASE + '/create-order', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify({ 
-  ebookId: currentEbookId, 
-  customer: currentCustomer,
-  amount: currentPrice
+  method: 'POST',
+  headers: { 
+    'Content-Type': 'application/json' 
+  },
+  body: JSON.stringify({ 
+    ebookId: currentEbookId, 
+    customer: currentCustomer,
+    amount: currentPrice
+  })
 })
-    })
-      .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
-      .then(function(result){
-        if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
-        var order = result.data;
+.then(function(res){ 
+  return res.json().then(function(data){ 
+    return { ok: res.ok, data: data }; 
+  }); 
+})
+.then(function(result){
+  if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
 
-        var rzp = new Razorpay({
+  var order = result.data;
+
+  var rzp = new Razorpay({
           key: order.keyId,
           amount: order.amount,
           currency: order.currency,
