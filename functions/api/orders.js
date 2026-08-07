@@ -36,11 +36,11 @@ export async function onRequestPost({ request, env }) {
           "Authorization": "Basic " + auth,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          amount: amount,
-          currency: "INR",
-          receipt: "ebook_" + Date.now()
-        })
+      body: JSON.stringify({
+  amount: amount * 100,
+  currency: "INR",
+  receipt: "ebook_" + Date.now()
+})
       }
     );
 
