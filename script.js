@@ -904,7 +904,7 @@ function showMain(){
           currency: order.currency,
           order_id: order.orderId,
           name: 'KalpAahar',
-          description: order.ebook.title,
+         description: order.ebook?.title || currentTitle,
           prefill: {
             name: currentCustomer.name,
             email: currentCustomer.email,
