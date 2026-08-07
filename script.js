@@ -888,8 +888,11 @@ function showMain(){
     fetch(CHECKOUT_API_BASE + '/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ebookId: currentEbookId, customer: currentCustomer })
-    })
+      body: JSON.stringify({
+  amount: 299,
+  ebookId: currentEbookId,
+  customer: currentCustomer
+})
       .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
       .then(function(result){
         if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
