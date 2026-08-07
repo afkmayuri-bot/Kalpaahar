@@ -904,6 +904,8 @@ fetch(CHECKOUT_API_BASE + '/api/orders', {method: 'POST',
 
   var order = result.data;
 
+  console.log("ORDER RESPONSE:", order);
+
   var rzp = new Razorpay({
           key: order.keyId,
           amount: order.amount,
