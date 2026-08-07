@@ -887,7 +887,11 @@ var CHECKOUT_ENDPOINT = "https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com
    fetch(CHECKOUT_API_BASE + '/create-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ebookId: currentEbookId, customer: currentCustomer })
+     body: JSON.stringify({ 
+  ebookId: currentEbookId, 
+  customer: currentCustomer,
+  amount: currentPrice
+})
     })
       .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
       .then(function(result){
