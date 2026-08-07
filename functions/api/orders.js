@@ -31,9 +31,9 @@ export async function onRequestPost({ request, env }) {
 
     const amount = ebook.price * 100;
 
-    const auth = btoa(
-      `${env.RAZORPAY_KEY_ID}:${env.RAZORPAY_SECRET}`
-    );
+   const auth = btoa(
+  `${env.RAZORPAY_KEY_ID}:${env.RAZORPAY_KEY_SECRET}`
+);
 
     const razorpayResponse = await fetch(
       "https://api.razorpay.com/v1/orders",
