@@ -895,7 +895,7 @@ function showMain(){
       .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
       .then(function(result){
         if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
-        var order = result.data;
+        var order = result.data || result;
 
         var rzp = new Razorpay({
           key: order.keyId,
