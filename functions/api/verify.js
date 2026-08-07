@@ -10,12 +10,12 @@ export async function onRequestPost({ request, env }) {
 
     const crypto = await import("node:crypto");
 
-    const generatedSignature = crypto
-      .createHmac("sha256", env.RAZORPAY_SECRET)
-      .update(
-        razorpay_order_id + "|" + razorpay_payment_id
-      )
-      .digest("hex");
+   const generatedSignature = crypto
+  .createHmac("sha256", env.RAZORPAY_KEY_SECRET)
+  .update(
+    razorpay_order_id + "|" + razorpay_payment_id
+  )
+  .digest("hex");
 
     if (generatedSignature !== razorpay_signature) {
       return Response.json(
