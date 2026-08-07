@@ -135,36 +135,19 @@ console.log("RAZORPAY KEY:", env.RAZORPAY_KEY_ID);    const {
 
 
     return Response.json({
+  success: true,
 
-      success: true,
+  data: {
+    keyId: env.RAZORPAY_KEY_ID,
+    orderId: order.id,
+    amount: order.amount,
+    currency: order.currency
+  },
 
-      keyId:
-        env.RAZORPAY_KEY_ID,
-
-
-      orderId:
-        order.id,
-
-
-      amount:
-        order.amount,
-
-
-      currency:
-        order.currency,
-
-
-      ebook: {
-
-        title:
-          ebook.title
-
-      }
-
-    });
-
-
-
+  ebook: {
+    title: ebook.title
+  }
+});
   } catch (error) {
 
 
