@@ -706,7 +706,7 @@ function showMain(){
   /* Point this at your deployed backend from the /backend folder.
      Local testing default shown below — change before going live,
      e.g. 'https://api.kalpaahar.com' */
-  var CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
+  var CHECKOUT_API_BASE = '';
 
   var CHECKOUT_ENDPOINT = 'https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com';
 
