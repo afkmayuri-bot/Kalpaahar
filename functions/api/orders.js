@@ -1,9 +1,10 @@
 export async function onRequestPost({ request, env }) {
   try {
 
-    const body = await request.json();
+   const body = await request.json();
 
-    const {
+console.log("ORDER REQUEST:", body);
+console.log("RAZORPAY KEY:", env.RAZORPAY_KEY_ID);    const {
       ebookId,
       customer
     } = body;
