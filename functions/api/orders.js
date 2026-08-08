@@ -150,20 +150,13 @@ console.log("RAZORPAY KEY:", env.RAZORPAY_KEY_ID);    const {
 });
   } catch (error) {
 
-
-    return Response.json(
-
-      {
-        error:
-          error.message
-      },
-
-      {
-        status: 500
-      }
-
-    );
-
-  }
+  return Response.json(
+    {
+      error: error.message
+    },
+    {
+      status: 500
+    }
+  );
 
 }
