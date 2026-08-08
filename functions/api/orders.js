@@ -1,14 +1,26 @@
-
 export async function onRequestPost({ request, env }) {
   try {
     const body = await request.json();
+
     const amount = Number(body.amount);
+    const customer = body.customer || {};
+    const ebookId = body.ebookId || "";
 
     if (!amount || amount <= 0) {
       return Response.json(
         {
           success: false,
           error: "Invalid amount"
+        },
+        { status: 400 }
+      );
+    }
+
+    if (!customer.email) {
+      return Response.json(
+        {
+          success: false,
+          error: "Customer email is required"
         },
         { status: 400 }
       );
@@ -39,7 +51,13 @@ export async function onRequestPost({ request, env }) {
         body: JSON.stringify({
           amount: Math.round(amount * 100),
           currency: "INR",
-          receipt: "ebook_" + Date.now()
+          receipt: "ebook_" + Date.now(),
+          notes: {
+            name: customer.name || "",
+            email: customer.email,
+            phone: customer.phone || "",
+            ebookId: ebookId
+          }
         })
       }
     );
