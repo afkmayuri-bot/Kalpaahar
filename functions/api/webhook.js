@@ -69,7 +69,7 @@ const EBOOK_CATALOG = {
   },
 };
 
-const FROM_EMAIL = "KalpAahar <ebooks@yourdomain.com>"; // must be a domain verified in Resend
+const FROM_EMAIL = "KalpAahar <ebooks@kalpaahar.in>"; // must be a domain verified in Resend
 
 export async function onRequestPost(context) {
   const { request, env } = context;
