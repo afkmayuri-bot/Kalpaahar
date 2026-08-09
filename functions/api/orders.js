@@ -1,3 +1,5 @@
+// functions/api/orders.js
+
 export async function onRequestPost({ request, env }) {
   try {
     const body = await request.json();
@@ -6,6 +8,9 @@ export async function onRequestPost({ request, env }) {
     const customer = body.customer || {};
     const ebookId = body.ebookId || "";
 
+    // --------------------------------------------------
+    // Validate amount
+    // --------------------------------------------------
     if (!amount || amount <= 0) {
       return Response.json(
         {
@@ -16,6 +21,9 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
+    // --------------------------------------------------
+    // Validate customer email
+    // --------------------------------------------------
     if (!customer.email) {
       return Response.json(
         {
@@ -26,7 +34,13 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
-    if (!env.RAZORPAY_KEY_ID || !env.RAZORPAY_KEY_SECRET) {
+    // --------------------------------------------------
+    // Validate Razorpay credentials
+    // --------------------------------------------------
+    if (
+      !env.RAZORPAY_KEY_ID ||
+      !env.RAZORPAY_KEY_SECRET
+    ) {
       return Response.json(
         {
           success: false,
@@ -36,22 +50,34 @@ export async function onRequestPost({ request, env }) {
       );
     }
 
+    // --------------------------------------------------
+    // Create Basic Auth credentials
+    // --------------------------------------------------
     const auth = btoa(
-      env.RAZORPAY_KEY_ID + ":" + env.RAZORPAY_KEY_SECRET
+      env.RAZORPAY_KEY_ID +
+      ":" +
+      env.RAZORPAY_KEY_SECRET
     );
 
+    // --------------------------------------------------
+    // Create Razorpay order
+    // --------------------------------------------------
     const razorpayResponse = await fetch(
       "https://api.razorpay.com/v1/orders",
       {
         method: "POST",
+
         headers: {
           "Authorization": "Basic " + auth,
           "Content-Type": "application/json"
         },
+
         body: JSON.stringify({
           amount: Math.round(amount * 100),
           currency: "INR",
           receipt: "ebook_" + Date.now(),
+
+          // These notes are used later by webhook.js
           notes: {
             name: customer.name || "",
             email: customer.email,
@@ -62,8 +88,14 @@ export async function onRequestPost({ request, env }) {
       }
     );
 
+    // --------------------------------------------------
+    // Read Razorpay response
+    // --------------------------------------------------
     const data = await razorpayResponse.json();
 
+    // --------------------------------------------------
+    // Handle Razorpay error
+    // --------------------------------------------------
     if (!razorpayResponse.ok) {
       return Response.json(
         {
@@ -71,14 +103,21 @@ export async function onRequestPost({ request, env }) {
           error:
             data.error?.description ||
             "Razorpay order creation failed",
+
           razorpay: data
         },
-        { status: razorpayResponse.status }
+        {
+          status: razorpayResponse.status
+        }
       );
     }
 
+    // --------------------------------------------------
+    // Return order details to frontend
+    // --------------------------------------------------
     return Response.json({
       success: true,
+
       data: {
         keyId: env.RAZORPAY_KEY_ID,
         orderId: data.id,
@@ -86,7 +125,14 @@ export async function onRequestPost({ request, env }) {
         currency: data.currency
       }
     });
+
   } catch (error) {
+
+    console.error(
+      "Order creation error:",
+      error
+    );
+
     return Response.json(
       {
         success: false,
