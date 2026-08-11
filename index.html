@@ -1905,7 +1905,20 @@ if (!valid) {
   var originalBtnText = formBtn.textContent;
 
   formBtn.disabled = true;
-  formBtn.textContent = 'Processing ₹800...';
+ var selectedPlan = plan.value;
+
+var consultationAmount = 0;
+var consultationService = '';
+
+if (selectedPlan === 'Quick Consultation') {
+  consultationAmount = 800;
+  consultationService = 'Quick Consultation';
+} else if (selectedPlan === 'Condition Specific Nutrition Plan') {
+  consultationAmount = 2500;
+  consultationService = 'Condition-Specific Nutrition Plan';
+}
+
+formBtn.textContent = 'Processing ₹' + consultationAmount + '...';
 
   formStatus.style.display = 'block';
   formStatus.style.color = 'var(--ink-soft)';
@@ -1916,35 +1929,25 @@ if (!valid) {
   // =====================================
 
   fetch(CHECKOUT_API_BASE + '/create-order', {
-    method: 'POST',
-
-    headers: {
-      'Content-Type': 'application/json'
-    },
-
-    body: JSON.stringify({
-      amount: 800,
-      paymentType: 'consultation',
-      service: 'Quick Consultation'
-    })
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    amount: consultationAmount,
+    paymentType: 'consultation',
+    service: consultationService
   })
+})
 
-  .then(function(res) {
-    return res.json().then(function(data) {
-      return {
-        ok: res.ok,
-        data: data
-      };
-    });
-  })
-
-  .then(function(result) {
-
-    if (!result.ok || !result.data.success) {
-      throw new Error(
-        result.data.error || 'Unable to create payment order'
-      );
-    }
+.then(function(res) {
+  return res.json().then(function(data) {
+    return {
+      ok: res.ok,
+      data: data
+    };
+  });
+})
 
     var order = result.data;
 
@@ -1962,7 +1965,7 @@ if (!valid) {
 
       name: 'KalpAahar',
 
-      description: 'Quick Consultation',
+      description: consultationService,
 
       order_id: order.orderId,
 
@@ -2061,7 +2064,7 @@ if (!valid) {
             '\n\n' +
             '✅ PAYMENT CONFIRMED' +
             '\n' +
-            'Amount: ₹800' +
+           'Amount: ₹' + consultationAmount +
             '\n' +
             'Payment ID: ' +
             paymentId;
