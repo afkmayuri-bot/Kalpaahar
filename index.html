@@ -2843,7 +2843,7 @@ function showMain(){
   /* Point this at your deployed backend from the /backend folder.
      Local testing default shown below — change before going live,
      e.g. 'https://api.kalpaahar.com' */
-  var CHECKOUT_API_BASE = 'http://localhost:4000';
+  var CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
 
   var CHECKOUT_ENDPOINT = 'https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com';
 
@@ -3022,7 +3022,7 @@ function showMain(){
     setPayButtonDisabled(true);
     showPayStatus('Setting up secure payment...');
 
-    fetch(CHECKOUT_API_BASE + '/api/orders', {
+    fetch(CHECKOUT_API_BASE + '/create-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ebookId: currentEbookId, customer: currentCustomer })
