@@ -1891,18 +1891,17 @@ form.addEventListener('submit', function(e) {
 
   if (dateInvalid) valid = false;
 
-  var slotInvalid = !selectedSlotId || !slotHidden.value;
+ var slotInvalid = !selectedSlotId;
 
-  slotGrid
-    .closest('.field')
-    .classList.toggle('error', slotInvalid);
+slotGrid
+  .closest('.field')
+  .classList.toggle('error', slotInvalid);
 
-  if (slotInvalid) valid = false;
+if (slotInvalid) valid = false;
 
-  if (!valid) {
-    return;
-  }
-
+if (!valid) {
+  return;
+}
   var originalBtnText = formBtn.textContent;
 
   formBtn.disabled = true;
