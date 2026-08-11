@@ -2233,17 +2233,17 @@ var order = result.data;
       headers: { 'Accept': 'application/json' },
       body: fd
     })
-    .then(function(res){ if(!res.ok) throw new Error('failed'); return res.json(); })
-    .then(function(){
-      newsletterForm.innerHTML = '<p style="color:#fff; margin:0; font-weight:600;">&#10003; Subscribed — welcome to the KalpAahar community!</p>';
-    })
-    .catch(function(){
-      newsletterForm.innerHTML = originalHTML;
-      var e2 = document.getElementById('newsletterEmail');
-      if (e2) e2.style.outline = '2px solid #e74c3c';
-    });
-  });
-
+    .then(function(res){ 
+  if(!res.ok) throw new Error('failed'); 
+  return res.json(); 
+})
+.then(function(){
+  newsletterForm.innerHTML = '<p style="color:#fff; margin:0; font-weight:600;">&#10003; Subscribed — welcome to the KalpAahar community!</p>';
+})
+.catch(function(){
+  newsletterForm.innerHTML = originalHTML;
+  var e2 = document.getElementById('newsletterEmail');
+  if (e2) e2.style.outline = '2px solid #e74c3c';
 });
 
 </script>
