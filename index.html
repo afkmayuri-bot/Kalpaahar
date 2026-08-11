@@ -1831,86 +1831,368 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
     return lines.join('\n');
   }
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var valid = true;
-    var plan = document.getElementById('cf-plan');
-    var name = document.getElementById('cf-name');
-    var email = document.getElementById('cf-email');
-    var phone = document.getElementById('cf-phone');
-    var city = document.getElementById('cf-city');
-    var age = document.getElementById('cf-age');
-    var gender = document.getElementById('cf-gender');
-    var height = document.getElementById('cf-height');
-    var weight = document.getElementById('cf-weight');
-    var allergies = document.getElementById('cf-allergies');
-    var medications = document.getElementById('cf-medications');
+  var valid = true;
 
-    function setError(input, isError){ input.closest('.field').classList.toggle('error', isError); if (isError) valid = false; }
+  var plan = document.getElementById('cf-plan');
+  var name = document.getElementById('cf-name');
+  var email = document.getElementById('cf-email');
+  var phone = document.getElementById('cf-phone');
+  var city = document.getElementById('cf-city');
+  var age = document.getElementById('cf-age');
+  var gender = document.getElementById('cf-gender');
+  var height = document.getElementById('cf-height');
+  var weight = document.getElementById('cf-weight');
+  var allergies = document.getElementById('cf-allergies');
+  var medications = document.getElementById('cf-medications');
 
-    setError(plan, !plan.value);
-    setError(name, name.value.trim().length < 2);
-    setError(email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()));
-    setError(phone, phone.value.replace(/\D/g,'').length < 7);
-    setError(city, city.value.trim().length < 2);
-    setError(age, !age.value);
-    setError(gender, !gender.value);
-    setError(height, !height.value);
-    setError(weight, !weight.value);
-    setError(allergies, allergies.value.trim().length < 1);
-    setError(medications, medications.value.trim().length < 1);
-    // Message is optional — no validation applied
+  function setError(input, isError) {
+    input.closest('.field').classList.toggle('error', isError);
+    if (isError) valid = false;
+  }
 
-    var diseaseChecked = form.querySelectorAll('input[name="Associated Disease"]:checked').length > 0;
-    var diseaseField = document.querySelector('[data-field="disease"]');
-    diseaseField.classList.toggle('error', !diseaseChecked);
-    if (!diseaseChecked) valid = false;
+  setError(plan, !plan.value);
+  setError(name, name.value.trim().length < 2);
+  setError(email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()));
+  setError(phone, phone.value.replace(/\D/g, '').length < 7);
+  setError(city, city.value.trim().length < 2);
+  setError(age, !age.value);
+  setError(gender, !gender.value);
+  setError(height, !height.value);
+  setError(weight, !weight.value);
+  setError(allergies, allergies.value.trim().length < 1);
+  setError(medications, medications.value.trim().length < 1);
 
-    var exerciseChecked = !!getRadioValue('Exercises');
-    document.querySelector('[data-field="exercise"]').classList.toggle('error', !exerciseChecked);
-    if (!exerciseChecked) valid = false;
+  var diseaseChecked =
+    form.querySelectorAll('input[name="Associated Disease"]:checked').length > 0;
 
-    var dateInvalid = !dateInput.value;
-    dateInput.closest('.field').classList.toggle('error', dateInvalid);
-    if (dateInvalid) valid = false;
+  var diseaseField =
+    document.querySelector('[data-field="disease"]');
 
-    var slotInvalid = !selectedSlotId || !slotHidden.value;
-    slotGrid.closest('.field').classList.toggle('error', slotInvalid);
-    if (slotInvalid) valid = false;
+  diseaseField.classList.toggle('error', !diseaseChecked);
 
-    if (!valid){ return; }
+  if (!diseaseChecked) valid = false;
 
-    var originalBtnText = formBtn.textContent;
-    formBtn.disabled = true;
-    formBtn.textContent = 'Opening WhatsApp...';
-    formStatus.style.display = 'block';
-    formStatus.style.color = 'var(--ink-soft)';
-    formStatus.textContent = 'Taking you to WhatsApp to confirm your booking...';
+  var exerciseChecked = !!getRadioValue('Exercises');
 
-    /* Fire-and-forget background record — never blocks the WhatsApp redirect below */
-    try{
-      fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      }).catch(function(){});
-    } catch(err){ /* ignore */ }
+  document
+    .querySelector('[data-field="exercise"]')
+    .classList.toggle('error', !exerciseChecked);
 
-    var waLink = 'https://wa.me/' + CLINIC_WHATSAPP_NUMBER + '?text=' + encodeURIComponent(buildWhatsAppMessage());
-    window.open(waLink, '_blank', 'noopener');
-    commitSlotBooking();
+  if (!exerciseChecked) valid = false;
 
-    formBtn.textContent = 'Sent — check WhatsApp';
-    formStatus.style.color = 'var(--emerald)';
-    formStatus.innerHTML = 'Your details are ready in WhatsApp — just hit send there to confirm your booking. Didn\'t open? <a href="' + waLink + '" target="_blank" rel="noopener" style="color:var(--emerald); font-weight:700; text-decoration:underline;">Tap here</a>.';
+  var dateInvalid = !dateInput.value;
 
-    setTimeout(function(){
+  dateInput
+    .closest('.field')
+    .classList.toggle('error', dateInvalid);
+
+  if (dateInvalid) valid = false;
+
+  var slotInvalid = !selectedSlotId || !slotHidden.value;
+
+  slotGrid
+    .closest('.field')
+    .classList.toggle('error', slotInvalid);
+
+  if (slotInvalid) valid = false;
+
+  if (!valid) {
+    return;
+  }
+
+  var originalBtnText = formBtn.textContent;
+
+  formBtn.disabled = true;
+  formBtn.textContent = 'Processing ₹800...';
+
+  formStatus.style.display = 'block';
+  formStatus.style.color = 'var(--ink-soft)';
+  formStatus.textContent = 'Preparing your secure payment...';
+
+  // =====================================
+  // CREATE ₹800 CONSULTATION ORDER
+  // =====================================
+
+  fetch(CHECKOUT_API_BASE + '/create-order', {
+    method: 'POST',
+
+    headers: {
+      'Content-Type': 'application/json'
+    },
+
+    body: JSON.stringify({
+      amount: 800,
+      paymentType: 'consultation',
+      service: 'Quick Consultation'
+    })
+  })
+
+  .then(function(res) {
+    return res.json().then(function(data) {
+      return {
+        ok: res.ok,
+        data: data
+      };
+    });
+  })
+
+  .then(function(result) {
+
+    if (!result.ok || !result.data.success) {
+      throw new Error(
+        result.data.error || 'Unable to create payment order'
+      );
+    }
+
+    var order = result.data;
+
+    // =====================================
+    // OPEN RAZORPAY
+    // =====================================
+
+    var options = {
+
+      key: order.keyId,
+
+      amount: order.amount,
+
+      currency: order.currency,
+
+      name: 'KalpAahar',
+
+      description: 'Quick Consultation',
+
+      order_id: order.orderId,
+
+      handler: function(response) {
+
+        formStatus.textContent =
+          'Payment received. Verifying payment...';
+
+        // =====================================
+        // VERIFY PAYMENT
+        // =====================================
+
+        fetch(CHECKOUT_API_BASE + '/api/verify', {
+
+          method: 'POST',
+
+          headers: {
+            'Content-Type': 'application/json'
+          },
+
+          body: JSON.stringify({
+
+            razorpay_order_id:
+              response.razorpay_order_id,
+
+            razorpay_payment_id:
+              response.razorpay_payment_id,
+
+            razorpay_signature:
+              response.razorpay_signature
+
+          })
+
+        })
+
+        .then(function(res) {
+
+          return res.json().then(function(data) {
+
+            return {
+              ok: res.ok,
+              data: data
+            };
+
+          });
+
+        })
+
+        .then(function(result) {
+
+          if (
+            !result.ok ||
+            !result.data.success ||
+            !result.data.verified
+          ) {
+
+            throw new Error(
+              result.data.error ||
+              'Payment verification failed'
+            );
+
+          }
+
+          // =====================================
+          // PAYMENT VERIFIED
+          // =====================================
+
+          var paymentId =
+            result.data.paymentId;
+
+          // Save form information in background
+          try {
+
+            fetch(FORM_ENDPOINT, {
+
+              method: 'POST',
+
+              headers: {
+                'Accept': 'application/json'
+              },
+
+              body: new FormData(form)
+
+            }).catch(function() {});
+
+          } catch (err) {
+            // Ignore background form error
+          }
+
+          // =====================================
+          // WHATSAPP MESSAGE
+          // =====================================
+
+          var message =
+            buildWhatsAppMessage() +
+            '\n\n' +
+            '✅ PAYMENT CONFIRMED' +
+            '\n' +
+            'Amount: ₹800' +
+            '\n' +
+            'Payment ID: ' +
+            paymentId;
+
+          var waLink =
+            'https://wa.me/' +
+            CLINIC_WHATSAPP_NUMBER +
+            '?text=' +
+            encodeURIComponent(message);
+
+          // Book slot only after successful payment
+          commitSlotBooking();
+
+          window.open(
+            waLink,
+            '_blank',
+            'noopener'
+          );
+
+          formBtn.textContent =
+            'Payment Successful';
+
+          formStatus.style.color =
+            'var(--emerald)';
+
+          formStatus.innerHTML =
+            'Payment successful! Your appointment details are ready in WhatsApp.';
+
+          setTimeout(function() {
+
+            formBtn.disabled = false;
+            formBtn.textContent = originalBtnText;
+
+          }, 5000);
+
+        })
+
+        .catch(function(error) {
+
+          console.error(
+            'Payment verification error:',
+            error
+          );
+
+          formBtn.disabled = false;
+          formBtn.textContent = originalBtnText;
+
+          formStatus.style.color = '#d64545';
+
+          formStatus.textContent =
+            'Payment verification failed. Please contact us before trying again.';
+
+        });
+
+      },
+
+      modal: {
+
+        ondismiss: function() {
+
+          formBtn.disabled = false;
+          formBtn.textContent = originalBtnText;
+
+          formStatus.style.display = 'none';
+
+        }
+
+      },
+
+      prefill: {
+
+        name: name.value.trim(),
+
+        email: email.value.trim(),
+
+        contact: phone.value.trim()
+
+      },
+
+      theme: {
+
+        color: '#2e8b57'
+
+      }
+
+    };
+
+    var rzp =
+      new Razorpay(options);
+
+    rzp.on('payment.failed', function(response) {
+
+      console.error(
+        'Razorpay payment failed:',
+        response
+      );
+
       formBtn.disabled = false;
       formBtn.textContent = originalBtnText;
-    }, 4000);
+
+      formStatus.style.color = '#d64545';
+
+      formStatus.textContent =
+        'Payment was not completed. Please try again.';
+
+    });
+
+    rzp.open();
+
+  })
+
+  .catch(function(error) {
+
+    console.error(
+      'Consultation payment error:',
+      error
+    );
+
+    formBtn.disabled = false;
+    formBtn.textContent = originalBtnText;
+
+    formStatus.style.color = '#d64545';
+
+    formStatus.textContent =
+      error.message ||
+      'Unable to start payment. Please try again.';
+
   });
 
+});
   /* ---- newsletter: real submission via FormSubmit.co ---- */
   var newsletterForm = document.getElementById('newsletterForm');
   newsletterForm.addEventListener('submit', function(e){
@@ -3045,6 +3327,7 @@ function showMain(){
   /* Point this at your deployed backend from the /backend folder.
      Local testing default shown below — change before going live,
      e.g. 'https://api.kalpaahar.com' */
+  window.CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
   var CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
 
   var CHECKOUT_ENDPOINT = 'https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com';
