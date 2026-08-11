@@ -1924,15 +1924,17 @@ formBtn.textContent = 'Processing ₹' + consultationAmount + '...';
   formStatus.style.color = 'var(--ink-soft)';
   formStatus.textContent = 'Preparing your secure payment...';
 
-  // =====================================
-  // CREATE ₹800 CONSULTATION ORDER
-  // =====================================
+ // =====================================
+// CREATE CONSULTATION ORDER
+// =====================================
 
-  fetch(CHECKOUT_API_BASE + '/create-order', {
+fetch(CHECKOUT_API_BASE + '/create-order', {
   method: 'POST',
+
   headers: {
     'Content-Type': 'application/json'
   },
+
   body: JSON.stringify({
     amount: consultationAmount,
     paymentType: 'consultation',
@@ -1949,45 +1951,52 @@ formBtn.textContent = 'Processing ₹' + consultationAmount + '...';
   });
 })
 
-    var order = result.data;
+.then(function(result) {
 
-    // =====================================
-    // OPEN RAZORPAY
-    // =====================================
+ if (!result.ok || !result.data.success) {
+  throw new Error(
+    result.data.error || 'Unable to create payment order'
+  );
+}
 
-    var options = {
+var order = result.data;
 
-      key: order.keyId,
+  // =====================================
+  // OPEN RAZORPAY
+  // =====================================
 
-      amount: order.amount,
+  var options = {
 
-      currency: order.currency,
+    key: order.keyId,
 
-      name: 'KalpAahar',
+    amount: order.amount,
 
-      description: consultationService,
+    currency: order.currency,
 
-      order_id: order.orderId,
+    name: 'KalpAahar',
 
-      handler: function(response) {
+    description: consultationService,
 
-        formStatus.textContent =
-          'Payment received. Verifying payment...';
+    order_id: order.orderId,
 
-        // =====================================
-        // VERIFY PAYMENT
-        // =====================================
+    handler: function(response) {
 
-        fetch(CHECKOUT_API_BASE + '/api/verify', {
+      formStatus.textContent =
+        'Payment received. Verifying payment...';
 
-          method: 'POST',
+      // =====================================
+      // VERIFY PAYMENT
+      // =====================================
 
-          headers: {
-            'Content-Type': 'application/json'
-          },
+      fetch(CHECKOUT_API_BASE + '/api/verify', {
 
-          body: JSON.stringify({
+        method: 'POST',
 
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
             razorpay_order_id:
               response.razorpay_order_id,
 
