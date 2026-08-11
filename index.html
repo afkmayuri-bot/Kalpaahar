@@ -2508,15 +2508,131 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
 
     <!-- Step 2: Payment -->
-    <div id="coStepPayment" class="checkout-step">
-      <span class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Payment</span>
-      <h3>Confirm &amp; Pay</h3>
-      <p class="co-lede" style="color:var(--ink-soft);">Your eBook — <strong id="coPayTitle">High Protein Breakfast</strong> — will be sent to <strong id="coPayEmail"></strong> right after payment.</p>
-      <div class="co-pay-amount">&#8377;<span id="coPayAmount">299</span></div>
-      <button type="button" class="btn btn-primary btn-block" data-ripple onclick="payNow()">Pay &#8377;<span id="coPayBtnAmount">299</span></button>
-      <p style="text-align:center; font-size:.78rem; color:var(--ink-soft); margin-top:14px;">Secure payments powered by Razorpay. Your card/UPI details are handled entirely by Razorpay and never touch our servers.</p>
-      <div class="co-status" id="coPayStatus"></div>
-    </div>
+
+<div id="coStepPayment" class="checkout-step">
+
+  <span class="eyebrow">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <path d="M7 8h10M7 12h10M7 16h6"/>
+    </svg>
+    Your eBook
+  </span>
+
+  <h3 id="coPayTitle">High Protein Breakfast</h3>
+
+  <p class="co-lede" style="color:var(--ink-soft);">
+    Fuel Your Morning. Power Your Day.
+  </p>
+
+  <!-- Product information -->
+
+  <div style="
+    background:#f7faf8;
+    border:1px solid rgba(46,139,87,.15);
+    border-radius:14px;
+    padding:18px;
+    margin:18px 0;
+  ">
+
+```
+<p style="margin:0 0 10px; font-weight:700;">
+  What's inside
+</p>
+
+<ul style="
+  margin:0;
+  padding-left:20px;
+  color:var(--ink-soft);
+  line-height:1.8;
+">
+  <li>20 practical nutrition-focused recipes</li>
+  <li>Easy ideas for busy mornings</li>
+  <li>Protein-forward breakfast options</li>
+  <li>Simple ingredients and easy preparation</li>
+</ul>
+```
+
+  </div>
+
+  <!-- Free bonus -->
+
+  <div style="
+    background:linear-gradient(135deg,#f1f8f3,#ffffff);
+    border:1px solid rgba(46,139,87,.25);
+    border-radius:14px;
+    padding:18px;
+    margin:18px 0;
+  ">
+
+```
+<div style="font-weight:800; margin-bottom:6px;">
+  🎁 FREE BONUS INCLUDED
+</div>
+
+<div style="font-weight:700;">
+  Move Well Home Workout Guide
+</div>
+
+<p style="
+  margin:6px 0 0;
+  color:var(--ink-soft);
+  font-size:.9rem;
+">
+  Get our practical home workout guide absolutely free with your eBook purchase.
+</p>
+```
+
+  </div>
+
+  <!-- Customer email -->
+
+  <p style="
+    color:var(--ink-soft);
+    font-size:.9rem;
+    margin:18px 0 8px;
+  ">
+    Your eBook will be sent to:
+    <strong id="coPayEmail"></strong>
+  </p>
+
+  <!-- Price -->
+
+  <div class="co-pay-amount">
+    &#8377;<span id="coPayAmount">299</span>
+  </div>
+
+  <!-- Payment button -->
+
+<button
+type="button"
+class="btn btn-primary btn-block"
+data-ripple
+onclick="payNow()"
+
+>
+
+```
+Pay &#8377;<span id="coPayBtnAmount">299</span>
+```
+
+  </button>
+
+  <p style="
+    text-align:center;
+    font-size:.78rem;
+    color:var(--ink-soft);
+    margin-top:14px;
+  ">
+    🔒 Secure payments powered by Razorpay.
+    Your card, UPI and payment details are handled entirely by Razorpay
+    and never touch our servers.
+  </p>
+
+  <div class="co-status" id="coPayStatus"></div>
+
+</div>
+
 
     <!-- Step 3: Payment success -->
     <div id="coStepSuccess" class="checkout-step">
