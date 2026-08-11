@@ -1906,28 +1906,29 @@ if (!valid) {
 
   formBtn.disabled = true;
  var selectedPlan = plan.value;
-
 var consultationAmount = 0;
 var consultationService = '';
 
-if (selectedPlan === 'Quick Consultation') {
+if (selectedPlan.trim() === 'Quick Consultation') {
   consultationAmount = 800;
   consultationService = 'Quick Consultation';
-} else if (selectedPlan === 'Condition Specific Nutrition Plan') {
+
+} else if (selectedPlan.trim() === 'Condition Specific Nutrition Plan') {
   consultationAmount = 2500;
   consultationService = 'Condition-Specific Nutrition Plan';
 }
 
 formBtn.textContent = 'Processing ₹' + consultationAmount + '...';
 
-  formStatus.style.display = 'block';
-  formStatus.style.color = 'var(--ink-soft)';
-  formStatus.textContent = 'Preparing your secure payment...';
+formStatus.style.display = 'block';
+formStatus.style.color = 'var(--ink-soft)';
+formStatus.textContent = 'Preparing your secure payment...';
 
- // =====================================
+// =====================================
 // CREATE CONSULTATION ORDER
 // =====================================
-
+console.log('PLAN:', selectedPlan);
+console.log('AMOUNT:', consultationAmount);
 fetch(CHECKOUT_API_BASE + '/create-order', {
   method: 'POST',
 
@@ -1935,6 +1936,12 @@ fetch(CHECKOUT_API_BASE + '/create-order', {
     'Content-Type': 'application/json'
   },
 
+  body: JSON.stringify({
+    amount: consultationAmount,
+    paymentType: 'consultation',
+    service: consultationService
+  })
+})
   body: JSON.stringify({
     amount: consultationAmount,
     paymentType: 'consultation',
