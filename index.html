@@ -2550,20 +2550,59 @@ document.addEventListener('DOMContentLoaded', function () {
   What's included
 </div>
 
-<div style="
+<ul id="coPayInside" style="
+  margin:0;
+  padding-left:20px;
   color:var(--ink-soft);
   font-size:.82rem;
   line-height:1.55;
-">
-  ✓ 20 practical breakfast recipes<br>
-  ✓ Protein-forward meal ideas<br>
-  ✓ Easy recipes for busy mornings
-</div>
-```
+"></ul>
 
   </div>
 
   <!-- Free bonus -->
+
+<div style="
+  background:#f7faf8;
+  border:1px solid rgba(46,139,87,.14);
+  border-radius:12px;
+  padding:14px 16px;
+  margin-bottom:12px;
+">
+
+  <div style="
+    font-weight:700;
+    font-size:.9rem;
+    margin-bottom:5px;
+  ">
+    🎯 Who It's For
+  </div>
+
+  <ul id="coPayWho" style="
+    margin:0;
+    padding-left:20px;
+    color:var(--ink-soft);
+    font-size:.82rem;
+    line-height:1.55;
+  "></ul>
+
+  <div style="
+    font-weight:700;
+    font-size:.9rem;
+    margin:14px 0 5px;
+  ">
+    ⭐ Benefits
+  </div>
+
+  <ul id="coPayBenefits" style="
+    margin:0;
+    padding-left:20px;
+    color:var(--ink-soft);
+    font-size:.82rem;
+    line-height:1.55;
+  "></ul>
+
+</div>
 
   <div style="
     background:linear-gradient(135deg,#f1f8f3,#ffffff);
@@ -2573,7 +2612,6 @@ document.addEventListener('DOMContentLoaded', function () {
     margin-bottom:14px;
   ">
 
-```
 <div style="
   font-weight:800;
   font-size:.88rem;
@@ -3030,10 +3068,145 @@ function showStep(step){
     });
   }, 10);
 }
+var EBOOK_INFO = {
+  'high-protein-breakfast': {
+    inside: [
+      '20 high-protein breakfast recipes',
+      'Calorie & macro breakdown for every recipe',
+      'Quick-prep and make-ahead options',
+      'Vegetarian and egg-based recipe variations'
+    ],
+    who: [
+      'Busy adults looking for healthy breakfast ideas',
+      'People wanting more protein in their morning meals',
+      'Anyone looking for quick, practical breakfast recipes'
+    ],
+    benefits: [
+      'Makes healthy mornings easier and more convenient',
+      'Helps you choose balanced, protein-rich breakfast options',
+      'Simple recipes using practical everyday ingredients'
+    ]
+  },
+
+  'picky-eaters': {
+    inside: [
+      'Practical nutrition ideas for selective eaters',
+      'Simple family-friendly meal suggestions',
+      'Balanced nutrition strategies for children',
+      'Easy ideas for stress-free mealtimes'
+    ],
+    who: [
+      'Parents of toddlers and young children who are selective eaters',
+      'Families looking for stress-free, no-fuss mealtimes',
+      'Caregivers wanting balanced nutrition without daily arguments'
+    ],
+    benefits: [
+      'Makes mealtimes calmer and more enjoyable',
+      'Supports better nutrition without unnecessary food battles',
+      'Easy ideas using everyday, affordable ingredients'
+    ]
+  },
+
+  'gut-health-reset': {
+    inside: [
+      '20 gut-friendly recipes for every meal of the day',
+      'Nutrition breakdown for every recipe',
+      'Fermented food and probiotic-rich meal ideas',
+      'Easy substitutions for common trigger ingredients'
+    ],
+    who: [
+      'People looking for practical gut-friendly meal ideas',
+      'Anyone wanting to include more diverse foods in their diet',
+      'Busy individuals who prefer simple recipes'
+    ],
+    benefits: [
+      'Makes gut-friendly eating easier to follow',
+      'Provides practical meal ideas for everyday cooking',
+      'Helps add variety to your meals with simple ingredients'
+    ]
+  },
+
+  'snack-smart': {
+    inside: [
+      '20 healthy, practical snack recipes',
+      'Calorie & macro breakdown for every recipe',
+      'On-the-go and desk-friendly snack options',
+      'Sweet, savoury and protein-rich snack variations'
+    ],
+    who: [
+      'Busy people looking for smarter snack options',
+      'Students and professionals needing convenient snacks',
+      'Anyone wanting simple homemade snack ideas'
+    ],
+    benefits: [
+      'Makes healthy snacking more convenient',
+      'Gives you a variety of sweet and savoury options',
+      'Easy recipes that fit into busy daily routines'
+    ]
+  },
+
+  'power-lunch': {
+    inside: [
+      '20 balanced, protein-forward lunch recipes',
+      'Calorie & macro breakdown for every recipe',
+      'Desk-friendly and meal-prep-ready options',
+      'Vegetarian and non-vegetarian variations'
+    ],
+    who: [
+      'Busy professionals looking for practical lunch ideas',
+      'People who meal-prep or carry lunch to work',
+      'Anyone wanting balanced and satisfying lunch recipes'
+    ],
+    benefits: [
+      'Makes weekday lunch planning easier',
+      'Provides practical protein-forward meal options',
+      'Useful for meal prep and busy workdays'
+    ]
+  },
+
+  'ancient-grain-modern-plate': {
+    inside: [
+      '20 gluten-free millet recipes',
+      'Nutrition breakdown for every recipe',
+      'Breakfast, main course and snack options',
+      'Beginner-friendly cooking tips for different millet varieties'
+    ],
+    who: [
+      'Anyone interested in adding more millet-based meals',
+      'People looking for gluten-free recipe ideas',
+      'Beginners wanting simple ways to cook different millets'
+    ],
+    benefits: [
+      'Makes millet cooking simple and approachable',
+      'Adds variety to everyday meals',
+      'Includes practical recipes for different times of the day'
+    ]
+  }
+};
   window.openCheckout = function(title, price){
     currentTitle = title || 'High Protein Breakfast';
     currentPrice = Number(price) || 299;
     currentEbookId = slugifyTitle(currentTitle);
+
+var info = EBOOK_INFO[currentEbookId];
+
+if (info) {
+  document.getElementById('coPayInside').innerHTML =
+    info.inside.map(function(item) {
+      return '<li>' + item + '</li>';
+    }).join('');
+
+  document.getElementById('coPayWho').innerHTML =
+    info.who.map(function(item) {
+      return '<li>' + item + '</li>';
+    }).join('');
+
+  document.getElementById('coPayBenefits').innerHTML =
+    info.benefits.map(function(item) {
+      return '<li>' + item + '</li>';
+    }).join('');
+}
+
     document.getElementById('coTitle').textContent = currentTitle;
     document.getElementById('coPrice').textContent = currentPrice;
     document.getElementById('coPayTitle').textContent = currentTitle;
