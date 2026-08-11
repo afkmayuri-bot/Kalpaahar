@@ -3009,11 +3009,27 @@ function showMain(){
   var currentEbookId = '';
   var currentCustomer = { name: '', email: '', phone: '' };
 
-  function showStep(step){
-    [stepDetails, stepPayment, stepSuccess].forEach(function(s){ s.classList.remove('active'); });
-    step.classList.add('active');
-  }
+function showStep(step){
+  [stepDetails, stepPayment, stepSuccess].forEach(function(s){
+    s.classList.remove('active');
+  });
 
+  step.classList.add('active');
+
+  // Always start the new checkout page from the top
+  setTimeout(function(){
+    var scrollBox = step.parentElement;
+
+    if (scrollBox) {
+      scrollBox.scrollTop = 0;
+    }
+
+    step.scrollIntoView({
+      behavior: 'auto',
+      block: 'start'
+    });
+  }, 10);
+}
   window.openCheckout = function(title, price){
     currentTitle = title || 'High Protein Breakfast';
     currentPrice = Number(price) || 299;
