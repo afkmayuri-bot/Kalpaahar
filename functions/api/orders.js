@@ -7,11 +7,13 @@ export async function onRequestPost({ request, env }) {
     const amount = Number(body.amount);
     const customer = body.customer || {};
     const ebookId = body.ebookId || "";
+    const paymentType = body.paymentType || "ebook";
+    const service = body.service || "";
 
     // --------------------------------------------------
     // Validate amount
     // --------------------------------------------------
-    if (!amount || amount <= 0) {
+    if (!Number.isFinite(amount) || amount <= 0) {
       return Response.json(
         {
           success: false,
@@ -22,16 +24,35 @@ export async function onRequestPost({ request, env }) {
     }
 
     // --------------------------------------------------
-    // Validate customer email
+    // Validate consultation
     // --------------------------------------------------
-    if (!customer.email) {
-      return Response.json(
-        {
-          success: false,
-          error: "Customer email is required"
-        },
-        { status: 400 }
-      );
+    if (paymentType === "consultation") {
+
+      if (!service) {
+        return Response.json(
+          {
+            success: false,
+            error: "Consultation service is required"
+          },
+          { status: 400 }
+        );
+      }
+
+    } else {
+
+      // --------------------------------------------------
+      // Validate eBook customer
+      // --------------------------------------------------
+      if (!customer.email) {
+        return Response.json(
+          {
+            success: false,
+            error: "Customer email is required"
+          },
+          { status: 400 }
+        );
+      }
+
     }
 
     // --------------------------------------------------
@@ -75,12 +96,16 @@ export async function onRequestPost({ request, env }) {
         body: JSON.stringify({
           amount: Math.round(amount * 100),
           currency: "INR",
-          receipt: "ebook_" + Date.now(),
+          receipt:
+            (paymentType === "consultation"
+              ? "consultation_"
+              : "ebook_") + Date.now(),
 
-          // These notes are used later by webhook.js
           notes: {
+            paymentType: paymentType,
+            service: service,
             name: customer.name || "",
-            email: customer.email,
+            email: customer.email || "",
             phone: customer.phone || "",
             ebookId: ebookId
           }
@@ -113,17 +138,15 @@ export async function onRequestPost({ request, env }) {
     }
 
     // --------------------------------------------------
-    // Return order details to frontend
+    // Return order details
     // --------------------------------------------------
     return Response.json({
       success: true,
 
-      data: {
-        keyId: env.RAZORPAY_KEY_ID,
-        orderId: data.id,
-        amount: data.amount,
-        currency: data.currency
-      }
+      keyId: env.RAZORPAY_KEY_ID,
+      orderId: data.id,
+      amount: data.amount,
+      currency: data.currency
     });
 
   } catch (error) {
