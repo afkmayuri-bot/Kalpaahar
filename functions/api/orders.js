@@ -1,14 +1,17 @@
-// functions/api/orders.js
-
 export async function onRequestPost({ request, env }) {
   try {
     const body = await request.json();
 
     const amount = Number(body.amount);
     const customer = body.customer || {};
-    const ebookId = body.ebookId || "";
-    const paymentType = body.paymentType || "ebook";
-    const service = body.service || "";
+    const ebookId = String(body.ebookId || "");
+    const paymentType = String(body.paymentType || "");
+    const service = String(
+      body.service ||
+      body.consultationType ||
+      body.plan ||
+      ""
+    );
 
     // --------------------------------------------------
     // Validate amount
@@ -56,6 +59,75 @@ export async function onRequestPost({ request, env }) {
     }
 
     // --------------------------------------------------
+    // eBook prices
+    // --------------------------------------------------
+    const ebookPrices = {
+      "high-protein-breakfast": 299,
+      "picky-eaters": 299,
+      "snack-smart": 299,
+      "gut-reset": 299,
+      "power-lunch": 299,
+      "ancient-grain-modern-plate": 299
+    };
+
+    // --------------------------------------------------
+    // Determine expected price
+    // --------------------------------------------------
+    let expectedAmount = null;
+
+    if (
+      paymentType === "consultation" &&
+      service === "Quick Consultation"
+    ) {
+      expectedAmount = 800;
+
+    } else if (
+      paymentType === "consultation" &&
+      service === "Condition-Specific Nutrition Plan"
+    ) {
+      expectedAmount = 2500;
+
+    } else if (ebookPrices[ebookId]) {
+      expectedAmount = ebookPrices[ebookId];
+    }
+
+    // --------------------------------------------------
+    // Validate product/service
+    // --------------------------------------------------
+    if (expectedAmount === null) {
+      return Response.json(
+        {
+          success: false,
+          error: "Invalid product or service"
+        },
+        { status: 400 }
+      );
+    }
+
+    // --------------------------------------------------
+    // Validate price
+    // --------------------------------------------------
+    if (amount !== expectedAmount) {
+      return Response.json(
+        {
+          success: false,
+          error: "Invalid amount",
+          expectedAmount: expectedAmount,
+          receivedAmount: amount
+        },
+        { status: 400 }
+      );
+    }
+
+    console.log("PAYMENT DEBUG", {
+      paymentType,
+      service,
+      ebookId,
+      receivedAmount: amount,
+      expectedAmount
+    });
+
+    // --------------------------------------------------
     // Validate Razorpay credentials
     // --------------------------------------------------
     if (
@@ -94,7 +166,7 @@ export async function onRequestPost({ request, env }) {
         },
 
         body: JSON.stringify({
-          amount: Math.round(amount * 100),
+          amount: Math.round(expectedAmount * 100),
           currency: "INR",
           receipt:
             (paymentType === "consultation"
@@ -128,7 +200,6 @@ export async function onRequestPost({ request, env }) {
           error:
             data.error?.description ||
             "Razorpay order creation failed",
-
           razorpay: data
         },
         {

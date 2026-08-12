@@ -733,6 +733,9 @@ var CHECKOUT_ENDPOINT = "https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com
     step.classList.add('active');
   }
 
+window.selectCollection = function(title, price){
+  window.openCheckout(title, price);
+};
   window.openCheckout = function(title, price){
     currentTitle = title || 'High Protein Breakfast';
     currentPrice = price || '299';
