@@ -894,7 +894,7 @@ fetch(CHECKOUT_API_BASE + '/api/orders', {method: 'POST',
   body: JSON.stringify({ 
     ebookId: currentEbookId, 
     customer: currentCustomer,
-    amount: currentPrice
+    amount: Number(currentPrice)
   })
 })
 .then(function(res){ 
