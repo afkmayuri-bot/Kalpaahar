@@ -2983,119 +2983,90 @@ var order = result.data;
 
   <!-- COMPLETE COLLECTION -->
 
-  <div style="
-    padding:18px;
-    margin-bottom:14px;
-    border:2px solid var(--ink);
-    border-radius:16px;
-    text-align:center;
-  ">
+<!-- COMPLETE COLLECTION -->
 
-    <div style="
-      font-size:.72rem;
-      font-weight:900;
-      margin-bottom:6px;
-    ">
-      ⭐ BEST VALUE
-    </div>
+<div style="
+  padding:18px;
+  margin-bottom:14px;
+  border:2px solid var(--ink);
+  border-radius:16px;
+  text-align:center;
+">
 
-    <div style="
-      font-size:1.05rem;
-      font-weight:900;
-      margin-bottom:6px;
-    ">
-      COMPLETE KALPAAHAR COLLECTION
-    </div>
+  <div style="font-size:.72rem;font-weight:900;margin-bottom:6px;">
+    ⭐ BEST VALUE
+  </div>
 
-    <div style="
-      font-size:.82rem;
-      color:var(--ink-soft);
-      margin-bottom:10px;
-    ">
-      All 6 Nutrition eBooks
-    </div>
+  <div style="font-size:1.05rem;font-weight:900;margin-bottom:6px;">
+    COMPLETE KALPAAHAR COLLECTION
+  </div>
 
-    <div style="font-size:1.15rem;font-weight:800;">
-      <span style="text-decoration:line-through;color:var(--ink-soft);">
-        ₹1,794
-      </span>
-      &nbsp;
-      ₹1,299
-    </div>
+  <div style="font-size:.82rem;color:var(--ink-soft);margin-bottom:10px;">
+    All 6 Nutrition eBooks
+  </div>
 
-    <div style="
-      font-size:.78rem;
-      font-weight:800;
-      margin-top:4px;
-    ">
-      Save ₹495
-    </div>
+  <div style="font-size:1.15rem;font-weight:800;">
+    <span style="text-decoration:line-through;color:var(--ink-soft);">
+      ₹1,794
+    </span>
+    &nbsp; ₹1,299
+  </div>
 
-    <button
-  type="button"
-  class="btn btn-primary btn-block"
-  style="margin-top:12px;"
-  onclick="selectCollection('Complete KalpAahar Collection', 1299)"
->
-  Get the Complete Collection
-</button>
-
-</div>
-
-  <!-- PROTEIN & ENERGY -->
-
-  <div style="
-    padding:16px;
-    margin-bottom:12px;
-    border:1px solid rgba(0,0,0,.1);
-    border-radius:14px;
-    text-align:center;
-  ">
-
-    <div style="font-size:1rem;font-weight:900;">
-      💪 PROTEIN & ENERGY COLLECTION
-    </div>
-
-    <div style="
-      font-size:.8rem;
-      color:var(--ink-soft);
-      margin:6px 0;
-    ">
-      High Protein Breakfast + Power Lunch + Snack Smart
-    </div>
-
-    <div style="font-weight:800;">
-      <span style="text-decoration:line-through;color:var(--ink-soft);">
-        ₹897
-</span>
-&nbsp; ₹699
-</div>
-
-<div style="font-size:.75rem;font-weight:800;">
-  Save ₹198
+  <div style="font-size:.78rem;font-weight:800;margin-top:4px;">
+  Save ₹495
 </div>
 
 <button
   type="button"
   class="btn btn-primary btn-block"
   style="margin-top:12px;"
-  onclick="selectCollection('Protein & Energy Collection', 699)"
+  onclick="openCheckout('Complete KalpAahar Collection', 1299)"
 >
-  Get this Collection
+  Get the Complete Collection
 </button>
 </div>
-  <!-- HAPPY FAMILY -->
 
-  <div style="
-    padding:16px;
-    margin-bottom:12px;
-    border:1px solid rgba(0,0,0,.1);
-    border-radius:14px;
-    text-align:center;
-  ">
+<!-- PROTEIN & ENERGY -->
 
-    <div style="font-size:1rem;font-weight:900;">
-      <!-- HAPPY FAMILY -->
+<div style="
+  padding:16px;
+  margin-bottom:12px;
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:14px;
+  text-align:center;
+">
+
+  <div style="font-size:1rem;font-weight:900;">
+    💪 PROTEIN & ENERGY COLLECTION
+  </div>
+  <div style="font-size:.8rem;color:var(--ink-soft);margin:6px 0;">
+    High Protein Breakfast + Power Lunch + Snack Smart
+  </div>
+
+  <div style="font-weight:800;">
+    <span style="text-decoration:line-through;color:var(--ink-soft);">
+      ₹897
+    </span>
+    &nbsp; ₹699
+  </div>
+
+  <div style="font-size:.75rem;font-weight:800;">
+    Save ₹198
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-primary btn-block"
+    style="margin-top:12px;"
+    onclick="openCheckout('Protein & Energy Collection', 699)"
+  >
+    Get this Collection
+  </button>
+
+</div>
+
+
+<!-- HAPPY FAMILY -->
 
 <div style="
   padding:16px;
@@ -3109,11 +3080,7 @@ var order = result.data;
     👨‍👩‍👧 HAPPY FAMILY NUTRITION COLLECTION
   </div>
 
-  <div style="
-    font-size:.8rem;
-    color:var(--ink-soft);
-    margin:6px 0;
-  ">
+  <div style="font-size:.8rem;color:var(--ink-soft);margin:6px 0;">
     Picky Eaters + High Protein Breakfast + Snack Smart
   </div>
 
@@ -3132,41 +3099,53 @@ var order = result.data;
     type="button"
     class="btn btn-primary btn-block"
     style="margin-top:12px;"
-    onclick="selectCollection('Happy Family Nutrition Collection', 699)"
+    onclick="openCheckout('Happy Family Nutrition Collection', 699)"
   >
     Get this Collection
   </button>
 
 </div>
-      🌿 GUT & GRAIN WELLNESS COLLECTION
-    </div>
 
-    <div style="
-      font-size:.8rem;
-      color:var(--ink-soft);
-      margin:6px 0;
-    ">
-      Gut Reset + Ancient Grain, Modern Plate + High Protein Breakfast
-    </div>
 
-    <div style="font-weight:800;">
-      <span style="text-decoration:line-through;color:var(--ink-soft);">
-        ₹897
-      </span>
-      &nbsp; ₹749
-    </div>
+<!-- GUT & GRAIN -->
 
-    <div style="font-size:.75rem;font-weight:800;">
-      Save ₹148
-<button
-  type="button"
-  class="btn btn-primary btn-block"
-  style="margin-top:12px;"
-  onclick="selectCollection('Gut & Grain Wellness Collection', 749)"
->
-  Get this Collection
-</button>
-    </div>
+<div style="
+  padding:16px;
+  margin-bottom:12px;
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:14px;
+  text-align:center;
+">
+
+  <div style="font-size:1rem;font-weight:900;">
+    🌿 GUT & GRAIN WELLNESS COLLECTION
+  </div>
+
+  <div style="font-size:.8rem;color:var(--ink-soft);margin:6px 0;">
+    Gut Reset + Ancient Grain, Modern Plate + High Protein Breakfast
+  </div>
+
+  <div style="font-weight:800;">
+    <span style="text-decoration:line-through;color:var(--ink-soft);">
+      ₹897
+    </span>
+    &nbsp; ₹749
+  </div>
+
+  <div style="font-size:.75rem;font-weight:800;">
+    Save ₹148
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-primary btn-block"
+    style="margin-top:12px;"
+    onclick="openCheckout('Gut & Grain Wellness Collection', 749)"
+  >
+    Get this Collection
+  </button>
+
+</div>
 
   </div>
 
