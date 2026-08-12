@@ -1904,17 +1904,30 @@ if (!valid) {
   var originalBtnText = formBtn.textContent;
 
   formBtn.disabled = true;
- var selectedPlan = plan.value;
+var selectedPlan = plan.value;
 var consultationAmount = 0;
 var consultationService = '';
 
-if (selectedPlan.trim() === 'Quick Consultation') {
+if (selectedPlan.toLowerCase().includes('quick')) {
   consultationAmount = 800;
   consultationService = 'Quick Consultation';
 
-} else if (selectedPlan.trim() === 'Condition-Specific Nutrition Plan') {
+} else if (
+  selectedPlan.toLowerCase().includes('condition') ||
+  selectedPlan.toLowerCase().includes('specific')
+) {
   consultationAmount = 2500;
   consultationService = 'Condition-Specific Nutrition Plan';
+}
+
+console.log('PLAN:', selectedPlan);
+console.log('FINAL AMOUNT:', consultationAmount);
+if (consultationAmount <= 0) {
+  formBtn.disabled = false;
+  formStatus.style.display = 'block';
+  formStatus.style.color = '#d64545';
+  formStatus.textContent = 'Unable to determine consultation price.';
+  return;
 }
 formBtn.textContent = 'Processing ₹' + consultationAmount + '...';
 
