@@ -3891,9 +3891,8 @@ if (info) {
      body: JSON.stringify({
   ebookId: currentEbookId,
   customer: currentCustomer,
-  amount: 299
+  amount: currentPrice
 })
-    })
       .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
       .then(function(result){
         if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
