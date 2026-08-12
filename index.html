@@ -1939,24 +1939,15 @@ fetch(CHECKOUT_API_BASE + '/create-order', {
     amount: consultationAmount,
     paymentType: 'consultation',
     service: consultationService
+})
+  .then(function(res) {
+    return res.json().then(function(data) {
+      return {
+        ok: res.ok,
+        data: data
+      };
+    });
   })
-})
-  body: JSON.stringify({
-    amount: consultationAmount,
-    paymentType: 'consultation',
-    service: consultationService
-  })
-})
-
-.then(function(res) {
-  return res.json().then(function(data) {
-    return {
-      ok: res.ok,
-      data: data
-    };
-  });
-})
-
 .then(function(result) {
 
  if (!result.ok || !result.data.success) {
