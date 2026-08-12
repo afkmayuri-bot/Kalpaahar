@@ -1777,7 +1777,8 @@ document.addEventListener('DOMContentLoaded', function () {
       slotGrid.querySelectorAll('.slot-btn').forEach(function(b){ b.classList.remove('is-selected'); });
       btn.classList.add('is-selected');
       selectedSlotId = btn.getAttribute('data-slot');
-      var slotDef = SLOTS.filter(function(s){ return s.id === selectedSlotId; })[0];
+      var slots = getSlotsForDate(dateInput.value);
+var slotDef = slots.filter(function(s){ return s.id === selectedSlotId; })[0];
       slotHidden.value = dateInput.value + ' | ' + (slotDef ? slotDef.label : selectedSlotId);
       slotGrid.closest('.field').classList.remove('error');
     });
