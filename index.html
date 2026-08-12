@@ -1445,9 +1445,7 @@ header.site-header.scrolled{ background:var(--glass); backdrop-filter:blur(16px)
 
           <div class="field" data-field="date">
             <label for="cf-date">Preferred Date</label>
-            <select id="cf-date" name="Preferred Date">
-              <option value="">Choose a date</option>
-            </select>
+            <input type="date" id="cf-date" name="Preferred Date">
             <span class="field-error">Please choose a date.</span>
           </div>
           <div class="field" data-field="slot">
@@ -2246,6 +2244,7 @@ var order = result.data;
   if (e2) e2.style.outline = '2px solid #e74c3c';
 });
 
+});
 </script>
 
 </div>
