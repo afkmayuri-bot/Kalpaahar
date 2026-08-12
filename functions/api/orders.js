@@ -70,10 +70,10 @@ export async function onRequestPost({ request, env }) {
   "ancient-grain-modern-plate": 299,
 
   // Collections
-  "Complete KalpAahar Collection": 1299,
-  "Protein & Energy Collection": 699,
-  "Happy Family Nutrition Collection": 699,
-  "Gut & Grain Wellness Collection": 749
+ "complete-kalpaahar-collection": 1299,
+"protein-&-energy-collection": 699,
+"happy-family-nutrition-collection": 699,
+"gut-&-grain-wellness-collection": 749
 };
 
     // --------------------------------------------------
