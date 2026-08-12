@@ -1936,11 +1936,12 @@ fetch(CHECKOUT_API_BASE + '/create-order', {
   },
 
   body: JSON.stringify({
-    amount: consultationAmount,
-    paymentType: 'consultation',
-    service: consultationService
+  amount: consultationAmount,
+  paymentType: 'consultation',
+  service: consultationService
 })
-  .then(function(res) {
+})
+.then(function(res) {
     return res.json().then(function(data) {
       return {
         ok: res.ok,
@@ -2178,29 +2179,27 @@ var order = result.data;
 
     });
 
-    rzp.open();
+   rzp.open();
 
-  })
+})
+.catch(function(error) {
 
-  .catch(function(error) {
+  console.error(
+    'Consultation payment error:',
+    error
+  );
 
-    console.error(
-      'Consultation payment error:',
-      error
-    );
+  formBtn.disabled = false;
+  formBtn.textContent = originalBtnText;
 
-    formBtn.disabled = false;
-    formBtn.textContent = originalBtnText;
+  formStatus.style.color = '#d64545';
 
-    formStatus.style.color = '#d64545';
-
-    formStatus.textContent =
-      error.message ||
-      'Unable to start payment. Please try again.';
-
-  });
+  formStatus.textContent =
+    error.message ||
+    'Unable to start payment. Please try again.';
 
 });
+
   /* ---- newsletter: real submission via FormSubmit.co ---- */
   var newsletterForm = document.getElementById('newsletterForm');
   newsletterForm.addEventListener('submit', function(e){
@@ -2237,7 +2236,8 @@ var order = result.data;
 });
 
 });
-</script>
+});
+});</script>
 
 </div>
 
