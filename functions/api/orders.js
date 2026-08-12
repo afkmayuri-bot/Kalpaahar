@@ -61,14 +61,20 @@ export async function onRequestPost({ request, env }) {
     // --------------------------------------------------
     // eBook prices
     // --------------------------------------------------
-    const ebookPrices = {
-      "high-protein-breakfast": 299,
-      "picky-eaters": 299,
-      "snack-smart": 299,
-      "gut-reset": 299,
-      "power-lunch": 299,
-      "ancient-grain-modern-plate": 299
-    };
+   const ebookPrices = {
+  "high-protein-breakfast": 299,
+  "picky-eaters": 299,
+  "snack-smart": 299,
+  "gut-reset": 299,
+  "power-lunch": 299,
+  "ancient-grain-modern-plate": 299,
+
+  // Collections
+  "Complete KalpAahar Collection": 1299,
+  "Protein & Energy Collection": 699,
+  "Happy Family Nutrition Collection": 699,
+  "Gut & Grain Wellness Collection": 749
+};
 
     // --------------------------------------------------
     // Determine expected price
