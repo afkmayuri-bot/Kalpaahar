@@ -1808,8 +1808,7 @@ var slotDef = slots.filter(function(s){ return s.id === selectedSlotId; })[0];
 
   function buildWhatsAppMessage(){
     var get = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
-    var diseaseOther = get('cf-disease-other');
-    var diseases = getCheckboxValues('Associated Disease') + (diseaseOther ? (' (' + diseaseOther + ')') : '');
+    var reasons = getCheckboxValues('Reason for Consultation');
     var lines = [
       'Hi KalpAahar, I would like to book a consultation.',
       '',
@@ -1819,15 +1818,15 @@ var slotDef = slots.filter(function(s){ return s.id === selectedSlotId; })[0];
       'Gender: ' + get('cf-gender'),
       'Occupation: ' + get('cf-occupation'),
       'Phone (WhatsApp): ' + get('cf-phone'),
-      'Email: ' + get('cf-email'),
-      'City: ' + get('cf-city'),
-      'Height: ' + get('cf-height') + ' inches',
-      'Weight: ' + get('cf-weight') + ' kg',
-      'Associated Disease: ' + diseases,
-      'Food Allergies: ' + get('cf-allergies'),
-      'Medications: ' + get('cf-medications'),
-      'Sleep Time: ' + get('cf-sleeptime'),
-      'Exercises: ' + getRadioValue('Exercises'),
+'Email: ' + get('cf-email'),
+'City: ' + get('cf-city'),
+'Height: ' + get('cf-height'),
+'Weight: ' + get('cf-weight') + ' kg',
+'Reason for Consultation: ' + reasons,
+'Food Allergies: ' + get('cf-allergies'),
+'Medications: ' + get('cf-medications'),
+'Sleep Time: ' + get('cf-sleeptime'),
+'Exercises: ' + getRadioValue('Exercises'),
       'Preferred Date & Time: ' + get('cf-slot'),
       'Message: ' + get('cf-message')
     ];
@@ -2053,15 +2052,36 @@ var order = result.data;
 
           // =====================================
           // PAYMENT VERIFIED
-          // =====================================
 
-          var paymentId =
-            result.data.paymentId;
+var paymentId =
+  result.data.paymentId;
 
-          // Save form information in background
-          try {
+// =====================================
+// ADD APPOINTMENT TO GOOGLE CALENDAR
+// =====================================
 
-            fetch(FORM_ENDPOINT, {
+var GOOGLE_CALENDAR_WEBAPP =
+  'https://script.google.com/macros/s/AKfycbwtuiqM3j0bEnnYt7JvamVCuw3aUaywfijCeKdra88Rg_U9A8NGVDtdF1zlA1BSX_XIVg/exec';
+
+fetch(GOOGLE_CALENDAR_WEBAPP, {
+  method: 'POST',
+  mode: 'no-cors',
+  headers: {
+    'Content-Type': 'text/plain;charset=utf-8'
+  },
+  body: JSON.stringify({
+    name: name.value.trim(),
+    email: email.value.trim(),
+    phone: phone.value.trim(),
+    plan: selectedPlan,
+    date: dateInput.value,
+    slotId: selectedSlotId
+  })
+});
+// Save form information in background
+try {
+
+  fetch(FORM_ENDPOINT, {
 
               method: 'POST',
 
