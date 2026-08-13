@@ -3020,7 +3020,7 @@ var order = result.data;
   type="button"
   class="btn btn-primary btn-block"
   style="margin-top:12px;"
-  onclick="openCheckout('Complete KalpAahar Collection', 1299)"
+  onclick="openCheckout('complete-kalpaahar-collection', 1299)"
 >
   Get the Complete Collection
 </button>
@@ -3058,7 +3058,7 @@ var order = result.data;
     type="button"
     class="btn btn-primary btn-block"
     style="margin-top:12px;"
-    onclick="openCheckout('Protein & Energy Collection', 699)"
+   onclick="openCheckout('protein-&-energy-collection', 699)"
   >
     Get this Collection
   </button>
@@ -3099,7 +3099,7 @@ var order = result.data;
     type="button"
     class="btn btn-primary btn-block"
     style="margin-top:12px;"
-    onclick="openCheckout('Happy Family Nutrition Collection', 699)"
+   onclick="openCheckout('happy-family-nutrition-collection', 699)"
   >
     Get this Collection
   </button>
@@ -3140,7 +3140,7 @@ var order = result.data;
     type="button"
     class="btn btn-primary btn-block"
     style="margin-top:12px;"
-    onclick="openCheckout('Gut & Grain Wellness Collection', 749)"
+   onclick="openCheckout('gut-&-grain-wellness-collection', 749)"
   >
     Get this Collection
   </button>
@@ -3562,7 +3562,7 @@ function showMain(){
 function selectCollection(title, price) {
   currentTitle = title;
   currentPrice = Number(price);
-  currentEbookId = slugifyTitle(title);
+  currentEbookId = (String(title).includes("-collection")) ? String(title) : slugifyTitle(title);
 
   document.getElementById('coTitle').textContent = currentTitle;
   document.getElementById('coPrice').textContent = currentPrice;
@@ -3716,7 +3716,7 @@ var EBOOK_INFO = {
   window.openCheckout = function(title, price){
     currentTitle = title || 'High Protein Breakfast';
     currentPrice = Number(price) || 299;
-    currentEbookId = slugifyTitle(currentTitle);
+    currentEbookId = (String(title).includes("-collection")) ? String(title) : slugifyTitle(title);
 
 var info = EBOOK_INFO[currentEbookId];
 
