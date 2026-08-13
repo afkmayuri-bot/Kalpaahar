@@ -717,6 +717,9 @@ var CHECKOUT_ENDPOINT = "https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com
       .trim()
       .replace(/\s+/g, '-');
   }
+  function getEbookId(title) {
+    return slugifyTitle(title);
+  }
   var overlay = document.getElementById('checkoutOverlay');
   var stepDetails = document.getElementById('coStepDetails');
   var stepPayment = document.getElementById('coStepPayment');
@@ -739,7 +742,7 @@ window.selectCollection = function(title, price){
   window.openCheckout = function(title, price){
     currentTitle = title || 'High Protein Breakfast';
     currentPrice = price || '299';
-    currentEbookId = slugifyTitle(currentTitle);
+    currentEbookId = getEbookId(currentTitle);
     document.getElementById('coTitle').textContent = currentTitle;
     document.getElementById('coPrice').textContent = currentPrice;
     document.getElementById('coPayTitle').textContent = currentTitle;
@@ -841,7 +844,7 @@ window.selectCollection = function(title, price){
      (handled by the backend email delivery once that's wired up). */
   var EBOOK_PDF_FILES = {
     'high-protein-breakfast': 'ebooks/High-Protein-Breakfast.pdf',
-    'gut-reset': 'ebooks/Gut-Health-Reset.pdf',
+    'gut-health-reset': 'ebooks/Gut-Health-Reset.pdf',
     'power-lunch': 'ebooks/Power-Lunch.pdf',
     'snack-smart': 'ebooks/Snack-Smart.pdf',
     'ancient-grain-modern-plate': 'ebooks/Ancient-Grain-Modern-Plate.pdf',
