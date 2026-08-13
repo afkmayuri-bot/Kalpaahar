@@ -3537,10 +3537,10 @@ function showMain(){
   /* Point this at your deployed backend from the /backend folder.
      Local testing default shown below — change before going live,
      e.g. 'https://api.kalpaahar.com' */
+  
   window.CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
-var CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
+  var CHECKOUT_API_BASE = window.CHECKOUT_API_BASE;
   var CHECKOUT_ENDPOINT = 'https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com';
-
   /* Must match the ids used in backend/ebooks/catalog.js */
   function slugifyTitle(title){
     return (title || '')
@@ -3892,6 +3892,7 @@ if (info) {
   customer: currentCustomer,
   amount: currentPrice
 })
+      })
       .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
       .then(function(result){
         if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
