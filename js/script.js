@@ -811,7 +811,7 @@ window.selectCollection = function(title, price){
     if (currentPrice === '0'){
       onPaymentDelivered();
     } else {
-      showStep(stepPayment);
+      payNow();
     }
   });
 
@@ -1159,3 +1159,4 @@ function closeSupportImage(){
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape') closeSupportImage();
 });
+
