@@ -1393,33 +1393,30 @@ header.site-header.scrolled{ background:var(--glass); backdrop-filter:blur(16px)
           </div>
 
           <div class="field-row">
-           <div class="field" data-field="height">
-  <label for="cf-height">Height (current) — feet &amp; inches <span style="color:#d64545;">*</span></label>
-  <input type="text" id="cf-height" name="Height" placeholder='e.g. 5&apos;6"' inputmode="text" autocomplete="off" required>
-</div>
+            <div class="field" data-field="height">
+              <label for="cf-height">Height (current) — inches <span style="color:#d64545;">*</span></label>
+              <input type="number" id="cf-height" name="Height (inches)" placeholder="e.g. 65" required>
+            </div>
             <div class="field" data-field="weight">
               <label for="cf-weight">Weight (current) — Kg <span style="color:#d64545;">*</span></label>
               <input type="number" id="cf-weight" name="Weight (kg)" placeholder="e.g. 68" required>
             </div>
           </div>
 
-<div class="field" data-field="reason">
-  <label>Reason for Consultation <span style="color:#d64545;">*</span></label>
-
-  <div class="option-group">
-    <label><input type="checkbox" name="Reason for Consultation" value="Weight Loss"> Weight Loss</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Diabetes"> Diabetes</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Thyroid"> Thyroid</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="PCOS/PCOD"> PCOS/PCOD</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Hypertension"> Hypertension</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Cholesterol Control"> Cholesterol Control</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Fatty Liver"> Fatty Liver</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Child Nutrition"> Child Nutrition</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Preventive Care"> Preventive Care</label>
-  </div>
-
-  <span class="field-error">Please select at least one option.</span>
-</div>
+          <div class="field" data-field="disease">
+            <label>Any associated disease already present <span style="color:#d64545;">*</span></label>
+            <div class="option-group">
+              <label><input type="checkbox" name="Associated Disease" value="Diabetes"> Diabetes</label>
+              <label><input type="checkbox" name="Associated Disease" value="Hypertension"> Hypertension</label>
+              <label><input type="checkbox" name="Associated Disease" value="Thyroid"> Thyroid</label>
+              <label><input type="checkbox" name="Associated Disease" value="PCOD/PCOS"> PCOD/PCOS</label>
+              <label><input type="checkbox" name="Associated Disease" value="Digestion Issues"> Digestion Issues</label>
+              <label><input type="checkbox" name="Associated Disease" value="None"> None</label>
+              <label><input type="checkbox" name="Associated Disease" value="Other"> Other</label>
+            </div>
+            <input type="text" id="cf-disease-other" name="Associated Disease — Other" placeholder="If Other, please specify" style="margin-top:8px;">
+            <span class="field-error">Please select at least one option.</span>
+          </div>
 
           <div class="field" data-field="allergies">
             <label for="cf-allergies">Do you have any food allergies? <span style="color:#d64545;">*</span></label>
@@ -1808,7 +1805,8 @@ var slotDef = slots.filter(function(s){ return s.id === selectedSlotId; })[0];
 
   function buildWhatsAppMessage(){
     var get = function(id){ var el = document.getElementById(id); return el ? el.value.trim() : ''; };
-    var reasons = getCheckboxValues('Reason for Consultation');
+    var diseaseOther = get('cf-disease-other');
+    var diseases = getCheckboxValues('Associated Disease') + (diseaseOther ? (' (' + diseaseOther + ')') : '');
     var lines = [
       'Hi KalpAahar, I would like to book a consultation.',
       '',
@@ -1818,15 +1816,15 @@ var slotDef = slots.filter(function(s){ return s.id === selectedSlotId; })[0];
       'Gender: ' + get('cf-gender'),
       'Occupation: ' + get('cf-occupation'),
       'Phone (WhatsApp): ' + get('cf-phone'),
-'Email: ' + get('cf-email'),
-'City: ' + get('cf-city'),
-'Height: ' + get('cf-height'),
-'Weight: ' + get('cf-weight') + ' kg',
-'Reason for Consultation: ' + reasons,
-'Food Allergies: ' + get('cf-allergies'),
-'Medications: ' + get('cf-medications'),
-'Sleep Time: ' + get('cf-sleeptime'),
-'Exercises: ' + getRadioValue('Exercises'),
+      'Email: ' + get('cf-email'),
+      'City: ' + get('cf-city'),
+      'Height: ' + get('cf-height') + ' inches',
+      'Weight: ' + get('cf-weight') + ' kg',
+      'Associated Disease: ' + diseases,
+      'Food Allergies: ' + get('cf-allergies'),
+      'Medications: ' + get('cf-medications'),
+      'Sleep Time: ' + get('cf-sleeptime'),
+      'Exercises: ' + getRadioValue('Exercises'),
       'Preferred Date & Time: ' + get('cf-slot'),
       'Message: ' + get('cf-message')
     ];
@@ -1866,17 +1864,17 @@ form.addEventListener('submit', function(e) {
   setError(allergies, allergies.value.trim().length < 1);
   setError(medications, medications.value.trim().length < 1);
 
-    var reasonChecked =
-    form.querySelectorAll('input[name="Reason for Consultation"]:checked').length > 0;
+  var diseaseChecked =
+    form.querySelectorAll('input[name="Associated Disease"]:checked').length > 0;
 
-  var reasonField =
-    document.querySelector('[data-field="reason"]');
+  var diseaseField =
+    document.querySelector('[data-field="disease"]');
 
-  reasonField.classList.toggle('error', !reasonChecked);
+  diseaseField.classList.toggle('error', !diseaseChecked);
 
-  if (!reasonChecked) valid = false;
+  if (!diseaseChecked) valid = false;
 
-    var exerciseChecked = !!getRadioValue('Exercises');
+  var exerciseChecked = !!getRadioValue('Exercises');
 
   document
     .querySelector('[data-field="exercise"]')
@@ -2052,36 +2050,15 @@ var order = result.data;
 
           // =====================================
           // PAYMENT VERIFIED
+          // =====================================
 
-var paymentId =
-  result.data.paymentId;
+          var paymentId =
+            result.data.paymentId;
 
-// =====================================
-// ADD APPOINTMENT TO GOOGLE CALENDAR
-// =====================================
+          // Save form information in background
+          try {
 
-var GOOGLE_CALENDAR_WEBAPP =
-  'https://script.google.com/macros/s/AKfycbwtuiqM3j0bEnnYt7JvamVCuw3aUaywfijCeKdra88Rg_U9A8NGVDtdF1zlA1BSX_XIVg/exec';
-
-fetch(GOOGLE_CALENDAR_WEBAPP, {
-  method: 'POST',
-  mode: 'no-cors',
-  headers: {
-    'Content-Type': 'text/plain;charset=utf-8'
-  },
-  body: JSON.stringify({
-    name: name.value.trim(),
-    email: email.value.trim(),
-    phone: phone.value.trim(),
-    plan: selectedPlan,
-    date: dateInput.value,
-    slotId: selectedSlotId
-  })
-});
-// Save form information in background
-try {
-
-  fetch(FORM_ENDPOINT, {
+            fetch(FORM_ENDPOINT, {
 
               method: 'POST',
 
@@ -3043,7 +3020,7 @@ try {
   type="button"
   class="btn btn-primary btn-block"
   style="margin-top:12px;"
-  onclick="openCheckout('complete-kalpaahar-collection', 1299)"
+  onclick="openCheckout('Complete KalpAahar Collection', 1299)"
 >
   Get the Complete Collection
 </button>
@@ -3081,7 +3058,7 @@ try {
     type="button"
     class="btn btn-primary btn-block"
     style="margin-top:12px;"
-   onclick="openCheckout('protein-&-energy-collection', 699)"
+    onclick="openCheckout('Protein & Energy Collection', 699)"
   >
     Get this Collection
   </button>
@@ -3122,7 +3099,7 @@ try {
     type="button"
     class="btn btn-primary btn-block"
     style="margin-top:12px;"
-   onclick="openCheckout('happy-family-nutrition-collection', 699)"
+    onclick="openCheckout('Happy Family Nutrition Collection', 699)"
   >
     Get this Collection
   </button>
@@ -3163,7 +3140,7 @@ try {
     type="button"
     class="btn btn-primary btn-block"
     style="margin-top:12px;"
-   onclick="openCheckout('gut-&-grain-wellness-collection', 749)"
+    onclick="openCheckout('Gut & Grain Wellness Collection', 749)"
   >
     Get this Collection
   </button>
@@ -3560,10 +3537,11 @@ function showMain(){
   /* Point this at your deployed backend from the /backend folder.
      Local testing default shown below — change before going live,
      e.g. 'https://api.kalpaahar.com' */
-  
   window.CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
-  var CHECKOUT_API_BASE = window.CHECKOUT_API_BASE;
+  var CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
+
   var CHECKOUT_ENDPOINT = 'https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com';
+
   /* Must match the ids used in backend/ebooks/catalog.js */
   function slugifyTitle(title){
     return (title || '')
@@ -3585,7 +3563,7 @@ function showMain(){
 function selectCollection(title, price) {
   currentTitle = title;
   currentPrice = Number(price);
-  currentEbookId = (String(title).includes("-collection")) ? String(title) : slugifyTitle(title);
+  currentEbookId = slugifyTitle(title);
 
   document.getElementById('coTitle').textContent = currentTitle;
   document.getElementById('coPrice').textContent = currentPrice;
@@ -3739,7 +3717,7 @@ var EBOOK_INFO = {
   window.openCheckout = function(title, price){
     currentTitle = title || 'High Protein Breakfast';
     currentPrice = Number(price) || 299;
-    currentEbookId = (String(title).includes("-collection")) ? String(title) : slugifyTitle(title);
+    currentEbookId = slugifyTitle(currentTitle);
 
 var info = EBOOK_INFO[currentEbookId];
 
@@ -3904,21 +3882,25 @@ if (info) {
       return;
     }
 
-    setPayButtonDisabled(true);
-    showPayStatus('Setting up secure payment...');
+   setPayButtonDisabled(true);
+showPayStatus('Setting up secure payment...');
 
-    fetch(CHECKOUT_API_BASE + '/api/orders', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify({
-  ebookId: currentEbookId,
-  customer: currentCustomer,
-  amount: currentPrice
+fetch(CHECKOUT_API_BASE + '/api/orders', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    ebookId: currentEbookId,
+    customer: currentCustomer,
+    amount: currentPrice
+  })
 })
-      })
-      .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
-      .then(function(result){
-        if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
+.then(function(res){
+  return res.json().then(function(data){
+    return { ok: res.ok, data: data };
+  });
+})
+.then(function(result){
+  if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
         var order = result.data;
 
         var rzp = new Razorpay({
