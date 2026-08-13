@@ -1403,20 +1403,23 @@ header.site-header.scrolled{ background:var(--glass); backdrop-filter:blur(16px)
             </div>
           </div>
 
-          <div class="field" data-field="disease">
-            <label>Any associated disease already present <span style="color:#d64545;">*</span></label>
-            <div class="option-group">
-              <label><input type="checkbox" name="Associated Disease" value="Diabetes"> Diabetes</label>
-              <label><input type="checkbox" name="Associated Disease" value="Hypertension"> Hypertension</label>
-              <label><input type="checkbox" name="Associated Disease" value="Thyroid"> Thyroid</label>
-              <label><input type="checkbox" name="Associated Disease" value="PCOD/PCOS"> PCOD/PCOS</label>
-              <label><input type="checkbox" name="Associated Disease" value="Digestion Issues"> Digestion Issues</label>
-              <label><input type="checkbox" name="Associated Disease" value="None"> None</label>
-              <label><input type="checkbox" name="Associated Disease" value="Other"> Other</label>
-            </div>
-            <input type="text" id="cf-disease-other" name="Associated Disease — Other" placeholder="If Other, please specify" style="margin-top:8px;">
-            <span class="field-error">Please select at least one option.</span>
-          </div>
+<div class="field" data-field="reason">
+  <label>Reason for Consultation <span style="color:#d64545;">*</span></label>
+
+  <div class="option-group">
+    <label><input type="checkbox" name="Reason for Consultation" value="Weight Loss"> Weight Loss</label>
+    <label><input type="checkbox" name="Reason for Consultation" value="Diabetes"> Diabetes</label>
+    <label><input type="checkbox" name="Reason for Consultation" value="Thyroid"> Thyroid</label>
+    <label><input type="checkbox" name="Reason for Consultation" value="PCOS/PCOD"> PCOS/PCOD</label>
+    <label><input type="checkbox" name="Reason for Consultation" value="Hypertension"> Hypertension</label>
+    <label><input type="checkbox" name="Reason for Consultation" value="Cholesterol Control"> Cholesterol Control</label>
+    <label><input type="checkbox" name="Reason for Consultation" value="Fatty Liver"> Fatty Liver</label>
+    <label><input type="checkbox" name="Reason for Consultation" value="Child Nutrition"> Child Nutrition</label>
+    <label><input type="checkbox" name="Reason for Consultation" value="Preventive Care"> Preventive Care</label>
+  </div>
+
+  <span class="field-error">Please select at least one option.</span>
+</div>
 
           <div class="field" data-field="allergies">
             <label for="cf-allergies">Do you have any food allergies? <span style="color:#d64545;">*</span></label>
@@ -1864,17 +1867,17 @@ form.addEventListener('submit', function(e) {
   setError(allergies, allergies.value.trim().length < 1);
   setError(medications, medications.value.trim().length < 1);
 
-  var diseaseChecked =
-    form.querySelectorAll('input[name="Associated Disease"]:checked').length > 0;
+    var reasonChecked =
+    form.querySelectorAll('input[name="Reason for Consultation"]:checked').length > 0;
 
-  var diseaseField =
-    document.querySelector('[data-field="disease"]');
+  var reasonField =
+    document.querySelector('[data-field="reason"]');
 
-  diseaseField.classList.toggle('error', !diseaseChecked);
+  reasonField.classList.toggle('error', !reasonChecked);
 
-  if (!diseaseChecked) valid = false;
+  if (!reasonChecked) valid = false;
 
-  var exerciseChecked = !!getRadioValue('Exercises');
+    var exerciseChecked = !!getRadioValue('Exercises');
 
   document
     .querySelector('[data-field="exercise"]')
