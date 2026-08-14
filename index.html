@@ -105,15 +105,10 @@ section.tight{ padding:72px 0; }
 
 /* ---------- Know More full page ---------- */
 .know-more-page{
-  display:none; position:fixed; inset:0; z-index:10000;
+  display:none; position:fixed; inset:0; z-index:999;
   background:var(--bg,#fff); overflow-y:auto; -webkit-overflow-scrolling:touch;
 }
 
-.know-more-page.open{
-  display:block !important;
-  visibility:visible !important;
-  opacity:1 !important;
-}
 .know-more-page.open{ display:block; }
 .km-page-inner{ max-width:820px; margin:0 auto; padding:120px 24px 80px; }
 .km-page-inner .checklist li,
@@ -3360,8 +3355,8 @@ Pay &#8377;<span id="coPayBtnAmount">299</span>
 
 <script>
 function showKnowMore(){
+  document.getElementById('mainContent').style.display = 'none';
   var panel = document.getElementById('knowMoreContent');
-  if (!panel) return;
   panel.classList.add('open');
   panel.scrollTop = 0;
   document.body.style.overflow = 'hidden';
