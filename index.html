@@ -3354,8 +3354,8 @@ Pay &#8377;<span id="coPayBtnAmount">299</span>
 
 <script>
 function showKnowMore(){
-  document.getElementById('mainContent').style.display = 'none';
   var panel = document.getElementById('knowMoreContent');
+  if (!panel) return;
   panel.classList.add('open');
   panel.scrollTop = 0;
   document.body.style.overflow = 'hidden';
