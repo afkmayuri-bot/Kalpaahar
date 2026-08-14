@@ -1864,41 +1864,37 @@ form.addEventListener('submit', function(e) {
   setError(age, !age.value);
   setError(gender, !gender.value);
   setError(height, !height.value);
-  setError(weight, !weight.value);
-  setError(allergies, allergies.value.trim().length < 1);
-  setError(medications, medications.value.trim().length < 1);
+setError(weight, !weight.value);
+setError(allergies, allergies.value.trim().length < 1);
+setError(medications, medications.value.trim().length < 1);
+var exerciseChecked = !!getRadioValue('Exercises');
 
-  var diseaseChecked =
-    form.querySelectorAll('input[name="Associated Disease"]:checked').length > 0;
+var exerciseField =
+  document.querySelector('[data-field="exercise"]');
 
-  var diseaseField =
-    document.querySelector('[data-field="disease"]');
+if (exerciseField) {
+  exerciseField.classList.toggle('error', !exerciseChecked);
+}
 
-  diseaseField.classList.toggle('error', !diseaseChecked);
+if (!exerciseChecked) valid = false;
 
-  if (!diseaseChecked) valid = false;
+var dateInvalid = !dateInput.value;
 
-  var exerciseChecked = !!getRadioValue('Exercises');
+var dateField = dateInput.closest('.field');
 
-  document
-    .querySelector('[data-field="exercise"]')
-    .classList.toggle('error', !exerciseChecked);
+if (dateField) {
+  dateField.classList.toggle('error', dateInvalid);
+}
 
-  if (!exerciseChecked) valid = false;
+if (dateInvalid) valid = false;
 
-  var dateInvalid = !dateInput.value;
+var slotInvalid = !selectedSlotId;
 
-  dateInput
-    .closest('.field')
-    .classList.toggle('error', dateInvalid);
+var slotField = slotGrid.closest('.field');
 
-  if (dateInvalid) valid = false;
-
- var slotInvalid = !selectedSlotId;
-
-slotGrid
-  .closest('.field')
-  .classList.toggle('error', slotInvalid);
+if (slotField) {
+  slotField.classList.toggle('error', slotInvalid);
+}
 
 if (slotInvalid) valid = false;
 

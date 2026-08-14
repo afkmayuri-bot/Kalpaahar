@@ -38,11 +38,11 @@ const FILES = {
     title: "Snack Smart",
   },
 
-  "ancient-grain-modern-plate": {
-    path: "/ebooks/Ancient-Grain-Modern-Plate.pdf",
-    filename: "Ancient-Grain-Modern-Plate.pdf",
-    title: "Ancient Grain Modern Plate",
-  },
+ "ancient-grain-modern-plate": {
+  path: "/ebooks/Ancient Grain, Modern Plate.pdf",
+  filename: "Ancient Grain, Modern Plate.pdf",
+  title: "Ancient Grain, Modern Plate",
+},
 
   "picky-eaters": {
     path: "/ebooks/Picky-Eaters.pdf",
