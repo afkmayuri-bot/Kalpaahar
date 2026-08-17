@@ -680,11 +680,7 @@ async function sendEbookEmail(
     const ebook of ebooks
   ) {
 
-    const origin =
-      new URL(request.url).origin;
-
-    const pdfUrl =
-      origin + ebook.path;
+    const pdfUrl = "https://kalpaahar.in" + ebook.path;
 
 
     console.log(
