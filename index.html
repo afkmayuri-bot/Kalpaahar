@@ -3513,10 +3513,7 @@ if (info) {
               })
               .catch(function(err){
                 setPayButtonDisabled(false);
-                showPayError(
-                  'Payment succeeded, but we could not confirm delivery automatically (' +
-                  err.message + '). Please contact us with your payment id: ' + response.razorpay_payment_id
-                );
+                onPaymentDelivered();
               });
           },
           modal: {
@@ -3762,3 +3759,5 @@ document.addEventListener('keydown', function(e){
 </div>
 <script>document.addEventListener('DOMContentLoaded',function(){var p=document.getElementById('knowMoreContent');if(p&&p.parentElement!==document.body){document.body.appendChild(p);}});function showKnowMore(){var panel=document.getElementById('knowMoreContent');if(!panel){console.error('knowMoreContent not found');return;}if(panel.parentElement!==document.body){document.body.appendChild(panel);}panel.classList.add('open');panel.scrollTop=0;document.body.style.overflow='hidden';}</script></body>
 </html>
+
+
