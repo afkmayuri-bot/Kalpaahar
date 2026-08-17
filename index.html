@@ -2122,7 +2122,7 @@ try {
       </ul>
     </div>
     <div class="details-price">&#8377;800<span> one-time</span></div>
-    <a href="#contact" class="btn btn-primary btn-block" data-ripple onclick="goToConsultForm('Quick Consultation', 'QuickConsult'); return false;">Book Your Quick Consult</a>
+    <a href="#contact" class="btn btn-primary btn-block" data-ripple onclick="document.getElementById('cf-plan').value='Quick Consultation'; document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'}); setTimeout(function(){document.getElementById('cf-name').focus();},700); return false;">Book Your Quick Consult</a>
   </div>
 </div>
 <div id="detailsOverlayConditionPlan" class="details-overlay">
@@ -3766,7 +3766,7 @@ document.addEventListener('keydown', function(e){
     </ul>
     <p class="doctor-affil"><strong style="letter-spacing:.14em; text-transform:uppercase;">Awards:</strong> Recipient of the prestigious Nav Durga Award, presented by Hon'ble Member of Parliament Dr. Vandana Tai Chavan, in recognition of excellence in Preventive Healthcare and Disease Management; felicitated by SOFOSH &ndash; Shreevatsa and TARA for exemplary contributions to the lives of specially-abled children. FMCN &ndash; Fellowship in Metabolic &amp; Clinical Nutrition.</p>
     <div style="text-align:center; margin:28px 0;">
-      <a href="#contact" class="btn btn-primary" data-ripple onclick="goToConsultForm('Quick Consultation', 'QuickConsult'); return false;">Book Appointment Slot</a>
+      <a href="#contact" class="btn btn-primary" data-ripple onclick="document.getElementById('cf-plan').value='Quick Consultation'; document.getElementById('contact').scrollIntoView({behavior:'smooth',block:'start'}); setTimeout(function(){document.getElementById('cf-name').focus();},700); return false;">Book Appointment Slot</a>
     </div>
     <div class="award-pics-main">
       <div class="award-pics-grid">
