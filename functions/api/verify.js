@@ -79,7 +79,9 @@ export async function onRequestPost({ request, env }) {
 
     return Response.json({
       success: true,
-      message: "Payment verified"
+      verified: true,
+      message: "Payment verified",
+      paymentId: razorpay_payment_id
     });
 
   } catch (error) {
