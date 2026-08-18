@@ -1828,7 +1828,8 @@ if (!valid) {
   var originalBtnText = formBtn.textContent;
   formBtn.disabled = true;
 var selectedPlan = plan.value;
-if (selectedPlan.toLowerCase().includes("guided wellness program")) {
+var selectedPlanText = plan.options[plan.selectedIndex] ? plan.options[plan.selectedIndex].textContent.trim() : selectedPlan;
+if (selectedPlan.toLowerCase().includes("guided wellness program") || selectedPlanText.toLowerCase().includes("guided wellness program")) {
   formBtn.disabled = false;
   formBtn.textContent = "Opening WhatsApp...";
   formStatus.style.display = "block";
