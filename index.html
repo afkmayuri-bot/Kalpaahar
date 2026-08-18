@@ -1828,6 +1828,16 @@ if (!valid) {
   var originalBtnText = formBtn.textContent;
   formBtn.disabled = true;
 var selectedPlan = plan.value;
+if (selectedPlan.toLowerCase().includes("guided wellness program")) {
+  formBtn.disabled = false;
+  formBtn.textContent = "Opening WhatsApp...";
+  formStatus.style.display = "block";
+  formStatus.style.color = "var(--ink-soft)";
+  formStatus.textContent = "Taking you to WhatsApp to confirm your enrollment...";
+  var guidedWaLink = "https://wa.me/" + CLINIC_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(buildWhatsAppMessage());
+  window.open(guidedWaLink, "_blank");
+  return;
+}
 var consultationAmount = 0;
 var consultationService = '';
 if (selectedPlan.toLowerCase().includes('quick')) {
