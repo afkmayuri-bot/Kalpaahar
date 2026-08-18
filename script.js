@@ -884,7 +884,7 @@ function showMain(){
     setPayButtonDisabled(true);
     showPayStatus('Setting up secure payment...');
 
-    fetch(CHECKOUT_API_BASE + '/api/orders', {
+    fetch(CHECKOUT_API_BASE + '/create-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
