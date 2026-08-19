@@ -3221,12 +3221,6 @@ window.selectCollection = function(title, price, clickedCard) {
     ebookId: currentEbookId
   });
 
-  var paymentSection = document.getElementById('coPayTitle');
-  if (paymentSection) {
-    setTimeout(function() {
-      paymentSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 100);
-  }
 };
 function showStep(step){
   [stepDetails, stepPayment, stepSuccess].forEach(function(s){
@@ -3238,6 +3232,15 @@ function showStep(step){
   var checkoutBox = document.querySelector('#checkoutOverlay .checkout-box');
   if (checkoutBox) {
     checkoutBox.scrollTop = 0;
+  }
+
+  if (step === stepPayment) {
+    setTimeout(function() {
+      var paymentTitle = document.getElementById('coPayTitle');
+      if (paymentTitle) {
+        paymentTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 150);
   }
 }
 var EBOOK_INFO = {
