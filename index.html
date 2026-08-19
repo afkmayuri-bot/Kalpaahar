@@ -3220,6 +3220,13 @@ window.selectCollection = function(title, price, clickedCard) {
     price: currentPrice,
     ebookId: currentEbookId
   });
+
+  var paymentSection = document.getElementById('coPayTitle');
+  if (paymentSection) {
+    setTimeout(function() {
+      paymentSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  }
 };
 function showStep(step){
   [stepDetails, stepPayment, stepSuccess].forEach(function(s){
