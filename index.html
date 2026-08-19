@@ -3233,16 +3233,15 @@ function showStep(step){
   if (checkoutBox) {
     checkoutBox.scrollTop = 0;
   }
-
   if (step === stepPayment) {
-    setTimeout(function() {
-      var paymentTitle = document.getElementById('coPayTitle');
-      if (paymentTitle) {
-        paymentTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function(){
+      var paymentStep = document.getElementById('coStepPayment');
+      if (checkoutBox && paymentStep) {
+        checkoutBox.scrollTo({ top: paymentStep.offsetTop, behavior: 'smooth' });
       }
     }, 150);
   }
-}
+
 var EBOOK_INFO = {
   'high-protein-breakfast': {
     inside: [
