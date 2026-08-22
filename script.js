@@ -845,29 +845,38 @@ function showMain(){
     'picky-eaters': 'ebooks/Picky-Eaters.pdf'
   };
 
-  function onPaymentDelivered(){
-    payStatus.style.display = 'none';
-    var dl = document.getElementById('coDownloadBtn');
-    var bonus = document.getElementById('coBonusBtn');
-    var pdfPath = EBOOK_PDF_FILES[currentEbookId];
-    if (pdfPath){
-      dl.textContent = 'Download eBook';
-      dl.href = pdfPath;
-      dl.setAttribute('download', '');
-      dl.onclick = null;
-    } else {
-      dl.textContent = 'Check Your Email 📧';
-      dl.removeAttribute('href');
-      dl.onclick = function(e){
-        e.preventDefault();
-        alert('Your eBook has been emailed to ' + currentCustomer.email + '. Please check your inbox (and spam folder) — it may take a minute to arrive.');
-      };
-    }
-    /* Every paid ebook purchase also gets the free Move Well workout guide as a bonus */
-    bonus.style.display = 'block';
-    showStep(stepSuccess);
+function onPaymentDelivered(){
+  payStatus.style.display = 'none';
+
+  var dl = document.getElementById('coDownloadBtn');
+  var bonus = document.getElementById('coBonusDownloadBtn');
+
+  var pdfPath = EBOOK_PDF_FILES[currentEbookId];
+
+  if (pdfPath){
+    dl.textContent = 'Download eBook';
+    dl.href = pdfPath;
+    dl.setAttribute('download', '');
+    dl.onclick = null;
+  } else {
+    dl.textContent = 'Check Your Email 📧';
+    dl.removeAttribute('href');
+    dl.onclick = function(e){
+      e.preventDefault();
+      alert(
+        'Your eBook has been emailed to ' +
+        currentCustomer.email +
+        '. Please check your inbox (and spam folder) — it may take a minute to arrive.'
+      );
+    };
   }
 
+  if (bonus) {
+    bonus.style.display = 'block';
+  }
+
+  showStep(stepSuccess);
+}
   /**
    * Real payment flow:
    * 1) ask our server to create a Razorpay order (server looks up the real price)
