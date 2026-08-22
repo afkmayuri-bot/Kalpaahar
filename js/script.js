@@ -731,10 +731,22 @@ var CHECKOUT_ENDPOINT = "https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com
   var currentEbookId = '';
   var currentCustomer = { name: '', email: '', phone: '' };
 
-  function showStep(step){
-    [stepDetails, stepPayment, stepSuccess].forEach(function(s){ s.classList.remove('active'); });
-    step.classList.add('active');
+ function showStep(step){
+  if (!step) {
+    console.error('showStep called with no step element — modal would go blank, aborting.');
+    return;
   }
+  [stepDetails, stepPayment, stepSuccess].forEach(function(s){
+    if (s) s.classList.remove('active');
+  });
+
+  step.classList.add('active');
+
+  var checkoutBox = document.querySelector('#checkoutOverlay .checkout-box');
+  if (checkoutBox) {
+    checkoutBox.scrollTop = 0;
+  }
+}
 
 window.selectCollection = function(title, price){
   window.openCheckout(title, price);
@@ -842,38 +854,50 @@ window.selectCollection = function(title, price){
   /* Ebooks with a direct PDF on this server get an instant download button.
      Any ebookId not listed here falls back to the "check your email" message
      (handled by the backend email delivery once that's wired up). */
-  var EBOOK_PDF_FILES = {
-    'high-protein-breakfast': 'ebooks/High-Protein-Breakfast.pdf',
-    'gut-health-reset': 'ebooks/Gut-Health-Reset.pdf',
-    'power-lunch': 'ebooks/Power-Lunch.pdf',
-    'snack-smart': 'ebooks/Snack-Smart.pdf',
-    'ancient-grain-modern-plate': 'ebooks/Ancient-Grain-Modern-Plate.pdf',
-    'picky-eaters': 'ebooks/Picky-Eaters.pdf'
-  };
+var EBOOK_PDF_FILES = {
+  'high-protein-breakfast': 'ebooks/High-Protein-Breakfast.pdf',
+  'gut-health-reset': 'ebooks/Gut-Health-Reset.pdf',
+  'power-lunch': 'ebooks/Power-Lunch.pdf',
+  'snack-smart': 'ebooks/Snack-Smart.pdf',
+  'picky-eaters': 'ebooks/Picky-Eaters.pdf',
+  'ancient-grain-modern-plate': 'ebooks/Ancient Grain, Modern Plate.pdf'
+};
 
   function onPaymentDelivered(){
+  try {
     payStatus.style.display = 'none';
+
     var dl = document.getElementById('coDownloadBtn');
     var bonus = document.getElementById('coBonusDownloadBtn');
     var pdfPath = EBOOK_PDF_FILES[currentEbookId];
-    if (pdfPath){
-      dl.textContent = 'Download eBook';
-      dl.href = pdfPath;
-      dl.setAttribute('download', '');
-      dl.onclick = null;
-    } else {
-      dl.textContent = 'Check Your Email 📧';
-      dl.removeAttribute('href');
-      dl.onclick = function(e){
-        e.preventDefault();
-        alert('Your eBook has been emailed to ' + currentCustomer.email + '. Please check your inbox (and spam folder) — it may take a minute to arrive.');
-      };
+
+    if (dl) {
+      if (pdfPath){
+        dl.textContent = 'Download eBook';
+        dl.href = pdfPath;
+        dl.setAttribute('download', '');
+        dl.onclick = null;
+      } else {
+        dl.textContent = 'Check Your Email 📧';
+        dl.removeAttribute('href');
+        dl.onclick = function(e){
+          e.preventDefault();
+          alert('Your eBook has been emailed to ' + currentCustomer.email + '. Please check your inbox (and spam folder) — it may take a minute to arrive.');
+        };
+      }
     }
+
     /* Every paid ebook purchase also gets the free Move Well workout guide as a bonus */
-    bonus.style.display = 'block';
+    if (bonus) {
+      bonus.style.display = 'block';
+    }
+
+  } catch (err) {
+    console.error('onPaymentDelivered setup error:', err);
+  } finally {
     showStep(stepSuccess);
   }
-
+}
   /**
    * Real payment flow:
    * 1) ask our server to create a Razorpay order (server looks up the real price)
@@ -939,13 +963,18 @@ fetch(CHECKOUT_API_BASE + '/api/orders', {method: 'POST',
                 customer: currentCustomer
               })
             })
-              .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
               .then(function(result){
-                setPayButtonDisabled(false);
-                if (!result.ok) throw new Error(result.data.error || 'Payment verification failed.');
-                onPaymentDelivered();
-              })
-              .catch(function(err){
+  setPayButtonDisabled(false);
+  console.log('Verify response:', result);
+
+  if (!result.ok || !result.data || !result.data.success) {
+    throw new Error(
+      (result.data && result.data.error) || 'Payment verification failed.'
+    );
+  }
+
+  onPaymentDelivered();
+}).catch(function(err){
                 setPayButtonDisabled(false);
                 showPayError(
                   'Payment succeeded, but we could not confirm delivery automatically (' +
