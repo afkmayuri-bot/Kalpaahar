@@ -710,16 +710,23 @@ var CHECKOUT_API_BASE = "https://kalpaahar-payment.afk-mayuri.workers.dev";
 var CHECKOUT_ENDPOINT = "https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com";
 
   /* Must match the ids used in backend/ebooks/catalog.js */
-  function slugifyTitle(title) {
-    return (title || '')
-      .toLowerCase()
-      .replace(/,/g, '')
-      .trim()
-      .replace(/\s+/g, '-');
-  }
-  function getEbookId(title) {
-    return slugifyTitle(title);
-  }
+ function getEbookId(title) {
+  var idMap = {
+    "High Protein Breakfast": "high-protein-breakfast",
+    "Picky Eaters": "picky-eaters",
+    "Snack Smart": "snack-smart",
+   "Gut Health Reset": "gut-reset",
+    "Power Lunch": "power-lunch",
+    "Ancient Grain, Modern Plate": "ancient-grain-modern-plate",
+
+    "Complete Kalpaahar Collection": "complete-kalpaahar-collection",
+    "Protein & Energy Collection": "protein-&-energy-collection",
+    "Happy Family Nutrition Collection": "happy-family-nutrition-collection",
+    "Gut & Grain Wellness Collection": "gut-&-grain-wellness-collection"
+  };
+
+  return idMap[title] || "";
+}
   var overlay = document.getElementById('checkoutOverlay');
   var stepDetails = document.getElementById('coStepDetails');
   var stepPayment = document.getElementById('coStepPayment');
@@ -736,29 +743,45 @@ var CHECKOUT_ENDPOINT = "https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com
     step.classList.add('active');
   }
 
-window.selectCollection = function(title, price){
-  window.openCheckout(title, price);
+window.selectCollection = function(title, price, clickedCard){
+  currentTitle = title;
+  currentPrice = String(price);
+  currentEbookId = getEbookId(title);
+
+  document.getElementById('coPayTitle').textContent = currentTitle;
+  document.getElementById('coPayAmount').textContent = currentPrice;
+  document.getElementById('coPayBtnAmount').textContent = currentPrice;
+  document.getElementById('coSuccessTitle').textContent = currentTitle;
+
+  document.querySelectorAll('.collection-option').forEach(function(card){
+    card.classList.remove('selected');
+  });
+
+  if (clickedCard) {
+    clickedCard.classList.add('selected');
+  }
 };
-  window.openCheckout = function(title, price){
-    currentTitle = title || 'High Protein Breakfast';
-    currentPrice = price || '299';
-    currentEbookId = getEbookId(currentTitle);
-    document.getElementById('coTitle').textContent = currentTitle;
-    document.getElementById('coPrice').textContent = currentPrice;
-    document.getElementById('coPayTitle').textContent = currentTitle;
-    document.getElementById('coPayAmount').textContent = currentPrice;
-    document.getElementById('coPayBtnAmount').textContent = currentPrice;
-    document.getElementById('coSuccessTitle').textContent = currentTitle;
 
-    detailsForm.reset();
-    detailsForm.querySelectorAll('.co-field').forEach(function(f){ f.classList.remove('error'); });
-    detailsStatus.style.display = 'none';
-    payStatus.style.display = 'none';
-    showStep(stepDetails);
+window.openCheckout = function(title, price){
+  currentTitle = title || 'High Protein Breakfast';
+  currentPrice = String(price || '299');
+  currentEbookId = getEbookId(currentTitle);
 
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
+  document.getElementById('coTitle').textContent = currentTitle;
+  document.getElementById('coPrice').textContent = currentPrice;
+  document.getElementById('coPayTitle').textContent = currentTitle;
+  document.getElementById('coPayAmount').textContent = currentPrice;
+  document.getElementById('coPayBtnAmount').textContent = currentPrice;
+  document.getElementById('coSuccessTitle').textContent = currentTitle;
+
+  detailsForm.reset();
+  detailsForm.querySelectorAll('.co-field').forEach(function(f){ f.classList.remove('error'); });
+  detailsStatus.style.display = 'none';
+  payStatus.style.display = 'none';
+  showStep(stepDetails);
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+};
 
   window.closeCheckout = function(){
     overlay.classList.remove('open');
@@ -814,7 +837,7 @@ window.selectCollection = function(title, price){
     if (currentPrice === '0'){
       onPaymentDelivered();
     } else {
-      payNow();
+      showStep(stepPayment);
     }
   });
 
@@ -847,33 +870,45 @@ window.selectCollection = function(title, price){
     'gut-reset': 'ebooks/Gut-Health-Reset.pdf',
     'power-lunch': 'ebooks/Power-Lunch.pdf',
     'snack-smart': 'ebooks/Snack-Smart.pdf',
-    'ancient-grain-modern-plate': 'ebooks/Ancient%20Grain%2C%20Modern%20Plate.pdf',
+    'ancient-grain-modern-plate': 'ebooks/Ancient-Grain-Modern-Plate.pdf',
     'picky-eaters': 'ebooks/Picky-Eaters.pdf'
   };
 
   function onPaymentDelivered(){
-    payStatus.style.display = 'none';
-    var dl = document.getElementById('coDownloadBtn');
-    var bonus = document.getElementById('coBonusDownloadBtn');
-    currentEbookId = getEbookId(currentTitle);
-    var pdfPath = EBOOK_PDF_FILES[currentEbookId];
-    if (pdfPath){
-      dl.textContent = 'Download eBook';
-      dl.href = pdfPath;
-      dl.setAttribute('download', '');
-      dl.onclick = null;
-    } else {
-      dl.textContent = 'Check Your Email 📧';
-      dl.removeAttribute('href');
-      dl.onclick = function(e){
-        e.preventDefault();
-        alert('Your eBook has been emailed to ' + currentCustomer.email + '. Please check your inbox (and spam folder) — it may take a minute to arrive.');
-      };
-    }
-    /* Every paid ebook purchase also gets the free Move Well workout guide as a bonus */
-    bonus.style.display = 'block';
-    showStep(stepSuccess);
+  payStatus.style.display = 'none';
+
+  var dl = document.getElementById('coDownloadBtn');
+  var bonus = document.getElementById('coBonusDownloadBtn');
+  var successTitle = document.getElementById('coSuccessTitle');
+
+  if (successTitle) {
+    successTitle.textContent = currentTitle;
   }
+
+  currentEbookId = getEbookId(currentTitle);
+  var pdfPath = EBOOK_PDF_FILES[currentEbookId];
+
+  if (pdfPath){
+    dl.textContent = 'Download eBook';
+    dl.href = pdfPath;
+    dl.setAttribute('download', '');
+    dl.onclick = null;
+  } else {
+    dl.textContent = 'Check Your Email ðŸ“§';
+    dl.removeAttribute('href');
+    dl.onclick = function(e){
+      e.preventDefault();
+      alert(
+        'Your eBook has been emailed to ' +
+        currentCustomer.email +
+        '. Please check your inbox (and spam folder) — it may take a minute to arrive.'
+      );
+    };
+  }
+
+  bonus.style.display = 'block';
+  showStep(stepSuccess);
+}
 
   /**
    * Real payment flow:
@@ -1163,4 +1198,3 @@ function closeSupportImage(){
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape') closeSupportImage();
 });
-
