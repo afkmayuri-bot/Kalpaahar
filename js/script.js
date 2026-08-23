@@ -844,10 +844,10 @@ window.selectCollection = function(title, price){
      (handled by the backend email delivery once that's wired up). */
   var EBOOK_PDF_FILES = {
     'high-protein-breakfast': 'ebooks/High-Protein-Breakfast.pdf',
-    'gut-health-reset': 'ebooks/Gut-Health-Reset.pdf',
+    'gut-reset': 'ebooks/Gut-Health-Reset.pdf',
     'power-lunch': 'ebooks/Power-Lunch.pdf',
     'snack-smart': 'ebooks/Snack-Smart.pdf',
-    'ancient-grain-modern-plate': 'ebooks/Ancient-Grain-Modern-Plate.pdf',
+    'ancient-grain-modern-plate': 'ebooks/Ancient%20Grain%2C%20Modern%20Plate.pdf',
     'picky-eaters': 'ebooks/Picky-Eaters.pdf'
   };
 
