@@ -855,6 +855,7 @@ window.selectCollection = function(title, price){
     payStatus.style.display = 'none';
     var dl = document.getElementById('coDownloadBtn');
     var bonus = document.getElementById('coBonusBtn');
+    currentEbookId = getEbookId(currentTitle);
     var pdfPath = EBOOK_PDF_FILES[currentEbookId];
     if (pdfPath){
       dl.textContent = 'Download eBook';
