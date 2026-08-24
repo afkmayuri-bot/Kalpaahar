@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---- dark mode toggle ---- */
   var themeToggle = document.getElementById('themeToggle');
   function readTheme(){ try { return localStorage.getItem('rootwell-theme'); } catch(e){ return null; } }
-  function writeTheme(val){ try { localStorage.setItem('rootwell-theme', val); } catch(e){ /* storage unavailable (e.g. file:// on some mobile browsers) — ignore */ } }
+  function writeTheme(val){ try { localStorage.setItem('rootwell-theme', val); } catch(e){ /* storage unavailable (e.g. file:// on some mobile browsers) â€” ignore */ } }
   var savedTheme = readTheme();
   if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme','dark');
   if (themeToggle){
@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var formStatus = form.querySelector('.form-status');
   var formBtn = form.querySelector('button[type="submit"]');
 
-  /* ---- time slot picker: 30-minute slots (2 per hour), 10 AM–7 PM, Mon–Sat ---- */
+  /* ---- time slot picker: 30-minute slots (2 per hour), 10 AMâ€“7 PM, Monâ€“Sat ---- */
   var BOOKINGS_KEY = 'kalpaahar_slot_bookings';
   function buildHalfHourSlots(startHour, endHour){
     var out = [];
@@ -255,11 +255,11 @@ document.addEventListener('DOMContentLoaded', function () {
     for (var h = startHour; h < endHour; h++){
       /* first half of the hour: HH:00 - HH:30 */
       var id1 = pad2(h) + '00-' + pad2(h) + '30';
-      out.push({ id: id1, label: fmt(h,0) + ' – ' + fmt(h,30) });
+      out.push({ id: id1, label: fmt(h,0) + ' â€“ ' + fmt(h,30) });
       /* second half of the hour: HH:30 - (HH+1):00 */
       var nextH = h + 1;
       var id2 = pad2(h) + '30-' + pad2(nextH) + '00';
-      out.push({ id: id2, label: fmt(h,30) + ' – ' + fmt(nextH,0) });
+      out.push({ id: id2, label: fmt(h,30) + ' â€“ ' + fmt(nextH,0) });
     }
     return out;
   }
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var added = 0, guard = 0;
     while (added < 14 && guard < 30){
       guard++;
-      if (d.getDay() !== 0){ /* skip Sunday — clinic closed */
+      if (d.getDay() !== 0){ /* skip Sunday â€” clinic closed */
         opts += '<option value="' + toISODate(d) + '">' + formatDateLabel(d) + '</option>';
         added++;
       }
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function () {
     setError(name, name.value.trim().length < 2);
     setError(email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()));
     setError(phone, phone.value.replace(/\D/g,'').length < 7);
-    // Message is optional — no validation applied
+    // Message is optional â€” no validation applied
 
     var dateInvalid = !dateInput.value;
     dateInput.closest('.field').classList.toggle('error', dateInvalid);
@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
     formStatus.style.color = 'var(--ink-soft)';
     formStatus.textContent = 'Taking you to WhatsApp to confirm your booking...';
 
-    /* Fire-and-forget background record — never blocks the WhatsApp redirect below */
+    /* Fire-and-forget background record â€” never blocks the WhatsApp redirect below */
     try{
       fetch(FORM_ENDPOINT, {
         method: 'POST',
@@ -427,9 +427,9 @@ document.addEventListener('DOMContentLoaded', function () {
     window.open(waLink, '_blank', 'noopener');
     commitSlotBooking();
 
-    formBtn.textContent = 'Sent — check WhatsApp';
+    formBtn.textContent = 'Sent â€” check WhatsApp';
     formStatus.style.color = 'var(--emerald)';
-    formStatus.innerHTML = 'Your details are ready in WhatsApp — just hit send there to confirm your booking. Didn\'t open? <a href="' + waLink + '" target="_blank" rel="noopener" style="color:var(--emerald); font-weight:700; text-decoration:underline;">Tap here</a>.';
+    formStatus.innerHTML = 'Your details are ready in WhatsApp â€” just hit send there to confirm your booking. Didn\'t open? <a href="' + waLink + '" target="_blank" rel="noopener" style="color:var(--emerald); font-weight:700; text-decoration:underline;">Tap here</a>.';
 
     setTimeout(function(){
       formBtn.disabled = false;
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var fd = new FormData();
     fd.append('Email', emailInput.value.trim());
-    fd.append('_subject', 'New Newsletter Signup — KalpAahar Website');
+    fd.append('_subject', 'New Newsletter Signup â€” KalpAahar Website');
     fd.append('_captcha', 'false');
 
     fetch(FORM_ENDPOINT, {
@@ -461,7 +461,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(function(res){ if(!res.ok) throw new Error('failed'); return res.json(); })
     .then(function(){
-      newsletterForm.innerHTML = '<p style="color:#fff; margin:0; font-weight:600;">&#10003; Subscribed — welcome to the KalpAahar community!</p>';
+      newsletterForm.innerHTML = '<p style="color:#fff; margin:0; font-weight:600;">&#10003; Subscribed â€” welcome to the KalpAahar community!</p>';
     })
     .catch(function(){
       newsletterForm.innerHTML = originalHTML;
@@ -546,7 +546,7 @@ function showMain(){
 
 // --- next script block ---
 
-/* ============ EBOOK DETAILS MODAL — PICKY EATERS ============ */
+/* ============ EBOOK DETAILS MODAL â€” PICKY EATERS ============ */
 (function(){
   var overlay = document.getElementById('detailsOverlayPickyEaters');
   var cover = document.getElementById('detCoverPickyEaters');
@@ -577,7 +577,7 @@ function showMain(){
 
 // --- next script block ---
 
-/* ============ EBOOK DETAILS MODAL — GUT RESET ============ */
+/* ============ EBOOK DETAILS MODAL â€” GUT RESET ============ */
 (function(){
   var overlay = document.getElementById('detailsOverlayGutReset');
   var cover = document.getElementById('detCoverGutReset');
@@ -608,7 +608,7 @@ function showMain(){
 
 // --- next script block ---
 
-/* ============ EBOOK DETAILS MODAL — SNACK SMART ============ */
+/* ============ EBOOK DETAILS MODAL â€” SNACK SMART ============ */
 (function(){
   var overlay = document.getElementById('detailsOverlaySnackSmart');
   var cover = document.getElementById('detCoverSnackSmart');
@@ -639,7 +639,7 @@ function showMain(){
 
 // --- next script block ---
 
-/* ============ EBOOK DETAILS MODAL — POWER LUNCH ============ */
+/* ============ EBOOK DETAILS MODAL â€” POWER LUNCH ============ */
 (function(){
   var overlay = document.getElementById('detailsOverlayPowerLunch');
   var cover = document.getElementById('detCoverPowerLunch');
@@ -670,7 +670,7 @@ function showMain(){
 
 // --- next script block ---
 
-/* ============ EBOOK DETAILS MODAL — MILLETS ============ */
+/* ============ EBOOK DETAILS MODAL â€” MILLETS ============ */
 (function(){
   var overlay = document.getElementById('detailsOverlayMillets');
   var cover = document.getElementById('detCoverMillets');
@@ -704,7 +704,7 @@ function showMain(){
 /* ============ EBOOK CHECKOUT MODAL ============ */
 (function(){
   /* Point this at your deployed backend from the /backend folder.
-     Local testing default shown below — change before going live,
+     Local testing default shown below â€” change before going live,
      e.g. 'https://api.kalpaahar.com' */
   var CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
   var CHECKOUT_ENDPOINT = 'https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com';
@@ -799,10 +799,10 @@ function showMain(){
       fd.append('Phone', phone.value.trim());
       fd.append('City', document.getElementById('co-city').value.trim());
       fd.append('eBook', currentTitle);
-      fd.append('_subject', 'New eBook Order — ' + currentTitle);
+      fd.append('_subject', 'New eBook Order â€” ' + currentTitle);
       fd.append('_captcha', 'false');
       fetch(CHECKOUT_ENDPOINT, { method:'POST', headers:{ 'Accept':'application/json' }, body: fd }).catch(function(){});
-    } catch(err){ /* ignore — never block checkout on the notification */ }
+    } catch(err){ /* ignore â€” never block checkout on the notification */ }
 
     /* Free items (price '0') skip Razorpay entirely and deliver right away */
     if (currentPrice === '0'){
@@ -846,28 +846,50 @@ function showMain(){
   };
 
   function onPaymentDelivered(){
-    payStatus.style.display = 'none';
+    if (payStatus) {
+      payStatus.style.display = 'none';
+    }
+
     var dl = document.getElementById('coDownloadBtn');
     var bonus = document.getElementById('coBonusBtn');
-    var pdfPath = EBOOK_PDF_FILES[currentEbookId];
-    if (pdfPath){
-      dl.textContent = 'Download eBook';
-      dl.href = pdfPath;
-      dl.setAttribute('download', '');
-      dl.onclick = null;
-    } else {
-      dl.textContent = 'Check Your Email 📧';
-      dl.removeAttribute('href');
-      dl.onclick = function(e){
-        e.preventDefault();
-        alert('Your eBook has been emailed to ' + currentCustomer.email + '. Please check your inbox (and spam folder) — it may take a minute to arrive.');
-      };
-    }
-    /* Every paid ebook purchase also gets the free Move Well workout guide as a bonus */
-    bonus.style.display = 'block';
-    showStep(stepSuccess);
-  }
 
+    if (dl) {
+      var pdfPath = EBOOK_PDF_FILES[currentEbookId];
+
+      if (pdfPath) {
+        dl.textContent = 'Download eBook';
+        dl.href = pdfPath;
+        dl.setAttribute('download', '');
+        dl.onclick = null;
+      } else {
+        dl.textContent = 'Check Your Email';
+        dl.removeAttribute('href');
+        dl.onclick = function(e){
+          e.preventDefault();
+          alert('Your eBook has been emailed to ' + currentCustomer.email + '. Please check your inbox and spam folder.');
+        };
+      }
+    }
+
+    if (bonus) {
+      bonus.style.display = 'block';
+    }
+
+    var successStep = document.getElementById('coStepSuccess');
+
+    if (!successStep) {
+      console.error('SUCCESS SCREEN ERROR: #coStepSuccess not found');
+      return;
+    }
+
+    [stepDetails, stepPayment, successStep].forEach(function(s){
+      if (s) s.classList.remove('active');
+    });
+
+    successStep.classList.add('active');
+
+    console.log('SUCCESS SCREEN SHOWN');
+  }
   /**
    * Real payment flow:
    * 1) ask our server to create a Razorpay order (server looks up the real price)
@@ -877,7 +899,7 @@ function showMain(){
    */
   window.payNow = function(){
     if (!currentEbookId || !currentCustomer.email){
-      showPayError('Something went wrong — please go back and re-enter your details.');
+      showPayError('Something went wrong â€” please go back and re-enter your details.');
       return;
     }
 
@@ -892,6 +914,7 @@ function showMain(){
   ebookId: currentEbookId,
   customer: currentCustomer
 })
+      })
       .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
       .then(function(result){
         if (!result.ok) throw new Error(result.data.error || 'Could not start payment.');
@@ -911,7 +934,7 @@ function showMain(){
           },
           theme: { color: '#2E8B57' },
           handler: function(response){
-            showPayStatus('Payment received — verifying and sending your eBook...');
+            showPayStatus('Payment received â€” verifying and sending your eBook...');
 
             fetch(CHECKOUT_API_BASE + '/api/verify', {
               method: 'POST',

@@ -2938,15 +2938,57 @@ Pay &#8377;<span id="coPayBtnAmount">299</span>
   </p>
   <div class="co-status" id="coPayStatus"></div>
 </div>
-    <!-- Step 3: Payment success -->
-    <div id="coStepSuccess" class="checkout-step">
-      <div class="co-success">
-        <div class="co-check">&#127881;</div>
-        <h3>Payment Successful! 🎉</h3>
-        <p>Thank you for your purchase from <strong>KalpAahar! 💚</strong></p>
-        <p>Your eBook <strong id='coSuccessTitle'>[eBook name]</strong> and free bonus have been sent to your email. Please check your inbox (and spam folder if needed).</p>
-      </div>
+        <!-- Step 3: Payment success -->
+<div id="coStepSuccess" class="checkout-step">
+  <div class="co-success">
+
+    <div class="co-check">&#127881;</div>
+
+    <h3>Payment Successful! 🎉</h3>
+
+    <p>
+      Thank you for your purchase from
+      <strong>KalpAahar! 💚</strong>
+    </p>
+
+    <p>
+      Your eBook
+      <strong id="coSuccessTitle">[eBook name]</strong>
+      is ready.
+    </p>
+
+    <!-- eBook download -->
+    <a
+      id="coDownloadBtn"
+      class="co-btn co-btn-primary"
+      href="#"
+      style="display:inline-flex; margin-top:15px;"
+    >
+      Download eBook
+    </a>
+
+    <!-- Free bonus -->
+    <div
+      id="coBonusDownloadBtn"
+      style="display:none; margin-top:18px;"
+    >
+      <p>
+        🎁 <strong>Your Free Bonus</strong><br>
+        Move Well — A Simple Home Workout Guide
+      </p>
+
+      <a
+        class="co-btn co-btn-secondary"
+href="ebooks/Move-Well-Home-Workout-Guide.pdf"download
+      >
+        Download Move Well Guide
+      </a>
     </div>
+
+    <p style="margin-top:18px; font-size:13px; opacity:.75;">
+      Keep this page open until your download starts.
+    </p>
+
   </div>
 </div>
 <script>

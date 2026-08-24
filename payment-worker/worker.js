@@ -13,24 +13,14 @@
       ""
     );
 
-    // --------------------------------------------------
-    // Validate amount
-    // --------------------------------------------------
     if (!Number.isFinite(amount) || amount <= 0) {
       return Response.json(
-        {
-          success: false,
-          error: "Invalid amount"
-        },
+        { success: false, error: "Invalid amount" },
         { status: 400 }
       );
     }
 
-    // --------------------------------------------------
-    // Validate consultation
-    // --------------------------------------------------
     if (paymentType === "consultation") {
-
       if (!service) {
         return Response.json(
           {
@@ -40,12 +30,7 @@
           { status: 400 }
         );
       }
-
     } else {
-
-      // --------------------------------------------------
-      // Validate eBook customer
-      // --------------------------------------------------
       if (!customer.email) {
         return Response.json(
           {
@@ -55,30 +40,22 @@
           { status: 400 }
         );
       }
-
     }
 
-    // --------------------------------------------------
-    // eBook prices
-    // --------------------------------------------------
-   const ebookPrices = {
-  "high-protein-breakfast": 299,
-  "picky-eaters": 299,
-  "snack-smart": 299,
-  "gut-reset": 299,
-  "power-lunch": 299,
-  "ancient-grain-modern-plate": 299,
+    const ebookPrices = {
+      "high-protein-breakfast": 299,
+      "picky-eaters": 299,
+      "snack-smart": 299,
+      "gut-reset": 299,
+      "power-lunch": 299,
+      "ancient-grain-modern-plate": 299,
 
-  // Collections
- "complete-kalpaahar-collection": 1299,
-"protein-&-energy-collection": 699,
-"happy-family-nutrition-collection": 699,
-"gut-&-grain-wellness-collection": 749
-};
+      "complete-kalpaahar-collection": 1299,
+      "protein-&-energy-collection": 699,
+      "happy-family-nutrition-collection": 699,
+      "gut-&-grain-wellness-collection": 749
+    };
 
-    // --------------------------------------------------
-    // Determine expected price
-    // --------------------------------------------------
     let expectedAmount = null;
 
     if (
@@ -86,20 +63,15 @@
       service === "Quick Consultation"
     ) {
       expectedAmount = 800;
-
     } else if (
       paymentType === "consultation" &&
       service === "Condition-Specific Nutrition Plan"
     ) {
       expectedAmount = 2500;
-
     } else if (ebookPrices[ebookId]) {
       expectedAmount = ebookPrices[ebookId];
     }
 
-    // --------------------------------------------------
-    // Validate product/service
-    // --------------------------------------------------
     if (expectedAmount === null) {
       return Response.json(
         {
@@ -110,32 +82,18 @@
       );
     }
 
-    // --------------------------------------------------
-    // Validate price
-    // --------------------------------------------------
     if (amount !== expectedAmount) {
       return Response.json(
         {
           success: false,
           error: "Invalid amount",
-          expectedAmount: expectedAmount,
+          expectedAmount,
           receivedAmount: amount
         },
         { status: 400 }
       );
     }
 
-    console.log("PAYMENT DEBUG", {
-      paymentType,
-      service,
-      ebookId,
-      receivedAmount: amount,
-      expectedAmount
-    });
-
-    // --------------------------------------------------
-    // Validate Razorpay credentials
-    // --------------------------------------------------
     if (
       !env.RAZORPAY_KEY_ID ||
       !env.RAZORPAY_KEY_SECRET
@@ -149,28 +107,20 @@
       );
     }
 
-    // --------------------------------------------------
-    // Create Basic Auth credentials
-    // --------------------------------------------------
     const auth = btoa(
       env.RAZORPAY_KEY_ID +
       ":" +
       env.RAZORPAY_KEY_SECRET
     );
 
-    // --------------------------------------------------
-    // Create Razorpay order
-    // --------------------------------------------------
     const razorpayResponse = await fetch(
       "https://api.razorpay.com/v1/orders",
       {
         method: "POST",
-
         headers: {
           "Authorization": "Basic " + auth,
           "Content-Type": "application/json"
         },
-
         body: JSON.stringify({
           amount: Math.round(expectedAmount * 100),
           currency: "INR",
@@ -178,48 +128,34 @@
             (paymentType === "consultation"
               ? "consultation_"
               : "ebook_") + Date.now(),
-
           notes: {
-            paymentType: paymentType,
-            service: service,
+            paymentType,
+            service,
             name: customer.name || "",
             email: customer.email || "",
             phone: customer.phone || "",
-            ebookId: ebookId
+            ebookId
           }
         })
       }
     );
 
-    // --------------------------------------------------
-    // Read Razorpay response
-    // --------------------------------------------------
     const data = await razorpayResponse.json();
 
-    // --------------------------------------------------
-    // Handle Razorpay error
-    // --------------------------------------------------
     if (!razorpayResponse.ok) {
       return Response.json(
         {
           success: false,
           error:
             data.error?.description ||
-            "Razorpay order creation failed",
-          razorpay: data
+            "Razorpay order creation failed"
         },
-        {
-          status: razorpayResponse.status
-        }
+        { status: razorpayResponse.status }
       );
     }
 
-    // --------------------------------------------------
-    // Return order details
-    // --------------------------------------------------
     return Response.json({
       success: true,
-
       keyId: env.RAZORPAY_KEY_ID,
       orderId: data.id,
       amount: data.amount,
@@ -227,11 +163,7 @@
     });
 
   } catch (error) {
-
-    console.error(
-      "Order creation error:",
-      error
-    );
+    console.error("Order creation error:", error);
 
     return Response.json(
       {
@@ -242,58 +174,184 @@
     );
   }
 }
+
+
+async function verifyPayment({ request, env }) {
+  try {
+    const body = await request.json();
+
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature
+    } = body;
+
+    if (
+      !razorpay_order_id ||
+      !razorpay_payment_id ||
+      !razorpay_signature
+    ) {
+      return Response.json(
+        {
+          success: false,
+          error: "Missing Razorpay payment details"
+        },
+        { status: 400 }
+      );
+    }
+
+    if (!env.RAZORPAY_KEY_SECRET) {
+      return Response.json(
+        {
+          success: false,
+          error: "Razorpay secret is not configured"
+        },
+        { status: 500 }
+      );
+    }
+
+    const encoder = new TextEncoder();
+
+    const key = await crypto.subtle.importKey(
+      "raw",
+      encoder.encode(env.RAZORPAY_KEY_SECRET),
+      {
+        name: "HMAC",
+        hash: "SHA-256"
+      },
+      false,
+      ["sign"]
+    );
+
+    const signatureBuffer = await crypto.subtle.sign(
+      "HMAC",
+      key,
+      encoder.encode(
+        razorpay_order_id + "|" + razorpay_payment_id
+      )
+    );
+
+    const generatedSignature = Array.from(
+      new Uint8Array(signatureBuffer)
+    )
+      .map(function(byte) {
+        return byte.toString(16).padStart(2, "0");
+      })
+      .join("");
+
+    if (generatedSignature !== razorpay_signature) {
+      return Response.json(
+        {
+          success: false,
+          error: "Invalid payment signature"
+        },
+        { status: 400 }
+      );
+    }
+
+    console.log(
+      "Razorpay payment verified:",
+      razorpay_payment_id
+    );
+
+    return Response.json({
+      success: true,
+      verified: true,
+      message: "Payment verified",
+      paymentId: razorpay_payment_id
+    });
+
+  } catch (error) {
+    console.error("Payment verification error:", error);
+
+    return Response.json(
+      {
+        success: false,
+        error: error.message
+      },
+      { status: 500 }
+    );
+  }
+}
+
+
 export default {
   async fetch(request, env) {
 
-    // CORS
+    const corsHeaders = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+    };
+
     if (request.method === "OPTIONS") {
       return new Response(null, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-        }
+        headers: corsHeaders
       });
     }
 
     const pathname = new URL(request.url).pathname;
 
-    // Create Razorpay order
+
+    // ================================
+    // CREATE RAZORPAY ORDER
+    // ================================
+
     if (
       pathname === "/api/orders" &&
       request.method === "POST"
     ) {
-
       const r = await onRequestPost({
         request,
         env
       });
 
-      const headers = new Headers(r.headers);
+      const headers = new Headers(corsHeaders);
 
-      headers.set(
-        "Access-Control-Allow-Origin",
-        "*"
-      );
+      if (r.headers) {
+        r.headers.forEach((value, key) => {
+          headers.set(key, value);
+        });
+      }
 
-      headers.set(
-        "Access-Control-Allow-Headers",
-        "Content-Type"
-      );
-
-      headers.set(
-        "Access-Control-Allow-Methods",
-        "GET, POST, OPTIONS"
-      );
-
-      return new Response(
-        r.body,
-        {
-          status: r.status,
-          headers
-        }
-      );
+      return new Response(r.body, {
+        status: r.status,
+        headers
+      });
     }
+
+
+    // ================================
+    // VERIFY RAZORPAY PAYMENT
+    // ================================
+
+    if (
+      pathname === "/api/verify" &&
+      request.method === "POST"
+    ) {
+      const r = await verifyPayment({
+        request,
+        env
+      });
+
+      const headers = new Headers(corsHeaders);
+
+      if (r.headers) {
+        r.headers.forEach((value, key) => {
+          headers.set(key, value);
+        });
+      }
+
+      return new Response(r.body, {
+        status: r.status,
+        headers
+      });
+    }
+
+
+    // ================================
+    // NOT FOUND
+    // ================================
 
     return Response.json(
       {
@@ -302,9 +360,7 @@ export default {
       },
       {
         status: 404,
-        headers: {
-          "Access-Control-Allow-Origin": "*"
-        }
+        headers: corsHeaders
       }
     );
   }
