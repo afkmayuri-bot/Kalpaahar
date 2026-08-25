@@ -3286,7 +3286,15 @@ function showStep(step){
 
   var checkoutBox = document.querySelector('#checkoutOverlay .checkout-box');
   if (checkoutBox) {
-    checkoutBox.scrollTop = 0;
+    var downloadBtn = document.getElementById('coDownloadBtn');
+  if (downloadBtn && EBOOK_PDF_FILES[currentEbookId]) {
+    downloadBtn.href = EBOOK_PDF_FILES[currentEbookId];
+    downloadBtn.download = '';
+    downloadBtn.target = '_blank';
+    downloadBtn.style.display = 'inline-flex';
+  }
+
+  checkoutBox.scrollTop = 0;
   }
 
   if (step === stepPayment) {
@@ -3542,6 +3550,14 @@ if (info) {
 
   successStep.classList.add('active');
   successStep.style.display = 'block';
+
+  var downloadBtn = document.getElementById('coDownloadBtn');
+  if (downloadBtn && EBOOK_PDF_FILES[currentEbookId]) {
+    downloadBtn.href = EBOOK_PDF_FILES[currentEbookId];
+    downloadBtn.download = '';
+    downloadBtn.target = '_blank';
+    downloadBtn.style.display = 'inline-flex';
+  }
 
   checkoutBox.scrollTop = 0;
 
@@ -3860,6 +3876,8 @@ document.addEventListener('keydown', function(e){
 
 </body>
 </html>
+
+
 
 
 
