@@ -1569,7 +1569,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (breakStartMin != null && startMin >= breakStartMin && startMin < breakEndMin) continue; /* skip break slots */
         var nextH = Math.floor(nextTotal / 60), nextM = nextTotal % 60;
         var id = pad2(h) + pad2(m) + '-' + pad2(nextH) + pad2(nextM);
-        out.push({ id: id, label: fmt(h, m) + ' â€“ ' + fmt(nextH, nextM) });
+      out.push({ id: id, label: fmt(h, m) + ' - ' + fmt(nextH, nextM) });
       }
     }
     return out;
