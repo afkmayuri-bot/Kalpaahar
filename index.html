@@ -1802,31 +1802,31 @@ formStatus.textContent = 'Preparing your secure payment...';
 // =====================================
 console.log('PLAN:', selectedPlan);
 console.log('AMOUNT:', consultationAmount);
-fetch(CHECKOUT_API_BASE + '/create-order', {
+fetch(CHECKOUT_API_BASE + '/api/orders', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-  amount: consultationAmount,
-  paymentType: 'consultation',
-  service: consultationService
-})
+    amount: consultationAmount,
+    paymentType: 'consultation',
+    service: consultationService,
+    customer: {
+      name: name.value.trim(),
+      email: email.value.trim(),
+      phone: phone.value.trim()
+    }
+  })
 })
 .then(function(res) {
-    return res.json().then(function(data) {
-      return {
-        ok: res.ok,
-        data: data
-      };
-    });
-  })
+  return res.json().then(function(data) {
+    return {
+      ok: res.ok,
+      data: data
+    };
+  });
+})
 .then(function(result) {
- if (!result.ok || !result.data.success) {
-  throw new Error(
-    result.data.error || 'Unable to create payment order'
-  );
-}
 var order = result.data;
   // =====================================
   // OPEN RAZORPAY
