@@ -1319,7 +1319,7 @@ position:fixed; inset:0; z-index:2000;
           </div>
           <div class="field" data-field="date">
             <label for="cf-date">Preferred Date</label>
-            <input type="date" id="cf-date" name="Preferred Date">
+            <select id='cf-date' name='Preferred Date'><option value='' >Select a date</option></select>
             <span class="field-error">Please choose a date.</span>
           </div>
           <div class="field" data-field="slot">
@@ -1549,6 +1549,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var SLOTS_SATURDAY = buildHalfHourSlots(10, 13, null, null); /* Saturday 10 AM–1 PM, no break slots needed */
   function getSlotsForDate(dateStr){
     var d = new Date(dateStr + 'T00:00:00');
+    if (d.getDay() === 0) return []; /* Sunday = clinic closed */
     return d.getDay() === 6 ? SLOTS_SATURDAY : SLOTS_WEEKDAY; /* 6 = Saturday */
   }
   var dateInput = document.getElementById('cf-date');
@@ -1571,6 +1572,8 @@ document.addEventListener('DOMContentLoaded', function () {
       guard++;
       if (d.getDay() !== 0){ /* skip Sunday &#8212; clinic closed */
         opts += '<option value="' + toISODate(d) + '">' + formatDateLabel(d) + '</option>';
+
+
         added++;
       }
       d = new Date(d.getTime() + 86400000);
@@ -1617,7 +1620,7 @@ document.addEventListener('DOMContentLoaded', function () {
     slotGrid.innerHTML = html;
   }
   if (dateInput){
-    dateInput.addEventListener('change', renderSlots);
+    dateInput.addEventListener('change', function(){ if (this.value && new Date(this.value + 'T00:00:00').getDay() === 0) { this.value = ''; slotGrid.innerHTML = '<p class="slot-hint">Sunday is closed. Please select Monday to Saturday.</p>'; selectedSlotId = null; return; } renderSlots(); });
     dateInput.addEventListener('input', renderSlots);
   }
   if (slotGrid){
@@ -1820,15 +1823,34 @@ var order = result.data;
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            razorpay_order_id:
-              response.razorpay_order_id,
-            razorpay_payment_id:
-              response.razorpay_payment_id,
-            razorpay_signature:
-              response.razorpay_signature
-          })
-        })
+       body: JSON.stringify({
+    razorpay_order_id:
+      response.razorpay_order_id,
+    razorpay_payment_id:
+      response.razorpay_payment_id,
+    razorpay_signature:
+      response.razorpay_signature,
+    paymentType: 'consultation',
+    service: consultationService,
+    customer: {
+      name: name.value.trim(),
+      email: email.value.trim(),
+      phone: phone.value.trim(),
+      age: age.value.trim(),
+      gender: gender.value,
+      city: city.value.trim(),
+      occupation: occupation.value.trim(),
+      height: height.value.trim(),
+      weight: weight.value.trim(),
+      allergies: allergies.value.trim(),
+      medications: medications.value.trim(),
+      sleepTime: document.getElementById('cf-sleeptime') ? document.getElementById('cf-sleeptime').value.trim() : '',
+      exercise: getRadioValue('Exercises'),
+      preferredDateTime: document.getElementById('cf-slot') ? document.getElementById('cf-slot').value.trim() : '',
+      message: document.getElementById('cf-message') ? document.getElementById('cf-message').value.trim() : '',
+      reasons: getCheckboxValues('Reason for Consultation')
+    }
+  })
         .then(function(res) {
           return res.json().then(function(data) {
             return {
@@ -1884,40 +1906,26 @@ try {
           } catch (err) {
             // Ignore background form error
           }
-          // =====================================
-          // WHATSAPP MESSAGE
-          // =====================================
-          var message =
-            buildWhatsAppMessage() +
-            '\n\n' +
-            '&#9989; PAYMENT CONFIRMED' +
-            '\n' +
-           'Amount: \u20B9' + consultationAmount +
-            '\n' +
-            'Payment ID: ' +
-            paymentId;
-          var waLink =
-            'https://wa.me/' +
-            CLINIC_WHATSAPP_NUMBER +
-            '?text=' +
-            encodeURIComponent(message);
-          // Book slot only after successful payment
-          commitSlotBooking();
-          window.open(
-            waLink,
-            '_blank',
-            'noopener'
-          );
-          formBtn.textContent =
-            'Payment Successful';
-          formStatus.style.color =
-            'var(--emerald)';
-          formStatus.innerHTML =
-            'Payment successful! Your appointment details are ready in WhatsApp.';
-          setTimeout(function() {
-            formBtn.disabled = false;
-            formBtn.textContent = originalBtnText;
-          }, 5000);
+         // =====================================
+// APPOINTMENT CONFIRMED
+// =====================================
+
+// Book slot only after successful payment
+commitSlotBooking();
+
+formBtn.textContent =
+  'Appointment Confirmed';
+
+formStatus.style.color =
+  'var(--emerald)';
+
+formStatus.innerHTML =
+  'Payment successful! Your appointment is confirmed. A confirmation email has been sent to you.';
+
+setTimeout(function() {
+  formBtn.disabled = false;
+  formBtn.textContent = originalBtnText;
+}, 5000);
         })
         .catch(function(error) {
           console.error(
@@ -3257,3 +3265,7 @@ document.addEventListener('keydown', function(e){
 </div>
 <script>document.addEventListener('DOMContentLoaded',function(){var p=document.getElementById('knowMoreContent');if(p&&p.parentElement!==document.body){document.body.appendChild(p);}});function showKnowMore(){var panel=document.getElementById('knowMoreContent');if(!panel){console.error('knowMoreContent not found');return;}if(panel.parentElement!==document.body){document.body.appendChild(panel);}panel.classList.add('open');panel.scrollTop=0;document.body.style.overflow='hidden';}</script></body>
 </html>
+
+
+
+
