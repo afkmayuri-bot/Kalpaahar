@@ -1555,7 +1555,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     dateInput.innerHTML = opts;
   }
-  try { populateDateOptions(); setTimeout(populateDateOptions,100); } catch(e) { console.error('Date initialization failed:',e); }
+  try { populateDateOptions(); } catch(e) { console.error('Date initialization failed:',e); }
   function todayStr(){ return toISODate(new Date()); }
   function readBookings(){
     try{ return JSON.parse(localStorage.getItem(BOOKINGS_KEY)) || {}; }
@@ -3664,6 +3664,7 @@ document.addEventListener('keydown', function(e){
 </div>
 <script>document.addEventListener('DOMContentLoaded',function(){var p=document.getElementById('knowMoreContent');if(p&&p.parentElement!==document.body){document.body.appendChild(p);}});function showKnowMore(){var panel=document.getElementById('knowMoreContent');if(!panel){console.error('knowMoreContent not found');return;}if(panel.parentElement!==document.body){document.body.appendChild(panel);}panel.classList.add('open');panel.scrollTop=0;document.body.style.overflow='hidden';}</script></body>
 </html>
+
 
 
 
