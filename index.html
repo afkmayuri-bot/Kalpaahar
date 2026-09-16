@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="google-site-verification" content="srNfJNfkWuM9Iv_QFG8lodZ5hOaUXPfWezXqE0_AgPs" />
+<meta name="google-site-verification" content="obpzUJVctP7JI_x7yVtyXcJ7GNA98G1rPqeov-I59ZY" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KalpAahar | Dr. Sayali Nahar | Clinical Nutrition &amp; Lifestyle Care in Pune</title>
@@ -455,6 +455,33 @@ header.site-header.scrolled{ background:var(--glass); backdrop-filter:blur(16px)
 .blog-card h3{ font-size:1.15rem; margin:8px 0 10px; }
 .blog-card a.link{ display:inline-flex; align-items:center; gap:6px; font-weight:600; color:var(--emerald); font-size:.88rem; }
 @media (max-width:980px){ .blog-grid{ grid-template-columns:1fr 1fr; } }
+/* ---------- ebooks ---------- */
+.ebook-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:36px; }
+@media (max-width:900px){ .ebook-grid{ grid-template-columns:1fr; } }
+.ebook-card{ background:var(--surface); border-radius:var(--radius); padding:24px; box-shadow:var(--shadow-soft); text-align:center; transition:transform .3s ease, box-shadow .3s ease; }
+.ebook-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow); }
+.ebook-cover{ width:100%; aspect-ratio:3/4.2; border-radius:12px; overflow:hidden; box-shadow:0 10px 24px rgba(0,0,0,.12); margin-bottom:20px; }
+.ebook-cover svg{ width:100%; height:100%; display:block; }
+.ebook-cover img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+.ebook-card:hover .ebook-cover img{ transform:scale(1.05); }
+.ebook-card h3{ font-size:1.2rem; margin-bottom:4px; }
+.ebook-tagline{ color:var(--green); font-weight:600; font-style:italic; font-size:.88rem; margin-bottom:10px; }
+.ebook-desc{ font-size:.9rem; margin-bottom:16px; }
+.ebook-price{ font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--emerald); margin-bottom:16px; }
+.ebook-price span{ font-size:.8rem; color:var(--ink-soft); font-family:'Poppins',sans-serif; font-weight:500; }
+.ebook-card a.btn-primary {
+  background: linear-gradient(135deg, var(--green), var(--emerald)) !important;
+  color: #fff !important;
+  border: 2px solid transparent !important;
+  box-shadow: 0 14px 30px rgba(46,139,87,.35) !important;
+}
+.ebook-card a.btn-primary:hover {
+  background: linear-gradient(135deg, var(--green), var(--emerald)) !important;
+  color: #fff !important;
+  box-shadow: 0 18px 38px rgba(46,139,87,.45) !important;
+}
+.ebook-soon{ color:var(--ink-soft); font-weight:600; font-size:.88rem; margin-bottom:16px; display:block; }
+@media (max-width:620px){ .blog-grid{ grid-template-columns:1fr; } }
 /* ---------- faq ---------- */
 .faq-item{ border-bottom:1px solid rgba(46,139,87,.15); }
 .faq-item summary{ cursor:pointer; list-style:none; padding:22px 4px; font-family:'Playfair Display',serif; font-weight:600; font-size:1.05rem; display:flex; align-items:center; justify-content:space-between; }
@@ -463,6 +490,8 @@ header.site-header.scrolled{ background:var(--glass); backdrop-filter:blur(16px)
 .faq-item[open] summary::after{ transform:rotate(45deg); }
 .faq-item p{ padding:0 4px 22px; font-size:.94rem; }
 /* ---------- contact ---------- */
+.contact-grid{display:grid !important;grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;gap:48px !important;align-items:start !important;}
+
 .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
 .form-card{ background:var(--surface); border-radius:var(--radius); padding:36px; box-shadow:var(--shadow-soft); }
 .field{ margin-bottom:18px; }
@@ -547,7 +576,6 @@ header.site-header.scrolled{ background:var(--glass); backdrop-filter:blur(16px)
 .clinic-details{ margin-top:20px; display:grid; gap:12px; }
 .clinic-details li{ display:flex; align-items:center; gap:10px; font-size:.92rem; }
 .clinic-details svg{ width:20px; height:20px; color:var(--emerald); flex-shrink:0; }
-@media (max-width:900px){ .contact-grid{ grid-template-columns:1fr; } }
 /* ---------- newsletter ---------- */
 .newsletter{ background:linear-gradient(135deg,var(--green),var(--emerald)); color:#fff; text-align:center; border-radius:var(--radius); padding:64px 40px; }
 .newsletter h2{ color:#fff; }
@@ -758,7 +786,7 @@ position:fixed; inset:0; z-index:2000;
   margin-top:1px;
 }
 </style>
-<style id=quick-consult-check-style>#detailsOverlayQuickConsult ul.consult-feature-list{list-style:none!important;padding:0!important;margin:14px 0 0!important;display:flex!important;flex-direction:column!important;gap:10px!important}#detailsOverlayQuickConsult ul.consult-feature-list li{position:relative!important;display:flex!important;align-items:center!important;background:#f4f6f2!important;border-radius:12px!important;padding:13px 15px 13px 46px!important;margin:0!important;font-size:16px!important;line-height:1.45!important;color:#26352d!important;min-height:48px!important;box-sizing:border-box!important}#detailsOverlayQuickConsult ul.consult-feature-list li::before{content:\2713!important;position:absolute!important;left:15px!important;top:50%!important;transform:translateY(-50%)!important;width:22px!important;height:22px!important;border-radius:50%!important;background:#3eaa62!important;color:#fff!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:14px!important;font-weight:700!important;line-height:22px!important;box-sizing:border-box!important}</style><style id=quick-consult-size-fix>#detailsOverlayQuickConsult .details-box{position:relative!important;width:100%!important;max-width:640px!important;margin:auto!important;padding:36px 32px 32px!important;max-height:90vh!important;overflow-y:auto!important;box-sizing:border-box!important}</style></head>
+<style id=quick-consult-check-style>#detailsOverlayQuickConsult ul.consult-feature-list{list-style:none!important;padding:0!important;margin:14px 0 0!important;display:flex!important;flex-direction:column!important;gap:10px!important}#detailsOverlayQuickConsult ul.consult-feature-list li{position:relative!important;display:flex!important;align-items:center!important;background:#f4f6f2!important;border-radius:12px!important;padding:13px 15px 13px 46px!important;margin:0!important;font-size:16px!important;line-height:1.45!important;color:#26352d!important;min-height:48px!important;box-sizing:border-box!important}#detailsOverlayQuickConsult ul.consult-feature-list li::before{content:\2713!important;position:absolute!important;left:15px!important;top:50%!important;transform:translateY(-50%)!important;width:22px!important;height:22px!important;border-radius:50%!important;background:#3eaa62!important;color:#fff!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:14px!important;font-weight:700!important;line-height:22px!important;box-sizing:border-box!important}</style><style id=quick-consult-size-fix>#detailsOverlayQuickConsult .details-box{position:relative!important;width:100%!important;max-width:640px!important;margin:auto!important;padding:36px 32px 32px!important;max-height:90vh!important;overflow-y:auto!important;box-sizing:border-box!important}</style><style id=mobile-contact-fix>@media (max-width: 768px){.contact-grid{grid-template-columns:1fr !important;gap:28px !important;width:100% !important}.contact-grid>*{min-width:0 !important;width:100% !important}.contact-section,.contact-form,.booking-form,.map-container{max-width:100% !important;box-sizing:border-box !important}}</style><style id=mobile-layout-fix-2>@media (max-width:768px){html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important}.contact-grid{display:flex!important;flex-direction:column!important;width:100%!important;max-width:100%!important;gap:28px!important}.contact-grid>*{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}.contact-grid img,.contact-grid iframe{max-width:100%!important}.contact-grid input,.contact-grid textarea,.contact-grid select,.contact-grid button{max-width:100%!important;box-sizing:border-box!important}}</style><style id=mobile-contact-final>@media (max-width:768px){.contact-grid,.contact-grid .contact-left,.contact-grid .contact-right{display:flex!important;flex-direction:column!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}.contact-grid>*{flex:0 0 auto!important;width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important}.contact-grid form,.contact-grid .form-group,.contact-grid .input-group{width:100%!important;max-width:100%!important;box-sizing:border-box!important}.contact-grid input,.contact-grid textarea,.contact-grid select{width:100%!important;max-width:100%!important;box-sizing:border-box!important}.contact-grid iframe,.contact-grid img{display:block!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}body{overflow-x:hidden!important}}</style><style id=mobile-consultation-final>@media (max-width:768px){#contact .contact-grid{display:flex!important;flex-direction:column!important;gap:28px!important}#contact .contact-grid>.form-card{order:1!important;width:100%!important;max-width:100%!important}#contact .contact-grid>.reveal-right{order:2!important;width:100%!important;max-width:100%!important}#contact .map-embed{width:100%!important;max-width:100%!important}#contact .map-embed iframe{width:100%!important;max-width:100%!important;display:block!important}#appointmentForm .field-row{display:flex!important;flex-direction:column!important;gap:16px!important;width:100%!important}#appointmentForm .field-row>.field{width:100%!important;max-width:100%!important}#appointmentForm .option-group{display:flex!important;flex-direction:column!important;width:100%!important;gap:10px!important}}</style></head>
 <body><div id="mainContent">
 <input type="checkbox" id="navCheck" class="nav-check" aria-hidden="true">
 <script>document.documentElement.classList.add('js-anim');</script>
@@ -980,7 +1008,7 @@ position:fixed; inset:0; z-index:2000;
       <h2>Choose The Level Of Support That Fits You</h2>
       <p style="max-width:560px; margin:14px auto 0;">Choose the level of support that fits where you are right now.</p>
       <p class="center" style="margin-top:22px;">
-        <a href="#contact" class="btn btn-primary" data-ripple>Book Your Consultation →</a>
+        <a href="#contact" class="btn btn-primary" data-ripple>Book Your Consultation -></a>
       </p>
       <p class="lede center" style="margin-top:12px;">Fill out the form and our team will reach out within 24 hours.</p>
     </div>
@@ -991,19 +1019,19 @@ position:fixed; inset:0; z-index:2000;
         <div class="service-card reveal">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11Z"/></svg></div>
           <h3>Quick Consult</h3>
-          <p>A simple, personalized diet plan for everyday concerns &#8212; anemia, digestion, hair and skin, immunity, and more.</p>
+          <p>A simple, personalized diet plan for everyday concerns &#8212; anemia, digestion, hair and skin, immunity, and more, with 15-minute history-taking.</p>
           <a href="#" class="btn btn-outline" data-ripple onclick="openDetailsQuickConsult(this); return false;">Learn More</a>
         </div>
         <div class="service-card reveal">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 5.5 6 10.5a6 6 0 0 1-12 0C6 8.5 12 3 12 3Z"/></svg></div>
           <h3>Condition-Specific Nutrition Plan</h3>
-          <p>An in-depth, personalized plan with lifestyle and exercise guidance for diabetes, thyroid, PCOS/PCOD, blood pressure, and other chronic conditions.</p>
+          <p>An in-depth, personalized plan with lifestyle and exercise guidance for diabetes, thyroid, PCOS/PCOD, blood pressure, and other chronic conditions, with 25-minute detailed history-taking.</p>
           <a href="#" class="btn btn-outline" data-ripple onclick="openDetailsConditionPlan(this); return false;">Learn More</a>
         </div>
         <div class="service-card reveal">
           <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
           <h3>Guided Wellness Programs</h3>
-          <p>Structured 4, 8, and 12-week journeys for sustainable weight loss and chronic disease management, with ongoing support.</p>
+          <p>Structured 4, 8, and 12-week journeys for sustainable weight loss and chronic disease management, with ongoing support, with 35-minute detailed history-taking.</p>
           <a href="#" class="btn btn-outline" data-ripple onclick="openDetailsGuidedProgram(this); return false;">Learn More</a>
         </div>
       </div>
@@ -1184,7 +1212,8 @@ position:fixed; inset:0; z-index:2000;
 </script>
 <!-- ============ RECOGNITION ============ -->
 <!-- ============ WHY CHOOSE US ============ -->
-
+<!-- ============ EBOOKS ============ -->
+<span id="blog" style="display:block; position:relative; top:-90px; visibility:hidden;" aria-hidden="true"></span>
 <!-- ============ BLOG ============ -->
 <!-- ============ FAQ ============ -->
 <section id="faq">
@@ -1221,15 +1250,8 @@ position:fixed; inset:0; z-index:2000;
           <input type="hidden" name="_captcha" value="false">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <div class="field" data-field="plan">
-            <label for="cf-plan">Choose Duration of Plan <span style="color:#d64545;">*</span></label>
-            <select id="cf-plan" name="Plan Selected" required>
-              <option value="">Select a plan</option>
-              <option value="Quick Consultation">Quick Consultation</option>
-              <option value="Condition Specific Nutrition Plan">Condition Specific Nutrition Plan</option>
-              <option value="Guided Wellness Program – 4 weeks">Guided Wellness Program – 4 weeks</option>
-              <option value="Guided Wellness Program – 8 weeks">Guided Wellness Program – 8 weeks</option>
-              <option value="Guided Wellness Program – 12 weeks">Guided Wellness Program – 12 weeks</option>
-            </select>
+            <label for="cf-plan">Choose Your Plan <span style="color:#d64545;">*</span></label>
+            <select id="cf-plan" name="Plan" required><option value="">Select a plan</option><option value="Quick Consultation">Quick Consultation - &#8377;800</option><option value="Condition Specific Nutrition Plan">Condition-Specific Nutrition Plan - &#8377;2,500</option><option value="Guided Wellness Program - 4 weeks">Guided Wellness Program - 4 Weeks - &#8377;5,999</option><option value="Guided Wellness Program - 8 weeks">Guided Wellness Program - 8 Weeks - &#8377;10,999</option><option value="Guided Wellness Program - 12 weeks">Guided Wellness Program - 12 Weeks - &#8377;14,999 (Most Comprehensive)</option></select>
             <span class="field-error">Please choose a plan.</span>
           </div>
           <div class="field" data-field="phone">
@@ -1266,12 +1288,7 @@ position:fixed; inset:0; z-index:2000;
                 <option>Other</option>
               </select>
             </div>
-          </div>
-          <div class="field" data-field="occupation">
-            <label for="cf-occupation">Occupation</label>
-            <input type="text" id="cf-occupation" name="Occupation" placeholder="e.g. Software Engineer">
-          </div>
-          <div class="field-row">
+          </div><div class="field-row">
            <div class="field" data-field="height">
   <label for="cf-height">Height (current) &#8212; feet &amp; inches <span style="color:#d64545;">*</span></label>
   <input type="text" id="cf-height" name="Height" placeholder='e.g. 5&apos;6"' inputmode="text" autocomplete="off" required>
@@ -1281,45 +1298,10 @@ position:fixed; inset:0; z-index:2000;
               <input type="number" id="cf-weight" name="Weight (kg)" placeholder="e.g. 68" required>
             </div>
           </div>
-<div class="field" data-field="reason">
-  <label>Reason for Consultation <span style="color:#d64545;">*</span></label>
-  <div class="option-group">
-    <label><input type="checkbox" name="Reason for Consultation" value="Weight Loss"> Weight Loss</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Diabetes"> Diabetes</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Thyroid"> Thyroid</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="PCOS/PCOD"> PCOS/PCOD</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Hypertension"> Hypertension</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Cholesterol Control"> Cholesterol Control</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Fatty Liver"> Fatty Liver</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Child Nutrition"> Child Nutrition</label>
-    <label><input type="checkbox" name="Reason for Consultation" value="Preventive Care"> Preventive Care</label>
-  </div>
-  <span class="field-error">Please select at least one option.</span>
-</div>
-          <div class="field" data-field="allergies">
-            <label for="cf-allergies">Do you have any food allergies? <span style="color:#d64545;">*</span></label>
-            <input type="text" id="cf-allergies" name="Food Allergies" placeholder="e.g. Nuts, dairy, gluten, or 'None'" required>
-            <span class="field-error">Please answer this question (write "None" if not applicable).</span>
-          </div>
-          <div class="field" data-field="medications">
-            <label for="cf-medications">Are you on any medications? If yes, please mention the condition for which medication is being taken. <span style="color:#d64545;">*</span></label>
-            <textarea id="cf-medications" name="Medications" placeholder="List medications and the condition they're for, or write 'None'" required></textarea>
-            <span class="field-error">Please answer this question (write "None" if not applicable).</span>
-          </div>
-          <div class="field" data-field="sleeptime">
-            <label for="cf-sleeptime">What time do you sleep?</label>
-            <input type="time" id="cf-sleeptime" name="Sleep Time">
-          </div>
-          <div class="field" data-field="exercise">
-            <label>Do you exercise? <span style="color:#d64545;">*</span></label>
-            <div class="option-group">
-              <label><input type="radio" name="Exercises" value="Yes" required> Yes</label>
-              <label><input type="radio" name="Exercises" value="No"> No</label>
-            </div>
-          </div>
+<div class="field" data-field="reason">   <label>Reason for Consultation <span style="color:#d64545;">*</span></label>   <div class="option-group">     <label><input type="checkbox" name="Reason for Consultation" value="Weight Loss"> Weight Loss</label>     <label><input type="checkbox" name="Reason for Consultation" value="Diabetes"> Diabetes</label>     <label><input type="checkbox" name="Reason for Consultation" value="Thyroid"> Thyroid</label>     <label><input type="checkbox" name="Reason for Consultation" value="PCOS/PCOD"> PCOS/PCOD</label>     <label><input type="checkbox" name="Reason for Consultation" value="Hypertension"> Hypertension</label>     <label><input type="checkbox" name="Reason for Consultation" value="Cholesterol Control"> Cholesterol Control</label>     <label><input type="checkbox" name="Reason for Consultation" value="Fatty Liver"> Fatty Liver</label>     <label><input type="checkbox" name="Reason for Consultation" value="Child Nutrition"> Child Nutrition</label>     <label><input type="checkbox" name="Reason for Consultation" value="Preventive Care"> Preventive Care</label>     <label><input type="checkbox" name="Reason for Consultation" value="Others" onchange="toggleOtherReason(this)"> Others</label>   </div>   <div id="otherReasonBox" style="display:none; margin-top:10px;">     <input type="text" id="cf-other-reason" name="Other Reason" placeholder="Please specify your reason">   </div>   <span class="field-error">Please select at least one option.</span> </div>
           <div class="field" data-field="date">
             <label for="cf-date">Preferred Date</label>
-            <select id='cf-date' name='Preferred Date'><option value='' >Select a date</option></select>
+            <select id="cf-date" name="Preferred Date"><option value="">Choose a date</option></select>
             <span class="field-error">Please choose a date.</span>
           </div>
           <div class="field" data-field="slot">
@@ -1329,13 +1311,7 @@ position:fixed; inset:0; z-index:2000;
             </div>
             <input type="hidden" id="cf-slot" name="Preferred Time Slot">
             <span class="field-error">Please select an available time slot.</span>
-          </div>
-          <div class="field" data-field="message">
-            <label for="cf-message">Additional Message &#8212; anything else we should know? (Optional)</label>
-            <textarea id="cf-message" name="Message" placeholder="Anything else you'd like Dr. Sayali to know before your session..."></textarea>
-            <span class="field-error">Please share a short message.</span>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block" data-ripple>Book Appointment</button>
+          </div><button type="submit" class="btn btn-primary btn-block" data-ripple>Book Appointment</button>
           <p class="form-status" style="display:none; margin-top:12px; font-size:.85rem; text-align:center;"></p>
         </form>
         <div class="contact-actions">
@@ -1345,10 +1321,10 @@ position:fixed; inset:0; z-index:2000;
       </div>
       <div class="reveal-right">
         <div class="map-embed"><iframe src="https://www.google.com/maps?q=Pune,Maharashtra&output=embed" title="Clinic location" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
-        <p style="margin-top:10px; font-size:.85rem;"><a href="https://maps.google.com/maps?q=Pune%2C%20Maharashtra" target="_blank" rel="noopener" style="color:var(--emerald); font-weight:600; text-decoration:underline;">Open in Google Maps →</a></p>
+        <p style="margin-top:10px; font-size:.85rem;"><a href="https://maps.google.com/maps?q=Pune%2C%20Maharashtra" target="_blank" rel="noopener" style="color:var(--emerald); font-weight:600; text-decoration:underline;">Open in Google Maps -></a></p>
         <ul class="clinic-details">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11Z"/></svg>Pune, Maharashtra</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/></svg>Mon – Fri: 10:00 AM – 7:00 PM | Sat: 10:00 AM – 1:00 PM</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/></svg>Mon - Fri: 10:00 AM - 7:00 PM | Sat: 10:00 AM - 1:00 PM</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V4H6.5A2.5 2.5 0 0 0 4 6.5v13Z"/></svg><a href="mailto:kalpaahar.wellness@gmail.com">kalpaahar.wellness@gmail.com</a></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3"/></svg><a href="tel:+917757021501">+91 77570 21501</a></li>
         </ul>
@@ -1390,6 +1366,7 @@ position:fixed; inset:0; z-index:2000;
       </div>
       <div>
         <h4>Quick Links</h4>
+        <ul class=consult-feature-list><li><a href="#about>About</a></li><li><a href=#founder>Founder</a></li></ul>
       </div>
       <div>
         <h4>Services</h4>
@@ -1523,7 +1500,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var form = document.getElementById('appointmentForm');
   var formStatus = form.querySelector('.form-status');
   var formBtn = form.querySelector('button[type="submit"]');
-  /* ---- time slot picker: 30-minute slots (2 per hour), Mon–Fri 10 AM–7 PM, Sat 10 AM–1 PM, break 1:00–2:30 PM daily ---- */
+  /* ---- time slot picker: 30-minute slots (2 per hour), Mon-Fri 10 AM-7 PM, Sat 10 AM-1 PM, break 1:00-2:30 PM daily ---- */
   var BOOKINGS_KEY = 'kalpaahar_slot_bookings';
   function buildHalfHourSlots(startHour, endHour, breakStartMin, breakEndMin){
     /* breakStartMin/breakEndMin are minutes-from-midnight marking a break to exclude (e.g. 13:00-14:30) */
@@ -1540,17 +1517,17 @@ document.addEventListener('DOMContentLoaded', function () {
         if (breakStartMin != null && startMin >= breakStartMin && startMin < breakEndMin) continue; /* skip break slots */
         var nextH = Math.floor(nextTotal / 60), nextM = nextTotal % 60;
         var id = pad2(h) + pad2(m) + '-' + pad2(nextH) + pad2(nextM);
-        out.push({ id: id, label: fmt(h, m) + ' – ' + fmt(nextH, nextM) });
+        out.push({ id: id, label: fmt(h, m) + ' - ' + fmt(nextH, nextM) });
       }
     }
     return out;
   }
-  var SLOTS_WEEKDAY = buildHalfHourSlots(10, 19, 13 * 60, 14 * 60 + 30); /* Mon–Fri 10 AM–7 PM, minus 1–2:30 PM break */
-  var SLOTS_SATURDAY = buildHalfHourSlots(10, 13, null, null); /* Saturday 10 AM–1 PM, no break slots needed */
+  var SLOTS_WEEKDAY = buildHalfHourSlots(10, 19, 13 * 60, 14 * 60 + 30); /* Mon-Fri 10 AM-7 PM, minus 1-2:30 PM break */
+  var SLOTS_SATURDAY = buildHalfHourSlots(10, 13, null, null); /* Saturday 10 AM-1 PM, no break slots needed */
   function getSlotsForDate(dateStr){
     var d = new Date(dateStr + 'T00:00:00');
-    if (d.getDay() === 0) return []; /* Sunday = clinic closed */
-    return d.getDay() === 6 ? SLOTS_SATURDAY : SLOTS_WEEKDAY; /* 6 = Saturday */
+    if (d.getDay() === 0) return []; /* Sunday closed */
+    return d.getDay() === 6 ? SLOTS_SATURDAY : SLOTS_WEEKDAY; /* Saturday */
   }
   var dateInput = document.getElementById('cf-date');
   var slotGrid = document.getElementById('slotGrid');
@@ -1572,8 +1549,6 @@ document.addEventListener('DOMContentLoaded', function () {
       guard++;
       if (d.getDay() !== 0){ /* skip Sunday &#8212; clinic closed */
         opts += '<option value="' + toISODate(d) + '">' + formatDateLabel(d) + '</option>';
-
-
         added++;
       }
       d = new Date(d.getTime() + 86400000);
@@ -1620,7 +1595,7 @@ document.addEventListener('DOMContentLoaded', function () {
     slotGrid.innerHTML = html;
   }
   if (dateInput){
-    dateInput.addEventListener('change', function(){ if (this.value && new Date(this.value + 'T00:00:00').getDay() === 0) { this.value = ''; slotGrid.innerHTML = '<p class="slot-hint">Sunday is closed. Please select Monday to Saturday.</p>'; selectedSlotId = null; return; } renderSlots(); });
+    dateInput.addEventListener('change', renderSlots);
     dateInput.addEventListener('input', renderSlots);
   }
   if (slotGrid){
@@ -1663,19 +1638,13 @@ var slotDef = slots.filter(function(s){ return s.id === selectedSlotId; })[0];
       'Name: ' + get('cf-name'),
       'Age: ' + get('cf-age'),
       'Gender: ' + get('cf-gender'),
-      'Occupation: ' + get('cf-occupation'),
       'Phone (WhatsApp): ' + get('cf-phone'),
 'Email: ' + get('cf-email'),
 'City: ' + get('cf-city'),
 'Height: ' + get('cf-height'),
 'Weight: ' + get('cf-weight') + ' kg',
 'Reason for Consultation: ' + reasons,
-'Food Allergies: ' + get('cf-allergies'),
-'Medications: ' + get('cf-medications'),
-'Sleep Time: ' + get('cf-sleeptime'),
-'Exercises: ' + getRadioValue('Exercises'),
       'Preferred Date & Time: ' + get('cf-slot'),
-      'Message: ' + get('cf-message')
     ];
     return lines.join('\n');
   }
@@ -1691,8 +1660,6 @@ form.addEventListener('submit', function(e) {
   var gender = document.getElementById('cf-gender');
   var height = document.getElementById('cf-height');
   var weight = document.getElementById('cf-weight');
-  var allergies = document.getElementById('cf-allergies');
-  var medications = document.getElementById('cf-medications');
   function setError(input, isError) {
     input.closest('.field').classList.toggle('error', isError);
     if (isError) valid = false;
@@ -1714,11 +1681,6 @@ form.addEventListener('submit', function(e) {
     document.querySelector('[data-field="reason"]');
   reasonField.classList.toggle('error', !reasonChecked);
   if (!reasonChecked) valid = false;
-    var exerciseChecked = !!getRadioValue('Exercises');
-  document
-    .querySelector('[data-field="exercise"]')
-    .classList.toggle('error', !exerciseChecked);
-  if (!exerciseChecked) valid = false;
   var dateInvalid = !dateInput.value;
   dateInput
     .closest('.field')
@@ -1823,34 +1785,13 @@ var order = result.data;
         headers: {
           'Content-Type': 'application/json'
         },
-       body: JSON.stringify({
-    razorpay_order_id:
-      response.razorpay_order_id,
-    razorpay_payment_id:
-      response.razorpay_payment_id,
-    razorpay_signature:
-      response.razorpay_signature,
-    paymentType: 'consultation',
-    service: consultationService,
-    customer: {
-      name: name.value.trim(),
-      email: email.value.trim(),
-      phone: phone.value.trim(),
-      age: age.value.trim(),
-      gender: gender.value,
-      city: city.value.trim(),
-      occupation: occupation.value.trim(),
-      height: height.value.trim(),
-      weight: weight.value.trim(),
-      allergies: allergies.value.trim(),
-      medications: medications.value.trim(),
-      sleepTime: document.getElementById('cf-sleeptime') ? document.getElementById('cf-sleeptime').value.trim() : '',
-      exercise: getRadioValue('Exercises'),
-      preferredDateTime: document.getElementById('cf-slot') ? document.getElementById('cf-slot').value.trim() : '',
-      message: document.getElementById('cf-message') ? document.getElementById('cf-message').value.trim() : '',
-      reasons: getCheckboxValues('Reason for Consultation')
-    }
-  })
+        body: JSON.stringify({
+            razorpay_order_id:
+              response.razorpay_order_id,
+            razorpay_payment_id:
+              response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature, paymentType: 'consultation', date: dateInput.value, slotId: selectedSlotId, customer: { name: name.value.trim(), email: email.value.trim(), phone: phone.value.trim() }, service: selectedPlan })
+        })
         .then(function(res) {
           return res.json().then(function(data) {
             return {
@@ -1874,26 +1815,6 @@ var order = result.data;
           // PAYMENT VERIFIED
 var paymentId =
   result.data.paymentId;
-// =====================================
-// ADD APPOINTMENT TO GOOGLE CALENDAR
-// =====================================
-var GOOGLE_CALENDAR_WEBAPP =
-  'https://script.google.com/macros/s/AKfycbwtuiqM3j0bEnnYt7JvamVCuw3aUaywfijCeKdra88Rg_U9A8NGVDtdF1zlA1BSX_XIVg/exec';
-fetch(GOOGLE_CALENDAR_WEBAPP, {
-  method: 'POST',
-  mode: 'no-cors',
-  headers: {
-    'Content-Type': 'text/plain;charset=utf-8'
-  },
-  body: JSON.stringify({
-    name: name.value.trim(),
-    email: email.value.trim(),
-    phone: phone.value.trim(),
-    plan: selectedPlan,
-    date: dateInput.value,
-    slotId: selectedSlotId
-  })
-});
 // Save form information in background
 try {
   fetch(FORM_ENDPOINT, {
@@ -1906,26 +1827,36 @@ try {
           } catch (err) {
             // Ignore background form error
           }
-         // =====================================
-// APPOINTMENT CONFIRMED
-// =====================================
-
-// Book slot only after successful payment
-commitSlotBooking();
-
-formBtn.textContent =
-  'Appointment Confirmed';
-
-formStatus.style.color =
-  'var(--emerald)';
-
-formStatus.innerHTML =
-  'Payment successful! Your appointment is confirmed. A confirmation email has been sent to you.';
-
-setTimeout(function() {
-  formBtn.disabled = false;
-  formBtn.textContent = originalBtnText;
-}, 5000);
+          // =====================================
+          // WHATSAPP MESSAGE
+          // =====================================
+          var message =
+            buildWhatsAppMessage() +
+            '\n\n' +
+            '? PAYMENT CONFIRMED' +
+            '\n' +
+           'Amount: \u20B9' + consultationAmount +
+            '\n' +
+            'Payment ID: ' +
+            paymentId;
+          var waLink =
+            'https://wa.me/' +
+            CLINIC_WHATSAPP_NUMBER +
+            '?text=' +
+            encodeURIComponent(message);
+          // Book slot only after successful payment
+          commitSlotBooking();
+          window.open('whatsapp://send?phone=' + CLINIC_WHATSAPP_NUMBER + '&text=' + encodeURIComponent(message), '_blank');
+          formBtn.textContent =
+            'Payment Successful';
+          formStatus.style.color =
+            'var(--emerald)';
+          formStatus.innerHTML =
+            'Payment successful! Your appointment details are ready in WhatsApp.';
+          setTimeout(function() {
+            formBtn.disabled = false;
+            formBtn.textContent = originalBtnText;
+          }, 5000);
         })
         .catch(function(error) {
           console.error(
@@ -2055,7 +1986,7 @@ setTimeout(function() {
     <p class="details-tagline">A detailed, personalized plan with lifestyle and exercise guidance.</p>
     <div class="details-section">
       <h4>What It Includes</h4>
-      <p>25-minute detailed history-taking + personalized nutrition plan + lifestyle modification + exercise guidance + supplement support (if required)</p>
+      <p>35-minute detailed history-taking + personalized nutrition plan + lifestyle modification + exercise guidance + supplement support (if required)</p>
     </div>
     <div class="details-section">
       <h4>This Plan Is Right For You If You're Dealing With</h4>
@@ -2084,13 +2015,13 @@ setTimeout(function() {
     <div class="details-section">
       <h4>What Every Duration Includes</h4>
       <ul>
-        <li>25-minute detailed history-taking</li>
+        <li>35-minute detailed history-taking</li>
         <li>Personalized diet plan, adjusted as you progress</li>
         <li>Lifestyle modifications</li>
         <li>Exercise plan</li>
         <li>Sleep support</li>
         <li>Supplement guidance (if required for a deficiency)</li>
-        <li>WhatsApp support and monitoring, 10:00 AM – 7:00 PM</li>
+        <li>WhatsApp support and monitoring, 10:00 AM - 7:00 PM</li>
         <li>Weekly progress check-ins</li>
       </ul>
     </div>
@@ -2113,7 +2044,7 @@ setTimeout(function() {
         <li><span>12 Weeks <em>(Most Comprehensive)</em></span><span class="service-price-inline">&#8377;14,999</span></li>
       </ul>
     </div>
-    <a href="https://wa.me/917757021501?text=Hi%20KalpAahar%2C%20I%27m%20interested%20in%20a%20Guided%20Wellness%20Program%20(4%2F8%2F12-week).%20Could%20you%20please%20share%20more%20details%20on%20duration%20and%20payment%20options%3F" target="_blank" rel="noopener" class="btn btn-primary btn-block" data-ripple onclick="closeDetailsGuidedProgram();">Chat on WhatsApp to Enroll</a>
+    <a href="https://wa.me/917757021501?text=Hi%20KalpAahar%2C%20I%27m%20interested%20in%20a%20personalized%20nutrition%20consultation%20with%20Dr.%20Sayali%20Nahar.%20Could%20you%20please%20share%20more%20details%3F" target="_blank" rel="noopener" class="btn btn-primary btn-block" data-ripple onclick="closeDetailsGuidedProgram();">Chat on WhatsApp to Enroll</a>
   </div>
 </div>
 <div id="detailsOverlay" class="details-overlay">
@@ -2123,9 +2054,9 @@ setTimeout(function() {
     <h3>High Protein Breakfast</h3>
     <p class="details-tagline">Fuel Your Morning. Power Your Day.</p>
     <div class="details-meta-row">
-      <span class="details-meta-chip">📖 42 Pages</span>
-      <span class="details-meta-chip">📄 PDF Format</span>
-      <span class="details-meta-chip">📱 Mobile &amp; Desktop Friendly</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€“ 42 Pages</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€ž PDF Format</span>
+      <span class="details-meta-chip">Ã°Å¸â€œÂ± Mobile &amp; Desktop Friendly</span>
     </div>
     <div class="details-section">
       <h4>&#128105;&#8205;&#9877;&#65039; About the eBook</h4>
@@ -2141,7 +2072,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>&#128218;️ What's Inside</h4>
+      <h4>&#128218;Ã¯Â¸Â What's Inside</h4>
       <ul>
         <li>20 high-protein breakfast recipes</li>
         <li>Calorie &amp; macro breakdown for every recipe</li>
@@ -2150,7 +2081,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🎯 Who It's For</h4>
+      <h4>Ã°Å¸Å½Â¯ Who It's For</h4>
       <ul>
         <li>Busy professionals who skip or rush breakfast</li>
         <li>Anyone working on fat loss or muscle building goals</li>
@@ -2177,9 +2108,9 @@ setTimeout(function() {
     <h3>Picky Eaters</h3>
     <p class="details-tagline">Healthy Meals. Happy Kids. Stress-Free Parents.</p>
     <div class="details-meta-row">
-      <span class="details-meta-chip">📖 40 Pages</span>
-      <span class="details-meta-chip">📄 PDF Format</span>
-      <span class="details-meta-chip">📱 Mobile &amp; Desktop Friendly</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€“ 40 Pages</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€ž PDF Format</span>
+      <span class="details-meta-chip">Ã°Å¸â€œÂ± Mobile &amp; Desktop Friendly</span>
     </div>
     <div class="details-section">
       <h4>&#128105;&#8205;&#9877;&#65039; About the eBook</h4>
@@ -2195,7 +2126,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🏳️ What's Inside</h4>
+      <h4>Ã°Å¸ÂÂ³Ã¯Â¸Â What's Inside</h4>
       <p style="margin-bottom:8px;"><strong>Part 1 &#8212; 15 Everyday Savory Favorites:</strong></p>
       <ul>
         <li>Cheesy Paneer Paratha</li>
@@ -2225,7 +2156,7 @@ setTimeout(function() {
       <p>Plus approximate nutrition (calories, protein, carbs, fat) for every recipe, and portions sized for a child.</p>
     </div>
     <div class="details-section">
-      <h4>🎯 Who It's For</h4>
+      <h4>Ã°Å¸Å½Â¯ Who It's For</h4>
       <ul>
         <li>Parents of toddlers and young children who are selective eaters</li>
         <li>Families looking for stress-free, no-fuss mealtimes</li>
@@ -2252,9 +2183,9 @@ setTimeout(function() {
     <h3>Gut Reset</h3>
     <p class="details-tagline">Heal Your Gut. Transform Your Health.</p>
     <div class="details-meta-row">
-      <span class="details-meta-chip">📖 40 Pages</span>
-      <span class="details-meta-chip">📄 PDF Format</span>
-      <span class="details-meta-chip">📱 Mobile &amp; Desktop Friendly</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€“ 40 Pages</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€ž PDF Format</span>
+      <span class="details-meta-chip">Ã°Å¸â€œÂ± Mobile &amp; Desktop Friendly</span>
     </div>
     <div class="details-section">
       <h4>&#128105;&#8205;&#9877;&#65039; About the eBook</h4>
@@ -2270,7 +2201,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🏳️ What's Inside</h4>
+      <h4>Ã°Å¸ÂÂ³Ã¯Â¸Â What's Inside</h4>
       <ul>
         <li>20 gut-friendly recipes for every meal of the day</li>
         <li>Nutrition breakdown for every recipe</li>
@@ -2279,7 +2210,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🎯 Who It's For</h4>
+      <h4>Ã°Å¸Å½Â¯ Who It's For</h4>
       <ul>
         <li>Anyone dealing with bloating, acidity or irregular digestion</li>
         <li>People looking to improve gut health through food, naturally</li>
@@ -2306,9 +2237,9 @@ setTimeout(function() {
     <h3>Snack Smart</h3>
     <p class="details-tagline">Snack Smart. Stay Energized.</p>
     <div class="details-meta-row">
-      <span class="details-meta-chip">📖 40 Pages</span>
-      <span class="details-meta-chip">📄 PDF Format</span>
-      <span class="details-meta-chip">📱 Mobile &amp; Desktop Friendly</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€“ 40 Pages</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€ž PDF Format</span>
+      <span class="details-meta-chip">Ã°Å¸â€œÂ± Mobile &amp; Desktop Friendly</span>
     </div>
     <div class="details-section">
       <h4>&#128105;&#8205;&#9877;&#65039; About the eBook</h4>
@@ -2324,7 +2255,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🏳️ What's Inside</h4>
+      <h4>Ã°Å¸ÂÂ³Ã¯Â¸Â What's Inside</h4>
       <ul>
         <li>20 healthy, practical snack recipes</li>
         <li>Calorie &amp; macro breakdown for every recipe</li>
@@ -2333,7 +2264,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🎯 Who It's For</h4>
+      <h4>Ã°Å¸Å½Â¯ Who It's For</h4>
       <ul>
         <li>Busy professionals who need energy between meals</li>
         <li>Anyone trying to break the habit of unhealthy snacking</li>
@@ -2360,9 +2291,9 @@ setTimeout(function() {
     <h3>Power Lunch</h3>
     <p class="details-tagline">Power Your Afternoon. Fuel Your Success.</p>
     <div class="details-meta-row">
-      <span class=details-meta-chip>📖 40 Pages</span>
-      <span class="details-meta-chip">📄 PDF Format</span>
-      <span class="details-meta-chip">📱 Mobile &amp; Desktop Friendly</span>
+      <span class=details-meta-chip>Ã°Å¸â€œâ€“ 40 Pages</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€ž PDF Format</span>
+      <span class="details-meta-chip">Ã°Å¸â€œÂ± Mobile &amp; Desktop Friendly</span>
     </div>
     <div class="details-section">
       <h4>&#128105;&#8205;&#9877;&#65039; About the eBook</h4>
@@ -2378,7 +2309,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🏳️ What's Inside</h4>
+      <h4>Ã°Å¸ÂÂ³Ã¯Â¸Â What's Inside</h4>
       <ul>
         <li>20 balanced, protein-forward lunch recipes</li>
         <li>Calorie &amp; macro breakdown for every recipe</li>
@@ -2387,7 +2318,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🎯 Who It's For</h4>
+      <h4>Ã°Å¸Å½Â¯ Who It's For</h4>
       <ul>
         <li>Working professionals who need to stay sharp post-lunch</li>
         <li>Anyone battling the afternoon energy slump</li>
@@ -2414,9 +2345,9 @@ setTimeout(function() {
     <h3>Ancient Grain, Modern Plate</h3>
     <p class="details-tagline">Ancient Grains. Modern Wellness.</p>
     <div class="details-meta-row">
-      <span class=details-meta-chip>📖 40 Pages</span>
-      <span class="details-meta-chip">📄 PDF Format</span>
-      <span class="details-meta-chip">📱 Mobile &amp; Desktop Friendly</span>
+      <span class=details-meta-chip>Ã°Å¸â€œâ€“ 40 Pages</span>
+      <span class="details-meta-chip">Ã°Å¸â€œâ€ž PDF Format</span>
+      <span class="details-meta-chip">Ã°Å¸â€œÂ± Mobile &amp; Desktop Friendly</span>
     </div>
     <div class="details-section">
       <h4>&#128105;&#8205;&#9877;&#65039; About the eBook</h4>
@@ -2432,7 +2363,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🏳️ What's Inside</h4>
+      <h4>Ã°Å¸ÂÂ³Ã¯Â¸Â What's Inside</h4>
       <ul>
         <li>20 gluten-free millet recipes</li>
         <li>Nutrition breakdown for every recipe</li>
@@ -2441,7 +2372,7 @@ setTimeout(function() {
       </ul>
     </div>
     <div class="details-section">
-      <h4>🎯 Who It's For</h4>
+      <h4>Ã°Å¸Å½Â¯ Who It's For</h4>
       <ul>
         <li>Anyone looking to reduce refined grains and eat more wholegrain</li>
         <li>People managing blood sugar or digestive health through diet</li>
@@ -2567,7 +2498,7 @@ setTimeout(function() {
     font-size:.9rem;
     margin-bottom:5px;
   ">
-    🎯 Who It's For
+    Ã°Å¸Å½Â¯ Who It's For
   </div>
   <ul id="coPayWho" style="
     margin:0;
@@ -2654,8 +2585,7 @@ setTimeout(function() {
     font-weight:900;
     margin-bottom:18px;
   ">
-    📚 Explore Our eBook Collections
- </div>
+    Ã°Å¸â€œÅ¡ Explore Our eBook Collections
 <!-- COMPLETE COLLECTION -->
 <div
   id="complete-kalpaahar"
@@ -2677,7 +2607,249 @@ setTimeout(function() {
     COMPLETE KALPAAHAR COLLECTION
   </div>
   <div style="font-size:.82rem;color:var(--ink-soft);margin-bottom:10px;">
-    
+    All 6 Nutrition eBooks
+  </div>
+  <div style="font-size:1.15rem;font-weight:800;">
+    <span style="text-decoration:line-through;color:var(--ink-soft);">
+      &#8377;1,794
+    </span>
+    &nbsp; &#8377;1,299
+  </div>
+  <div style="font-size:.78rem;font-weight:800;margin-top:4px;">
+    Save &#8377;495
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary btn-block"
+    style="margin-top:12px;"
+    onclick="selectCollection('Complete Kalpaahar Collection', 1299, this.parentElement); return false;"
+  >
+    Get the Complete Collection
+  </button>
+</div>
+<!-- PROTEIN & ENERGY -->
+<div
+  class="collection-option"
+  style="
+    padding:16px;
+    margin-bottom:12px;
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:14px;
+    text-align:center;
+  "
+>
+  <div style="font-size:1rem;font-weight:900;">
+    Ã°Å¸â€™Âª PROTEIN & ENERGY COLLECTION
+  </div>
+  <div style="font-size:.8rem;color:var(--ink-soft);margin:6px 0;">
+    High Protein Breakfast + Power Lunch + Snack Smart
+  </div>
+  <div style="font-weight:800;">
+    <span style="text-decoration:line-through;color:var(--ink-soft);">
+      &#8377;897
+    </span>
+    &nbsp; &#8377;699
+  </div>
+  <div style="font-size:.75rem;font-weight:800;">
+    Save &#8377;198
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary btn-block"
+    style="margin-top:12px;"
+    onclick="selectCollection('Protein & Energy Collection', 699, this.parentElement); return false;"
+  >
+    Get this Collection
+  </button>
+</div>
+<!-- HAPPY FAMILY -->
+<div
+  class="collection-option"
+  style="
+    padding:16px;
+    margin-bottom:12px;
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:14px;
+    text-align:center;
+  "
+>
+  <div style="font-size:1rem;font-weight:900;">
+    &#128104;&#8205;&#128105;&#8205;&#128103; HAPPY FAMILY NUTRITION COLLECTION
+  </div>
+  <div style="font-size:.8rem;color:var(--ink-soft);margin:6px 0;">
+    Picky Eaters + High Protein Breakfast + Snack Smart
+  </div>
+  <div style="font-weight:800;">
+    <span style="text-decoration:line-through;color:var(--ink-soft);">
+      &#8377;897
+    </span>
+    &nbsp; &#8377;699
+  </div>
+  <div style="font-size:.75rem;font-weight:800;">
+    Save &#8377;198
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary btn-block"
+    style="margin-top:12px;"
+   onclick="selectCollection('Happy Family Nutrition Collection', 699, this.parentElement); return false;"
+  >
+    Get this Collection
+  </button>
+</div>
+<!-- GUT & GRAIN -->
+<div
+  class="collection-option"
+  style="
+    padding:16px;
+    margin-bottom:12px;
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:14px;
+    text-align:center;
+  "
+>
+  <div style="font-size:1rem;font-weight:900;">
+    Ã°Å¸Å’Â¿ GUT & GRAIN WELLNESS COLLECTION
+  </div>
+  <div style="font-size:.8rem;color:var(--ink-soft);margin:6px 0;">
+    Gut Reset + Ancient Grain, Modern Plate + High Protein Breakfast
+  </div>
+  <div style="font-weight:800;">
+    <span style="text-decoration:line-through;color:var(--ink-soft);">
+      &#8377;897
+    </span>
+    &nbsp; &#8377;749
+  </div>
+  <div style="font-size:.75rem;font-weight:800;">
+    Save &#8377;148
+  </div>
+  <button
+    type="button"
+    class="btn btn-primary btn-block"
+    style="margin-top:12px;"
+    onclick="selectCollection('Gut & Grain Wellness Collection', 749, this.parentElement); return false;"
+  >
+    Get this Collection
+  </button>
+</div>
+  <!-- Email -->
+  <div style="
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:.8rem;
+    margin-bottom:4px;
+  ">
+    Your eBook will be sent to
+  </div>
+  <div style="
+    text-align:center;
+    font-weight:700;
+    font-size:.86rem;
+    margin-bottom:8px;
+    word-break:break-word;
+  ">
+    <span id="coPayEmail"></span>
+  </div>
+  <!-- Price -->
+  <div class="co-pay-amount" style="
+    margin:4px 0 10px;
+    font-size:2rem;
+  ">
+    &#8377;<span id="coPayAmount">299</span>
+  </div>
+    <!-- Pay -->
+  <button
+    type="button"
+    class="btn btn-primary btn-block"
+    data-ripple
+    onclick="payNow()"
+  >
+    Pay &#8377;<span id="coPayBtnAmount">299</span>
+  </button>
+
+  <p style="
+    text-align:center;
+    font-size:.7rem;
+    line-height:1.4;
+    color:var(--ink-soft);
+    margin:9px 0 0;
+  ">
+    Ã°Å¸â€â€™ Secure payment powered by Razorpay. Your payment details are handled securely by Razorpay.
+  </p>
+
+  <div class="co-status" id="coPayStatus"></div>
+
+</div>
+</div>
+
+<!-- Step 3: Payment success -->
+<div id="coStepSuccess" class="checkout-step">
+  <div class="co-success">
+
+    <div class="co-check">&#127881;</div>
+
+    <h3>Payment Successful! Ã°Å¸Å½â€°</h3>
+
+    <p>
+      Thank you for your purchase from
+      <strong>KalpAahar! Ã°Å¸â€™Å¡</strong>
+    </p>
+
+    <p>
+      Your eBook
+      <strong id="coSuccessTitle">[eBook name]</strong>
+      is ready.
+    </p>
+
+    <a
+      id="coDownloadBtn"
+      class="co-btn co-btn-primary"
+      href="#"
+      style="display:inline-flex; margin-top:15px;"
+    >
+      Download eBook
+    </a>
+
+    <div
+      id="coBonusDownloadBtn"
+      style="display:none; margin-top:18px;"
+    >
+      <p>
+        Ã°Å¸Å½Â <strong>Your Free Bonus</strong><br>
+        Move Well - A Simple Home Workout Guide
+      </p>
+
+      <a
+        class="co-btn co-btn-secondary"
+        href="ebooks/Move-Well-Home-Workout-Guide.pdf"
+        download
+      >
+        Download Move Well Guide
+      </a>
+    </div>
+
+    <p style="margin-top:18px; font-size:13px; opacity:.75;">
+      Keep this page open until your download starts.
+    </p>
+
+  </div>
+</div>
+<script>
+function showKnowMore(){
+  var panel = document.getElementById('knowMoreContent');
+  if (!panel) return;
+  panel.classList.add('open');
+  panel.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+function showMain(){
+  var panel = document.getElementById('knowMoreContent');
+  panel.classList.remove('open');
+  document.getElementById('mainContent').style.display = 'block';
+  document.body.style.overflow = '';
+  window.scrollTo(0,0);
+}
+</script>
 <script>
 /* ============ SERVICE DETAILS MODALS ============ */
 (function(){
@@ -2731,7 +2903,8 @@ setTimeout(function() {
     buyBtn.onclick = function(e){
       e.preventDefault();
       closeDetails();
-};
+      openCheckout('High Protein Breakfast', '299');
+    };
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -2755,7 +2928,8 @@ setTimeout(function() {
     buyBtn.onclick = function(e){
       e.preventDefault();
       closeDetailsPickyEaters();
-};
+      openCheckout('Picky Eaters', '299');
+    };
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -2779,7 +2953,8 @@ setTimeout(function() {
     buyBtn.onclick = function(e){
       e.preventDefault();
       closeDetailsGutReset();
-};
+      openCheckout('Gut Reset', '299');
+    };
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -2803,7 +2978,8 @@ setTimeout(function() {
     buyBtn.onclick = function(e){
       e.preventDefault();
       closeDetailsSnackSmart();
-};
+      openCheckout('Snack Smart', '299');
+    };
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -2827,7 +3003,8 @@ setTimeout(function() {
     buyBtn.onclick = function(e){
       e.preventDefault();
       closeDetailsPowerLunch();
-};
+      openCheckout('Power Lunch', '299');
+    };
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -2851,7 +3028,8 @@ setTimeout(function() {
     buyBtn.onclick = function(e){
       e.preventDefault();
       closeDetailsMillets();
-};
+      openCheckout('Ancient Grain, Modern Plate', '299');
+    };
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -2872,6 +3050,7 @@ setTimeout(function() {
   window.CHECKOUT_API_BASE = 'https://kalpaahar-payment.afk-mayuri.workers.dev';
   var CHECKOUT_API_BASE = window.CHECKOUT_API_BASE;
   var CHECKOUT_ENDPOINT = 'https://formsubmit.co/ajax/kalpaahar.wellness@gmail.com';
+  /* Must match the ids used in backend/ebooks/catalog.js */
   function slugifyTitle(title){
   return (title || '')
     .toLowerCase()
@@ -2953,7 +3132,227 @@ function showStep(step){
 }
 
 
-
+var EBOOK_INFO = {
+  'high-protein-breakfast': {
+    inside: [
+      '20 high-protein breakfast recipes',
+      'Calorie & macro breakdown for every recipe',
+      'Quick-prep and make-ahead options',
+      'Vegetarian and egg-based recipe variations'
+    ],
+    who: [
+      'Busy adults looking for healthy breakfast ideas',
+      'People wanting more protein in their morning meals',
+      'Anyone looking for quick, practical breakfast recipes'
+    ],
+    benefits: [
+      'Makes healthy mornings easier and more convenient',
+      'Helps you choose balanced, protein-rich breakfast options',
+      'Simple recipes using practical everyday ingredients'
+    ]
+  },
+  'picky-eaters': {
+    inside: [
+      'Practical nutrition ideas for selective eaters',
+      'Simple family-friendly meal suggestions',
+      'Balanced nutrition strategies for children',
+      'Easy ideas for stress-free mealtimes'
+    ],
+    who: [
+      'Parents of toddlers and young children who are selective eaters',
+      'Families looking for stress-free, no-fuss mealtimes',
+      'Caregivers wanting balanced nutrition without daily arguments'
+    ],
+    benefits: [
+      'Makes mealtimes calmer and more enjoyable',
+      'Supports better nutrition without unnecessary food battles',
+      'Easy ideas using everyday, affordable ingredients'
+    ]
+  },
+  'gut-health-reset': {
+    inside: [
+      '20 gut-friendly recipes for every meal of the day',
+      'Nutrition breakdown for every recipe',
+      'Fermented food and probiotic-rich meal ideas',
+      'Easy substitutions for common trigger ingredients'
+    ],
+    who: [
+      'People looking for practical gut-friendly meal ideas',
+      'Anyone wanting to include more diverse foods in their diet',
+      'Busy individuals who prefer simple recipes'
+    ],
+    benefits: [
+      'Makes gut-friendly eating easier to follow',
+      'Provides practical meal ideas for everyday cooking',
+      'Helps add variety to your meals with simple ingredients'
+    ]
+  },
+  'snack-smart': {
+    inside: [
+      '20 healthy, practical snack recipes',
+      'Calorie & macro breakdown for every recipe',
+      'On-the-go and desk-friendly snack options',
+      'Sweet, savoury and protein-rich snack variations'
+    ],
+    who: [
+      'Busy people looking for smarter snack options',
+      'Students and professionals needing convenient snacks',
+      'Anyone wanting simple homemade snack ideas'
+    ],
+    benefits: [
+      'Makes healthy snacking more convenient',
+      'Gives you a variety of sweet and savoury options',
+      'Easy recipes that fit into busy daily routines'
+    ]
+  },
+  'power-lunch': {
+    inside: [
+      '20 balanced, protein-forward lunch recipes',
+      'Calorie & macro breakdown for every recipe',
+      'Desk-friendly and meal-prep-ready options',
+      'Vegetarian and non-vegetarian variations'
+    ],
+    who: [
+      'Busy professionals looking for practical lunch ideas',
+      'People who meal-prep or carry lunch to work',
+      'Anyone wanting balanced and satisfying lunch recipes'
+    ],
+    benefits: [
+      'Makes weekday lunch planning easier',
+      'Provides practical protein-forward meal options',
+      'Useful for meal prep and busy workdays'
+    ]
+  },
+  'ancient-grain-modern-plate': {
+    inside: [
+      '20 gluten-free millet recipes',
+      'Nutrition breakdown for every recipe',
+      'Breakfast, main course and snack options',
+      'Beginner-friendly cooking tips for different millet varieties'
+    ],
+    who: [
+      'Anyone interested in adding more millet-based meals',
+      'People looking for gluten-free recipe ideas',
+      'Beginners wanting simple ways to cook different millets'
+    ],
+    benefits: [
+      'Makes millet cooking simple and approachable',
+      'Adds variety to everyday meals',
+      'Includes practical recipes for different times of the day'
+    ]
+  }
+};
+  window.openCheckout = function(title, price){
+    currentTitle = title || 'High Protein Breakfast';
+    currentPrice = Number(price) || 299;
+    currentEbookId = getEbookId(currentTitle);
+var info = EBOOK_INFO[currentEbookId];
+if (info) {
+  document.getElementById('coPayInside').innerHTML =
+    info.inside.map(function(item) {
+      return '<li>' + item + '</li>';
+    }).join('');
+  document.getElementById('coPayWho').innerHTML =
+    info.who.map(function(item) {
+      return '<li>' + item + '</li>';
+    }).join('');
+  document.getElementById('coPayBenefits').innerHTML =
+    info.benefits.map(function(item) {
+      return '<li>' + item + '</li>';
+    }).join('');
+}
+    document.getElementById('coTitle').textContent = currentTitle;
+    document.getElementById('coPrice').textContent = currentPrice;
+    document.getElementById('coPayTitle').textContent = currentTitle;
+    document.getElementById('coPayAmount').textContent = currentPrice;
+    document.getElementById('coPayBtnAmount').textContent = currentPrice;
+    document.getElementById('coSuccessTitle').textContent = currentTitle;
+    detailsForm.reset();
+    detailsForm.querySelectorAll('.co-field').forEach(function(f){ f.classList.remove('error'); });
+    detailsStatus.style.display = 'none';
+    payStatus.style.display = 'none';
+    showStep(stepDetails);
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeCheckout = function(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeCheckout(); });
+  detailsForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('co-name');
+    var email = document.getElementById('co-email');
+    var phone = document.getElementById('co-phone');
+    var consent = document.getElementById('co-consent');
+    var valid = true;
+    function setError(input, isError){ input.closest('.co-field').classList.toggle('error', isError); if (isError) valid = false; }
+    setError(name, name.value.trim().length < 2);
+    setError(email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()));
+    setError(phone, phone.value.replace(/\D/g,'').length < 7);
+    if (!consent.checked){
+      valid = false;
+      detailsStatus.style.display = 'block';
+      detailsStatus.style.color = '#c0392b';
+      detailsStatus.textContent = 'Please agree to receive your eBook and health tips to continue.';
+    }
+    if (!valid) return;
+    detailsStatus.style.display = 'none';
+    document.getElementById('coPayEmail').textContent = email.value.trim();
+    currentCustomer = {
+      name: name.value.trim(),
+      email: email.value.trim(),
+      phone: phone.value.trim()
+    };
+    /* Fire-and-forget notification to the team so the order is on record before payment */
+    try{
+      var fd = new FormData();
+      fd.append('Full Name', name.value.trim());
+      fd.append('Email', email.value.trim());
+      fd.append('Phone', phone.value.trim());
+      fd.append('City', document.getElementById('co-city').value.trim());
+      fd.append('eBook', currentTitle);
+      fd.append('_subject', 'New eBook Order &#8212; ' + currentTitle);
+      fd.append('_captcha', 'false');
+      fetch(CHECKOUT_ENDPOINT, { method:'POST', headers:{ 'Accept':'application/json' }, body: fd }).catch(function(){});
+    } catch(err){ /* ignore &#8212; never block checkout on the notification */ }
+    /* Free items (price '0') skip Razorpay entirely and deliver right away */
+    if (currentPrice === '0'){
+      onPaymentDelivered();
+    } else {
+      showStep(stepPayment);
+    }
+  });
+  function showPayError(message){
+    payStatus.style.display = 'block';
+    payStatus.style.color = '#c0392b';
+    payStatus.textContent = message;
+  }
+  function showPayStatus(message){
+    payStatus.style.display = 'block';
+    payStatus.style.color = 'var(--ink-soft)';
+    payStatus.textContent = message;
+  }
+  function setPayButtonDisabled(disabled){
+    var btn = document.querySelector('#coStepPayment button[onclick="payNow()"]');
+    if (btn){
+      btn.disabled = disabled;
+      btn.style.opacity = disabled ? '0.6' : '1';
+      btn.style.pointerEvents = disabled ? 'none' : 'auto';
+    }
+  }
+  /* Ebooks with a direct PDF on this server get an instant download button.
+     Any ebookId not listed here falls back to the "check your email" message
+     (handled by the backend email delivery once that's wired up). */
+  var EBOOK_PDF_FILES = {
+    'high-protein-breakfast': 'ebooks/High-Protein-Breakfast.pdf',
+    'gut-reset': 'ebooks/Gut-Health-Reset.pdf',
+    'power-lunch': 'ebooks/Power-Lunch.pdf',
+    'snack-smart': 'ebooks/Snack-Smart.pdf',
+    'ancient-grain-modern-plate': 'ebooks/Ancient-Grain-Modern-Plate.pdf',
+    'picky-eaters': 'ebooks/Picky-Eaters.pdf'
+  };
   function onPaymentDelivered(){
     payStatus.style.display = 'none';
     showStep(stepSuccess);
@@ -3265,6 +3664,47 @@ document.addEventListener('keydown', function(e){
 </div>
 <script>document.addEventListener('DOMContentLoaded',function(){var p=document.getElementById('knowMoreContent');if(p&&p.parentElement!==document.body){document.body.appendChild(p);}});function showKnowMore(){var panel=document.getElementById('knowMoreContent');if(!panel){console.error('knowMoreContent not found');return;}if(panel.parentElement!==document.body){document.body.appendChild(panel);}panel.classList.add('open');panel.scrollTop=0;document.body.style.overflow='hidden';}</script></body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
