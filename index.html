@@ -1502,33 +1502,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var formBtn = form.querySelector('button[type="submit"]');
   /* ---- time slot picker: 30-minute slots (2 per hour), Mon-Fri 10 AM-7 PM, Sat 10 AM-1 PM, break 1:00-2:30 PM daily ---- */
   var BOOKINGS_KEY = 'kalpaahar_slot_bookings';
-  function buildHalfHourSlots(startHour, endHour, breakStartMin, breakEndMin){
-    /* breakStartMin/breakEndMin are minutes-from-midnight marking a break to exclude (e.g. 13:00-14:30) */
-    var out = [];
-    var fmt = function(h, m){
-      var period = h >= 12 ? 'PM' : 'AM';
-      var h12 = h % 12; if (h12 === 0) h12 = 12;
-      return h12 + (m === 0 ? ':00' : ':30') + ' ' + period;
-    };
-    for (var h = startHour; h < endHour; h++){
-      for (var m = 0; m < 60; m += 30){
-        var startMin = h * 60 + m;
-        var nextTotal = startMin + 30;
-        if (breakStartMin != null && startMin >= breakStartMin && startMin < breakEndMin) continue; /* skip break slots */
-        var nextH = Math.floor(nextTotal / 60), nextM = nextTotal % 60;
-        var id = pad2(h) + pad2(m) + '-' + pad2(nextH) + pad2(nextM);
-        out.push({ id: id, label: fmt(h, m) + ' - ' + fmt(nextH, nextM) });
-      }
-    }
-    return out;
-  }
-  var SLOTS_WEEKDAY = buildHalfHourSlots(10, 19, 13 * 60, 14 * 60 + 30); /* Mon-Fri 10 AM-7 PM, minus 1-2:30 PM break */
-  var SLOTS_SATURDAY = buildHalfHourSlots(10, 13, null, null); /* Saturday 10 AM-1 PM, no break slots needed */
-  function getSlotsForDate(dateStr){
-    var d = new Date(dateStr + 'T00:00:00');
-    if (d.getDay() === 0) return []; /* Sunday closed */
-    return d.getDay() === 6 ? SLOTS_SATURDAY : SLOTS_WEEKDAY; /* Saturday */
-  }
+  function buildHalfHourSlots(startHour,endHour,breakStartMin,breakEndMin){var out=[];for(var h=startHour;h<endHour;h++){for(var m=0;m<60;m+=30){var mins=h*60+m;if(breakStartMin!==null&&mins>=breakStartMin&&mins<breakEndMin)continue;var h12=h%12;if(h12===0)h12=12;var period=h>=12?'PM':'AM';var label=h12+(m===0?':00':':30')+' '+period;out.push({id:(h<10?'0':'')+h+(m===0?'00':'30'),label:label});}}return out;}
+var SLOTS_WEEKDAY=buildHalfHourSlots(10,19,780,870);
+var SLOTS_SATURDAY=buildHalfHourSlots(10,13,null,null);
+function getSlotsForDate(dateStr){var d=new Date(dateStr+'T00:00:00');if(d.getDay()===0)return [];return d.getDay()===6?SLOTS_SATURDAY:SLOTS_WEEKDAY;}
   var dateInput = document.getElementById('cf-date');
   var slotGrid = document.getElementById('slotGrid');
   var slotHidden = document.getElementById('cf-slot');
@@ -3683,6 +3660,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });</script></body>
 </html>
+
 
 
 
