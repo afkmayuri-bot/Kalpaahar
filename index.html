@@ -3662,8 +3662,28 @@ document.addEventListener('keydown', function(e){
     </blockquote>
   </div>
 </div>
-<script>document.addEventListener('DOMContentLoaded',function(){var p=document.getElementById('knowMoreContent');if(p&&p.parentElement!==document.body){document.body.appendChild(p);}});function showKnowMore(){var panel=document.getElementById('knowMoreContent');if(!panel){console.error('knowMoreContent not found');return;}if(panel.parentElement!==document.body){document.body.appendChild(panel);}panel.classList.add('open');panel.scrollTop=0;document.body.style.overflow='hidden';}</script></body>
+<script>document.addEventListener('DOMContentLoaded',function(){var p=document.getElementById('knowMoreContent');if(p&&p.parentElement!==document.body){document.body.appendChild(p);}});function showKnowMore(){var panel=document.getElementById('knowMoreContent');if(!panel){console.error('knowMoreContent not found');return;}if(panel.parentElement!==document.body){document.body.appendChild(panel);}panel.classList.add('open');panel.scrollTop=0;document.body.style.overflow='hidden';}</script><script id="date-dropdown-final-fix">
+document.addEventListener("DOMContentLoaded", function () {
+  var e = document.getElementById("cf-date");
+  if (!e) return;
+  var d = new Date();
+  d.setHours(0,0,0,0);
+  var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  e.innerHTML = "";
+  e.appendChild(new Option("Choose a date", ""));
+  var n = 0;
+  while (n < 14) {
+    if (d.getDay() !== 0) {
+      var iso = d.getFullYear() + "-" + String(d.getMonth()+1).padStart(2,"0") + "-" + String(d.getDate()).padStart(2,"0");
+      e.appendChild(new Option(days[d.getDay()] + ", " + d.getDate() + " " + months[d.getMonth()], iso));
+      n++;
+    }
+    d.setDate(d.getDate()+1);
+  }
+});</script></body>
 </html>
+
 
 
 
